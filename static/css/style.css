@@ -1,0 +1,19 @@
+.verified {
+	color:#3D9140;
+	font-size: 12px;
+    line-height: 16px;
+}
+.unverified {
+	color:#B13E0F;
+	font-size: 12px;
+    line-height: 16px;
+}
+
+.currentTrack {
+	display: inline;
+}
+
+.ipfshash {
+	color: #999;
+	display: inline;
+}
