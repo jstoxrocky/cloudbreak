@@ -9,10 +9,6 @@ import { getTokenBalance } from '../actions/actions'
 })
 class TokensBalance extends React.Component {
 
-	componentDidMount() {	
-		this.props.dispatch(getTokenBalance());
-	}
-
 	render() {
 		const {balance} = this.props;
 		return (

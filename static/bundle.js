@@ -28690,21 +28690,17 @@ var _tokensBalance = __webpack_require__(436);
 
 var _tokensBalance2 = _interopRequireDefault(_tokensBalance);
 
-var _currentTrack = __webpack_require__(345);
+var _player = __webpack_require__(442);
 
-var _currentTrack2 = _interopRequireDefault(_currentTrack);
-
-var _address = __webpack_require__(435);
-
-var _address2 = _interopRequireDefault(_address);
+var _player2 = _interopRequireDefault(_player);
 
 var _stream = __webpack_require__(348);
 
 var _stream2 = _interopRequireDefault(_stream);
 
-var _radio = __webpack_require__(440);
+var _searchResults = __webpack_require__(450);
 
-var _radio2 = _interopRequireDefault(_radio);
+var _searchResults2 = _interopRequireDefault(_searchResults);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28717,10 +28713,9 @@ var App = function App() {
 			{ className: 'site-title' },
 			'CloudBreak Player'
 		),
-		_react2.default.createElement(_address2.default, null),
 		_react2.default.createElement(_tokensBalance2.default, null),
-		_react2.default.createElement(_currentTrack2.default, null),
-		_react2.default.createElement(_radio2.default, null),
+		_react2.default.createElement(_player2.default, null),
+		_react2.default.createElement(_searchResults2.default, null),
 		_react2.default.createElement(_stream2.default, null)
 	);
 };
@@ -70280,107 +70275,7 @@ module.exports = function (_ref) {
 
 /***/ }),
 /* 344 */,
-/* 345 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _dec, _class;
-
-var _react = __webpack_require__(11);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(76);
-
-var _actions = __webpack_require__(431);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var CurrentTrack = (_dec = (0, _reactRedux.connect)(function (_ref) {
-	var stream = _ref.stream;
-
-	return {
-		artist: stream.artist,
-		artistIsVerified: stream.artistIsVerified,
-		title: stream.title,
-		titleIsVerified: stream.titleIsVerified,
-		currentTrack: stream.currentTrack
-	};
-}), _dec(_class = function (_React$Component) {
-	_inherits(CurrentTrack, _React$Component);
-
-	function CurrentTrack() {
-		_classCallCheck(this, CurrentTrack);
-
-		return _possibleConstructorReturn(this, (CurrentTrack.__proto__ || Object.getPrototypeOf(CurrentTrack)).apply(this, arguments));
-	}
-
-	_createClass(CurrentTrack, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			this.props.dispatch((0, _actions.getCurrentTrack)());
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			var _props = this.props,
-			    artist = _props.artist,
-			    artistIsVerified = _props.artistIsVerified,
-			    title = _props.title,
-			    titleIsVerified = _props.titleIsVerified;
-
-			var artist_class = artistIsVerified == 'true' ? 'fa fa-check-circle-o verified' : 'fa fa-times-circle-o unverified';
-			var title_class = titleIsVerified == 'true' ? 'fa fa-check-circle-o verified' : 'fa fa-times-circle-o unverified';
-			return _react2.default.createElement(
-				'div',
-				{ className: 'now-playing col-md-6' },
-				_react2.default.createElement(
-					'h5',
-					null,
-					artist,
-					' ',
-					_react2.default.createElement('i', { className: artist_class, 'aria-hidden': 'true' })
-				),
-				_react2.default.createElement(
-					'h3',
-					null,
-					_react2.default.createElement(
-						'strong',
-						null,
-						title
-					),
-					' ',
-					_react2.default.createElement('i', { className: title_class, 'aria-hidden': 'true' })
-				)
-			);
-		}
-	}]);
-
-	return CurrentTrack;
-}(_react2.default.Component)) || _class);
-;
-
-exports.default = CurrentTrack;
-
-// <audio controls ref="audio" controlsList="nodownload">
-// 				<source src={'https://gateway.ipfs.io/ipfs/'+this.props.isPlaying} type="audio/mp3" />
-// </audio>
-
-/***/ }),
+/* 345 */,
 /* 346 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -86743,18 +86638,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(54);
 
-var _tokensReducer = __webpack_require__(433);
-
-var _tokensReducer2 = _interopRequireDefault(_tokensReducer);
-
-var _userReducer = __webpack_require__(434);
-
-var _userReducer2 = _interopRequireDefault(_userReducer);
-
-var _currentTrackReducer = __webpack_require__(437);
-
-var _currentTrackReducer2 = _interopRequireDefault(_currentTrackReducer);
-
 var _streamReducer = __webpack_require__(438);
 
 var _streamReducer2 = _interopRequireDefault(_streamReducer);
@@ -86766,9 +86649,6 @@ var _radioReducer2 = _interopRequireDefault(_radioReducer);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var reducers = (0, _redux.combineReducers)({
-	// tokens: tokensReducer,
-	user: _userReducer2.default,
-	// currentTrack: currentTrackReducer,
 	stream: _streamReducer2.default,
 	radio: _radioReducer2.default
 });
@@ -88940,7 +88820,7 @@ module.exports = isIterateeCall;
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.stream = exports.radioOptionChange = exports.getCurrentTrack = exports.getTokenBalance = exports.getUserAddress = exports.RADIO_OPTION_CHANGE = exports.STREAM_FULFILLED = exports.STREAM_REJECTED = exports.STREAM_PENDING_REJECTED = exports.STREAM_PENDING = exports.STREAM = exports.GET_CURRENT_TRACK_FULFILLED = exports.GET_CURRENT_TRACK_PENDING = exports.GET_CURRENT_TRACK = exports.GET_USER_ADDRESS_FULFILLED = exports.GET_USER_ADDRESS_PENDING = exports.GET_USER_ADDRESS = exports.GET_TOKEN_BALANCE_FULFILLED = exports.GET_TOKEN_BALANCE_PENDING = exports.GET_TOKEN_BALANCE = undefined;
+exports.stream = exports.updatePlayer = exports.radioOptionChange = exports.RADIO_OPTION_CHANGE = exports.STREAM_FULFILLED = exports.STREAM_REJECTED = exports.STREAM_PENDING_REJECTED = exports.STREAM_PENDING = exports.STREAM = exports.UPDATE_PLAYER_FULFILLED = exports.UPDATE_PLAYER_PENDING = exports.UPDATE_PLAYER = undefined;
 
 var _bs = __webpack_require__(346);
 
@@ -88952,90 +88832,62 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-var GET_TOKEN_BALANCE = exports.GET_TOKEN_BALANCE = "GET_TOKEN_BALANCE";
-var GET_TOKEN_BALANCE_PENDING = exports.GET_TOKEN_BALANCE_PENDING = "GET_TOKEN_BALANCE_PENDING";
-var GET_TOKEN_BALANCE_FULFILLED = exports.GET_TOKEN_BALANCE_FULFILLED = "GET_TOKEN_BALANCE_FULFILLED";
-var GET_USER_ADDRESS = exports.GET_USER_ADDRESS = "GET_USER_ADDRESS";
-var GET_USER_ADDRESS_PENDING = exports.GET_USER_ADDRESS_PENDING = "GET_USER_ADDRESS_PENDING";
-var GET_USER_ADDRESS_FULFILLED = exports.GET_USER_ADDRESS_FULFILLED = "GET_USER_ADDRESS_FULFILLED";
-var GET_CURRENT_TRACK = exports.GET_CURRENT_TRACK = "GET_CURRENT_TRACK";
-var GET_CURRENT_TRACK_PENDING = exports.GET_CURRENT_TRACK_PENDING = "GET_CURRENT_TRACK_PENDING";
-var GET_CURRENT_TRACK_FULFILLED = exports.GET_CURRENT_TRACK_FULFILLED = "GET_CURRENT_TRACK_FULFILLED";
+var UPDATE_PLAYER = exports.UPDATE_PLAYER = "UPDATE_PLAYER";
+var UPDATE_PLAYER_PENDING = exports.UPDATE_PLAYER_PENDING = "UPDATE_PLAYER_PENDING";
+var UPDATE_PLAYER_FULFILLED = exports.UPDATE_PLAYER_FULFILLED = "UPDATE_PLAYER_FULFILLED";
 
 var STREAM = exports.STREAM = "STREAM";
 var STREAM_PENDING = exports.STREAM_PENDING = "STREAM_PENDING";
 var STREAM_PENDING_REJECTED = exports.STREAM_PENDING_REJECTED = "STREAM_PENDING_REJECTED";
 var STREAM_REJECTED = exports.STREAM_REJECTED = "STREAM_REJECTED";
 var STREAM_FULFILLED = exports.STREAM_FULFILLED = "STREAM_FULFILLED";
+
 var RADIO_OPTION_CHANGE = exports.RADIO_OPTION_CHANGE = "RADIO_OPTION_CHANGE";
+
+var toIPFSHash = function toIPFSHash(hexArray) {
+	var hexHashFunction = hexArray[0];
+	var hexSize = hexArray[1];
+	var hexTrackHash = hexArray[2];
+	var bytesHashFunction = _contracts.web3.utils.hexToBytes(hexHashFunction);
+	var bytesSize = _contracts.web3.utils.hexToBytes(hexSize);
+	var bytesTrackHash = _contracts.web3.utils.hexToBytes(hexTrackHash);
+	var combinedBytes = [].concat(_toConsumableArray(bytesHashFunction), _toConsumableArray(bytesSize), _toConsumableArray(bytesTrackHash));
+	var IPFSHash = _bs2.default.encode(combinedBytes);
+	return IPFSHash;
+};
 
 var _getUserAddress = function _getUserAddress() {
 	return _contracts.web3.eth.getAccounts();
 };
 
-var _getTokenBalance = function _getTokenBalance() {
-	return _getUserAddress().then(function (receipt) {
-		var user = receipt[0];
-		return _contracts.Tokens.methods.getTokenBalance(user).call();
-	});
+var _getTokenBalance = function _getTokenBalance(user) {
+	return _contracts.Tokens.methods.getTokenBalance(user).call();
 };
 
-var _getCurrentTrack = function _getCurrentTrack() {
-	return _getUserAddress().then(function (receipt) {
-		var user = receipt[0];
-		return _contracts.Player.methods.getCurrentTrack(user).call();
-	});
+var _getCurrentTrack = function _getCurrentTrack(user) {
+	return _contracts.Player.methods.getCurrentTrack(user).call();
 };
 
-var _getTrackBase58 = function _getTrackBase58() {
-	return _getCurrentTrack().then(function (receipt) {
-		var hexHashFunction = receipt[0];
-		var hexSize = receipt[1];
-		var hexTrackHash = receipt[2];
-		var bytesHashFunction = _contracts.web3.utils.hexToBytes(hexHashFunction);
-		var bytesSize = _contracts.web3.utils.hexToBytes(hexSize);
-		var bytesTrackHash = _contracts.web3.utils.hexToBytes(hexTrackHash);
-		var combinedBytes = [].concat(_toConsumableArray(bytesHashFunction), _toConsumableArray(bytesSize), _toConsumableArray(bytesTrackHash));
-		var base58TrackHash = _bs2.default.encode(combinedBytes);
-		var payload = base58TrackHash;
-		return new Promise(function (resolve, reject) {
-			return resolve(payload);
-		});
-	});
+var _getTrackBasicMetadataByHash = function _getTrackBasicMetadataByHash(trackHash, key) {
+	return _contracts.Data.methods.getTrackBasicMetadataByHash(trackHash, key).call();
 };
 
-var _getTrackBasicMetadataByHashArtist = function _getTrackBasicMetadataByHashArtist() {
-	return _getCurrentTrack().then(function (receipt) {
-		var hexTrackHash = receipt[2];
-		return _contracts.Data.methods.getTrackBasicMetadataByHash(hexTrackHash, 'artist').call();
+var _getCurrentTrackMetadata = function _getCurrentTrackMetadata(user) {
+	var track = _getCurrentTrack(user);
+	var metadata = track.then(function (receipt) {
+		var currentTrack = receipt[2];
+		return Promise.all([_getTrackBasicMetadataByHash(currentTrack, 'artist'), _getTrackBasicMetadataByHash(currentTrack, 'title')]);
 	});
-};
-
-var _getTrackBasicMetadataByHashTitle = function _getTrackBasicMetadataByHashTitle() {
-	return _getCurrentTrack().then(function (receipt) {
-		var hexTrackHash = receipt[2];
-		return _contracts.Data.methods.getTrackBasicMetadataByHash(hexTrackHash, 'title').call();
-	});
-};
-
-var _getCurrentTrackMetadata = function _getCurrentTrackMetadata() {
-	return Promise.all([_getTrackBase58(), _getTrackBasicMetadataByHashArtist(), _getTrackBasicMetadataByHashTitle(), _getTokenBalance()]).then(function (receipt) {
-		var base58TrackHash = receipt[0];
-		var artistReceipt = receipt[1];
-		var titleReceipt = receipt[2];
-		var tokensReceipt = receipt[3];
-		var artist = artistReceipt[0];
-		var artistIsVerified = artistReceipt[1];
-		var title = titleReceipt[0];
-		var titleIsVerified = titleReceipt[1];
-		var balance = tokensReceipt[0];
+	return metadata.then(function () {
+		var result = metadata.value();
+		var hex_track_values = track.value();
+		var IPFSHash = toIPFSHash(hex_track_values);
 		var payload = {
-			base58TrackHash: base58TrackHash,
-			artist: artist,
-			artistIsVerified: artistIsVerified,
-			title: title,
-			titleIsVerified: titleIsVerified,
-			balance: balance
+			artist: result[0][0],
+			artistIsVerified: result[0][1],
+			title: result[1][0],
+			titleIsVerified: result[1][1],
+			currentTrack: IPFSHash
 		};
 		return new Promise(function (resolve, reject) {
 			return resolve(payload);
@@ -89043,69 +88895,47 @@ var _getCurrentTrackMetadata = function _getCurrentTrackMetadata() {
 	});
 };
 
-var _stream = function _stream(selectedOption) {
-	return _getUserAddress().then(function (receipt) {
-
-		var user = receipt[0];
-		var options = {
-			gas: _contracts.gas,
-			gasPrice: _contracts.gasPrice,
-			from: user
-		};
-		return _contracts.Player.methods.stream('0xb8f1532472debea5faf67b3e4ce06e5931c891da5e3b632becf2a4ddf6f5b64c').send(options).catch(function (error) {
-			console.log('Metamask rejection');
-			return { 'status': '0x0' };
-		});
+var _updatePlayer = function _updatePlayer(user) {
+	var metadata = _getCurrentTrackMetadata(user);
+	var balance = metadata.then(function () {
+		return _getTokenBalance(user);
 	});
-};
-
-var _stream_and_fetch_metadata = function _stream_and_fetch_metadata(selectedOption) {
-
-	var streamTransaction = _stream(selectedOption);
-
-	var fetchMetadata = streamTransaction.then(function () {
-		return _getCurrentTrackMetadata();
-	});
-
-	var checkBalance = fetchMetadata.then(function () {
-		return _getTokenBalance();
-	});
-
-	return checkBalance.then(function () {
-
-		var txReceipt = streamTransaction.value();
-
-		var txSuccess = !!_contracts.web3.utils.hexToNumber(txReceipt.status);
-
-		var metadata = fetchMetadata.value();
-		var balance = checkBalance.value();
-		metadata.txSuccess = txSuccess;
-		metadata.balance = balance;
+	return balance.then(function () {
+		var tokenBalance = balance.value();
+		var metadataResult = metadata.value();
+		metadataResult.balance = tokenBalance;
 		return new Promise(function (resolve, reject) {
-			return resolve(metadata);
+			return resolve(metadataResult);
 		});
 	});
 };
 
-var getUserAddress = exports.getUserAddress = function getUserAddress() {
-	return {
-		type: GET_USER_ADDRESS,
-		payload: _getUserAddress
+var _stream = function _stream(user, keccakTrackHash) {
+	var options = {
+		gas: _contracts.GAS,
+		gasPrice: _contracts.GAS_PRICE,
+		from: user
 	};
+	return _contracts.Player.methods.stream(keccakTrackHash).send(options).catch(function (error) {
+		console.log('Metamask rejection');
+		return { 'status': '0x0' };
+	});
 };
 
-var getTokenBalance = exports.getTokenBalance = function getTokenBalance() {
-	return {
-		type: GET_TOKEN_BALANCE,
-		payload: _getTokenBalance
-	};
-};
-
-var getCurrentTrack = exports.getCurrentTrack = function getCurrentTrack() {
-	return {
-		type: GET_CURRENT_TRACK,
-		payload: _getCurrentTrackMetadata
-	};
+var _stream_and_fetch_metadata = function _stream_and_fetch_metadata(user, keccakTrackHash) {
+	var streamTX = _stream(user, keccakTrackHash);
+	var metadata = streamTX.then(function () {
+		return _updatePlayer(user);
+	});
+	return metadata.then(function () {
+		var txReceipt = streamTX.value();
+		var txSuccess = !!_contracts.web3.utils.hexToNumber(txReceipt.status);
+		var metadataResult = metadata.value();
+		metadataResult.txSuccess = txSuccess;
+		return new Promise(function (resolve, reject) {
+			return resolve(metadataResult);
+		});
+	});
 };
 
 var radioOptionChange = exports.radioOptionChange = function radioOptionChange(value) {
@@ -89115,169 +88945,35 @@ var radioOptionChange = exports.radioOptionChange = function radioOptionChange(v
 	};
 };
 
-var stream = exports.stream = function stream(selectedOption) {
+var updatePlayer = exports.updatePlayer = function updatePlayer() {
+	return {
+		type: UPDATE_PLAYER,
+		payload: _getUserAddress().then(function (receipt) {
+			var user = receipt[0];
+			return new Promise(function (resolve, reject) {
+				return resolve(_updatePlayer(user));
+			});
+		})
+	};
+};
+
+var stream = exports.stream = function stream(keccakTrackHash) {
 	return {
 		type: STREAM,
-		payload: new Promise(function (resolve, reject) {
-			return resolve(_stream_and_fetch_metadata(selectedOption));
+		payload: _getUserAddress().then(function (receipt) {
+			var user = receipt[0];
+			return new Promise(function (resolve, reject) {
+				return resolve(_stream_and_fetch_metadata(user, keccakTrackHash));
+			});
 		})
 	};
 };
 
 /***/ }),
 /* 432 */,
-/* 433 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _merge = __webpack_require__(364);
-
-var _merge2 = _interopRequireDefault(_merge);
-
-var _actions = __webpack_require__(431);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var initialState = {
-	balance: 0
-};
-
-function tokensReducer() {
-	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-	var action = arguments[1];
-
-	Object.freeze(state);
-	switch (action.type) {
-		case _actions.GET_TOKEN_BALANCE_PENDING:
-			return state;
-		case _actions.GET_TOKEN_BALANCE_FULFILLED:
-			var nextState = (0, _merge2.default)({}, state);
-			var balance = action.payload;
-			nextState.balance = balance;
-			return nextState;
-		default:
-			return state;
-	}
-}
-
-exports.default = tokensReducer;
-
-// GET_TOKEN_BALANCE_REJECTED
-
-/***/ }),
-/* 434 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _merge = __webpack_require__(364);
-
-var _merge2 = _interopRequireDefault(_merge);
-
-var _actions = __webpack_require__(431);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var initialState = {
-	address: null
-};
-
-function userReducer() {
-	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-	var action = arguments[1];
-
-	Object.freeze(state);
-	switch (action.type) {
-		case _actions.GET_USER_ADDRESS_PENDING:
-			return state;
-		case _actions.GET_USER_ADDRESS_FULFILLED:
-			var nextState = (0, _merge2.default)({}, state);
-			var address = action.payload[0];
-			nextState.address = address;
-			return nextState;
-		default:
-			return state;
-	}
-}
-
-exports.default = userReducer;
-
-/***/ }),
-/* 435 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _dec, _class;
-
-var _react = __webpack_require__(11);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(76);
-
-var _actions = __webpack_require__(431);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Address = (_dec = (0, _reactRedux.connect)(function (_ref) {
-	var user = _ref.user;
-
-	return {
-		address: user.address
-	};
-}), _dec(_class = function (_React$Component) {
-	_inherits(Address, _React$Component);
-
-	function Address() {
-		_classCallCheck(this, Address);
-
-		return _possibleConstructorReturn(this, (Address.__proto__ || Object.getPrototypeOf(Address)).apply(this, arguments));
-	}
-
-	_createClass(Address, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			this.props.dispatch((0, _actions.getUserAddress)());
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			return _react2.default.createElement('div', null);
-		}
-	}]);
-
-	return Address;
-}(_react2.default.Component)) || _class);
-;
-
-exports.default = Address;
-
-/***/ }),
+/* 433 */,
+/* 434 */,
+/* 435 */,
 /* 436 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -89324,11 +89020,6 @@ var TokensBalance = (_dec = (0, _reactRedux.connect)(function (_ref) {
 	}
 
 	_createClass(TokensBalance, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			this.props.dispatch((0, _actions.getTokenBalance)());
-		}
-	}, {
 		key: 'render',
 		value: function render() {
 			var balance = this.props.balance;
@@ -89349,58 +89040,7 @@ var TokensBalance = (_dec = (0, _reactRedux.connect)(function (_ref) {
 exports.default = TokensBalance;
 
 /***/ }),
-/* 437 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _merge = __webpack_require__(364);
-
-var _merge2 = _interopRequireDefault(_merge);
-
-var _actions = __webpack_require__(431);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var initialState = {
-	currentTrack: null,
-	artist: null,
-	artistIsVerified: null,
-	title: null,
-	titleIsVerified: null
-};
-
-function currentTrackReducer() {
-	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-	var action = arguments[1];
-
-	Object.freeze(state);
-	switch (action.type) {
-		case _actions.GET_CURRENT_TRACK_PENDING:
-			return state;
-		case _actions.GET_CURRENT_TRACK_FULFILLED:
-			var nextState = (0, _merge2.default)({}, state);
-			nextState.currentTrack = action.payload.base58TrackHash;;
-			nextState.artist = action.payload.artist;;
-			nextState.artistIsVerified = action.payload.artistIsVerified;;
-			nextState.title = action.payload.title;;
-			nextState.titleIsVerified = action.payload.titleIsVerified;;
-			return nextState;
-		default:
-			return state;
-	}
-}
-
-exports.default = currentTrackReducer;
-
-// GET_CURRENT_TRACK_REJECTED
-
-/***/ }),
+/* 437 */,
 /* 438 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -89439,7 +89079,7 @@ function streamReducer() {
 			return state;
 		case _actions.STREAM_FULFILLED:
 			var nextState = (0, _merge2.default)({}, state);
-			nextState.currentTrack = action.payload.base58TrackHash;
+			nextState.currentTrack = action.payload.currentTrack;
 			nextState.artist = action.payload.artist;
 			nextState.artistIsVerified = action.payload.artistIsVerified;
 			nextState.title = action.payload.title;
@@ -89455,21 +89095,16 @@ function streamReducer() {
 			var nextState = (0, _merge2.default)({}, state);
 			nextState.txSuccess = false;
 			nextState.msg = 'Error streaming track';
-		case _actions.GET_CURRENT_TRACK_PENDING:
+		case _actions.UPDATE_PLAYER_PENDING:
 			return state;
-		case _actions.GET_CURRENT_TRACK_FULFILLED:
+		case _actions.UPDATE_PLAYER_FULFILLED:
 			var nextState = (0, _merge2.default)({}, state);
-			nextState.currentTrack = action.payload.base58TrackHash;
+			nextState.currentTrack = action.payload.currentTrack;
 			nextState.artist = action.payload.artist;
 			nextState.artistIsVerified = action.payload.artistIsVerified;
 			nextState.title = action.payload.title;
 			nextState.titleIsVerified = action.payload.titleIsVerified;
-			return nextState;
-		case _actions.GET_TOKEN_BALANCE_PENDING:
-			return state;
-		case _actions.GET_TOKEN_BALANCE_FULFILLED:
-			var nextState = (0, _merge2.default)({}, state);
-			nextState.balance = action.payload;
+			nextState.balance = action.payload.balance;
 			return nextState;
 		default:
 			return state;
@@ -89488,7 +89123,7 @@ exports.default = streamReducer;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.gasPrice = exports.gas = exports.Data = exports.Player = exports.Tokens = exports.web3 = undefined;
+exports.GAS_PRICE = exports.GAS = exports.Data = exports.Player = exports.Tokens = exports.web3 = undefined;
 
 var _web = __webpack_require__(36);
 
@@ -89510,11 +89145,172 @@ var DATA_ADDRESS = '0xcb240b795dc6214b1c4b8fc05583ad657e738a18';
 var DATA_ABI = [{ "constant": false, "inputs": [{ "name": "keccakTrackHash", "type": "bytes32" }], "name": "convertKeccackHashToIPFSHash", "outputs": [{ "name": "", "type": "bytes32" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "addr", "type": "address" }], "name": "setPlayerAddress", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getTokensAddress", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "addr", "type": "address" }], "name": "setTokensAddress", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getPlayerAddress", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "newAmount", "type": "uint256" }], "name": "setCaptchaReward", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "name": "trackHash", "type": "bytes32" }, { "name": "key", "type": "string" }], "name": "getTrackBasicMetadataByHash", "outputs": [{ "name": "", "type": "string" }, { "name": "", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "trackHash", "type": "bytes32" }, { "name": "key", "type": "string" }, { "name": "value", "type": "string" }, { "name": "userToPay", "type": "address" }], "name": "uploadMetadata", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "trackHash", "type": "bytes32" }], "name": "getIpfsHashMetadata", "outputs": [{ "name": "", "type": "bytes1" }, { "name": "", "type": "bytes1" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "newAmount", "type": "uint256" }], "name": "setVerificationRequirement", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "hashFunction", "type": "bytes1" }, { "name": "size", "type": "bytes1" }, { "name": "trackHash", "type": "bytes32" }, { "name": "artist", "type": "string" }, { "name": "title", "type": "string" }], "name": "uploadTrack", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "trackHash", "type": "bytes32" }], "name": "incrementPlayCount", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "anonymous": false, "inputs": [{ "indexed": false, "name": "trackHash", "type": "bytes32" }], "name": "newUpload", "type": "event" }];
 var Data = exports.Data = new web3.eth.Contract(DATA_ABI, DATA_ADDRESS);
 
-var gas = exports.gas = 200000;
-var gasPrice = exports.gasPrice = 2000000000;
+var GAS = exports.GAS = 200000;
+var GAS_PRICE = exports.GAS_PRICE = 2000000000;
 
 /***/ }),
-/* 440 */
+/* 440 */,
+/* 441 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _merge = __webpack_require__(364);
+
+var _merge2 = _interopRequireDefault(_merge);
+
+var _actions = __webpack_require__(431);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var initialState = {
+	selectedOption: null
+};
+
+function radioReducer() {
+	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+	var action = arguments[1];
+
+	Object.freeze(state);
+	switch (action.type) {
+		case _actions.RADIO_OPTION_CHANGE:
+			var nextState = (0, _merge2.default)({}, state);
+			nextState.selectedOption = action.payload.selectedOption;
+			return nextState;
+		default:
+			return state;
+	}
+}
+
+exports.default = radioReducer;
+
+// STREAM_PENDING_REJECTED
+
+/***/ }),
+/* 442 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _dec, _class;
+
+var _react = __webpack_require__(11);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(76);
+
+var _actions = __webpack_require__(431);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Player = (_dec = (0, _reactRedux.connect)(function (_ref) {
+	var stream = _ref.stream;
+
+	return {
+		artist: stream.artist,
+		artistIsVerified: stream.artistIsVerified,
+		title: stream.title,
+		titleIsVerified: stream.titleIsVerified,
+		currentTrack: stream.currentTrack
+	};
+}), _dec(_class = function (_React$Component) {
+	_inherits(Player, _React$Component);
+
+	function Player() {
+		_classCallCheck(this, Player);
+
+		return _possibleConstructorReturn(this, (Player.__proto__ || Object.getPrototypeOf(Player)).apply(this, arguments));
+	}
+
+	_createClass(Player, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			this.props.dispatch((0, _actions.updatePlayer)());
+		}
+	}, {
+		key: 'onTrackChange',
+		value: function onTrackChange(source) {
+			console.log(source);
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _props = this.props,
+			    artist = _props.artist,
+			    artistIsVerified = _props.artistIsVerified,
+			    title = _props.title,
+			    titleIsVerified = _props.titleIsVerified,
+			    currentTrack = _props.currentTrack;
+
+			var artist_class = artistIsVerified == 'true' ? 'fa fa-check-circle-o verified' : 'fa fa-times-circle-o unverified';
+			var title_class = titleIsVerified == 'true' ? 'fa fa-check-circle-o verified' : 'fa fa-times-circle-o unverified';
+			if (this.refs.audio) {
+				this.refs.audio.load();
+			}
+			return _react2.default.createElement(
+				'div',
+				{ className: 'now-playing col-md-6' },
+				_react2.default.createElement(
+					'h5',
+					null,
+					artist,
+					' ',
+					_react2.default.createElement('i', { className: artist_class, 'aria-hidden': 'true' })
+				),
+				_react2.default.createElement(
+					'h3',
+					null,
+					_react2.default.createElement(
+						'strong',
+						null,
+						title
+					),
+					' ',
+					_react2.default.createElement('i', { className: title_class, 'aria-hidden': 'true' })
+				),
+				_react2.default.createElement(
+					'audio',
+					{ controls: true, ref: 'audio', controlsList: 'nodownload', onChange: this.onTrackChange.bind(this) },
+					_react2.default.createElement('source', { src: 'https://gateway.ipfs.io/ipfs/' + currentTrack, type: 'audio/mp3' })
+				)
+			);
+		}
+	}]);
+
+	return Player;
+}(_react2.default.Component)) || _class);
+;
+
+exports.default = Player;
+
+/***/ }),
+/* 443 */,
+/* 444 */,
+/* 445 */,
+/* 446 */,
+/* 447 */,
+/* 448 */,
+/* 449 */,
+/* 450 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -89547,22 +89343,22 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var PROVIDER = '0x778626c4f776387092fbf5af6a22b7556f57fe8d814edb4c0e23f4a8e5fd9cd7';
 var BLESSINGS = '0xb8f1532472debea5faf67b3e4ce06e5931c891da5e3b632becf2a4ddf6f5b64c';
 
-var Radio = (_dec = (0, _reactRedux.connect)(function (_ref) {
+var SearchResults = (_dec = (0, _reactRedux.connect)(function (_ref) {
 	var radio = _ref.radio;
 
 	return {
 		selectedOption: radio.selectedOption
 	};
 }), _dec(_class = function (_React$Component) {
-	_inherits(Radio, _React$Component);
+	_inherits(SearchResults, _React$Component);
 
-	function Radio() {
-		_classCallCheck(this, Radio);
+	function SearchResults() {
+		_classCallCheck(this, SearchResults);
 
-		return _possibleConstructorReturn(this, (Radio.__proto__ || Object.getPrototypeOf(Radio)).apply(this, arguments));
+		return _possibleConstructorReturn(this, (SearchResults.__proto__ || Object.getPrototypeOf(SearchResults)).apply(this, arguments));
 	}
 
-	_createClass(Radio, [{
+	_createClass(SearchResults, [{
 		key: 'handleOptionChange',
 		value: function handleOptionChange(changeEvent) {
 			var payload = { selectedOption: changeEvent.target.value };
@@ -89617,53 +89413,11 @@ var Radio = (_dec = (0, _reactRedux.connect)(function (_ref) {
 		}
 	}]);
 
-	return Radio;
+	return SearchResults;
 }(_react2.default.Component)) || _class);
 ;
 
-exports.default = Radio;
-
-/***/ }),
-/* 441 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _merge = __webpack_require__(364);
-
-var _merge2 = _interopRequireDefault(_merge);
-
-var _actions = __webpack_require__(431);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var initialState = {
-	selectedOption: null
-};
-
-function radioReducer() {
-	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-	var action = arguments[1];
-
-	Object.freeze(state);
-	switch (action.type) {
-		case _actions.RADIO_OPTION_CHANGE:
-			var nextState = (0, _merge2.default)({}, state);
-			nextState.selectedOption = action.payload.selectedOption;
-			return nextState;
-		default:
-			return state;
-	}
-}
-
-exports.default = radioReducer;
-
-// STREAM_PENDING_REJECTED
+exports.default = SearchResults;
 
 /***/ })
 /******/ ]);

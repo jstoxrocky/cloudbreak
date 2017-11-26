@@ -1,157 +1,122 @@
 import bs58 from 'bs58';
-import {Tokens, Player, Data, web3, gas, gasPrice} from "../contracts/contracts"
+import {Tokens, Player, Data, web3, GAS, GAS_PRICE} from "../contracts/contracts"
 
 
-export const GET_TOKEN_BALANCE = "GET_TOKEN_BALANCE";
-export const GET_TOKEN_BALANCE_PENDING = "GET_TOKEN_BALANCE_PENDING";
-export const GET_TOKEN_BALANCE_FULFILLED = "GET_TOKEN_BALANCE_FULFILLED";
-export const GET_USER_ADDRESS = "GET_USER_ADDRESS";
-export const GET_USER_ADDRESS_PENDING = "GET_USER_ADDRESS_PENDING";
-export const GET_USER_ADDRESS_FULFILLED = "GET_USER_ADDRESS_FULFILLED";
-export const GET_CURRENT_TRACK = "GET_CURRENT_TRACK";
-export const GET_CURRENT_TRACK_PENDING = "GET_CURRENT_TRACK_PENDING";
-export const GET_CURRENT_TRACK_FULFILLED = "GET_CURRENT_TRACK_FULFILLED";
+export const UPDATE_PLAYER = "UPDATE_PLAYER";
+export const UPDATE_PLAYER_PENDING = "UPDATE_PLAYER_PENDING";
+export const UPDATE_PLAYER_FULFILLED = "UPDATE_PLAYER_FULFILLED";
 
 export const STREAM = "STREAM";
 export const STREAM_PENDING = "STREAM_PENDING";
 export const STREAM_PENDING_REJECTED = "STREAM_PENDING_REJECTED"
 export const STREAM_REJECTED = "STREAM_REJECTED"
 export const STREAM_FULFILLED = "STREAM_FULFILLED";
+
 export const RADIO_OPTION_CHANGE = "RADIO_OPTION_CHANGE";
 
 
-const _getUserAddress = () => web3.eth.getAccounts();
-
-
-const _getTokenBalance = () => _getUserAddress().then(receipt => {
-	const user = receipt[0];
-	return Tokens.methods.getTokenBalance(user).call()
-});
-
-
-const _getCurrentTrack = () => _getUserAddress().then(receipt => {
-	const user = receipt[0];
-	return Player.methods.getCurrentTrack(user).call()
-})
-
-
-const _getTrackBase58 = () => _getCurrentTrack().then(receipt => {
-	const hexHashFunction = receipt[0];
-	const hexSize = receipt[1];
-	const hexTrackHash = receipt[2];
+const toIPFSHash = (hexArray) => {
+	const hexHashFunction = hexArray[0];
+	const hexSize = hexArray[1];
+	const hexTrackHash = hexArray[2];
 	const bytesHashFunction = web3.utils.hexToBytes(hexHashFunction);
 	const bytesSize = web3.utils.hexToBytes(hexSize);
 	const bytesTrackHash = web3.utils.hexToBytes(hexTrackHash);
 	const combinedBytes = [...bytesHashFunction, ...bytesSize, ...bytesTrackHash];
-	const base58TrackHash = bs58.encode(combinedBytes);
-	const payload = base58TrackHash
-	return new Promise((resolve, reject) => resolve(payload))
-})
+	const IPFSHash = bs58.encode(combinedBytes);
+	return IPFSHash
+}
 
+const _getUserAddress = () => web3.eth.getAccounts()
 
-const _getTrackBasicMetadataByHashArtist = () => _getCurrentTrack().then(receipt => {
-	const hexTrackHash = receipt[2];
-	return Data.methods.getTrackBasicMetadataByHash(hexTrackHash, 'artist').call()
-})
+const _getTokenBalance = (user) => Tokens.methods.getTokenBalance(user).call()
 
+const _getCurrentTrack = (user) => Player.methods.getCurrentTrack(user).call()
 
-const _getTrackBasicMetadataByHashTitle = () => _getCurrentTrack().then(receipt => {
-	const hexTrackHash = receipt[2];
-	return Data.methods.getTrackBasicMetadataByHash(hexTrackHash, 'title').call()
-})
+const _getTrackBasicMetadataByHash = (trackHash, key) => Data.methods.getTrackBasicMetadataByHash(trackHash, key).call()
 
-
-const _getCurrentTrackMetadata = () => Promise.all([
-	_getTrackBase58(), 
-	_getTrackBasicMetadataByHashArtist(), 
-	_getTrackBasicMetadataByHashTitle(), 
-	_getTokenBalance()]).then((receipt) => {
-		const base58TrackHash = receipt[0]
-		const artistReceipt = receipt[1]
-		const titleReceipt = receipt[2]
-		const tokensReceipt = receipt[3]
-		const artist = artistReceipt[0];
-		const artistIsVerified = artistReceipt[1];
-		const title = titleReceipt[0];
-		const titleIsVerified = titleReceipt[1];
-		const balance = tokensReceipt[0]
+const _getCurrentTrackMetadata = (user) => {
+	let track = _getCurrentTrack(user)
+	let metadata = track.then((receipt) => {
+		const currentTrack = receipt[2]
+		return Promise.all([
+			_getTrackBasicMetadataByHash(currentTrack, 'artist'), 
+			_getTrackBasicMetadataByHash(currentTrack, 'title'),
+		])
+	})
+	return metadata.then(() => {
+		let result = metadata.value()
+		let hex_track_values = track.value()
+		let IPFSHash = toIPFSHash(hex_track_values)
 		const payload = {
-			base58TrackHash: base58TrackHash,
-			artist: artist,
-			artistIsVerified: artistIsVerified,
-			title: title,
-			titleIsVerified: titleIsVerified,
-			balance: balance,
+			artist: result[0][0],
+			artistIsVerified: result[0][1],
+			title: result[1][0],
+			titleIsVerified: result[1][1],
+			currentTrack: IPFSHash,
 		}
 		return new Promise((resolve, reject) => resolve(payload))
-})
+	})
+}
 
+const _updatePlayer = (user) => {
+	let metadata = _getCurrentTrackMetadata(user)
+	let balance = metadata.then(() => {
+		return _getTokenBalance(user)
+	})
+	return balance.then(() => {
+		let tokenBalance = balance.value()
+		let metadataResult = metadata.value()
+		metadataResult.balance = tokenBalance
+		return new Promise((resolve, reject) => resolve(metadataResult))
+	})
+}
 
-const _stream = (selectedOption) => _getUserAddress().then(receipt => {
-
-	const user = receipt[0];
+const _stream = (user, keccakTrackHash) => {
 	const options = {
-		gas: gas,
-		gasPrice: gasPrice,
+		gas: GAS,
+		gasPrice: GAS_PRICE,
 		from: user,
 	}
-	return Player.methods.stream('0xb8f1532472debea5faf67b3e4ce06e5931c891da5e3b632becf2a4ddf6f5b64c').send(options)
+	return Player.methods.stream(keccakTrackHash).send(options)
 		.catch(function(error){
 		    console.log('Metamask rejection')
 		    return {'status':'0x0'}
 		});
-})
+}
 
-
-const _stream_and_fetch_metadata = (selectedOption) => {
-
-	let streamTransaction = _stream(selectedOption);
-
-	let fetchMetadata = streamTransaction.then(() => {
-		return _getCurrentTrackMetadata()
+const _stream_and_fetch_metadata = (user, keccakTrackHash) => {
+	let streamTX = _stream(user, keccakTrackHash)
+	let metadata = streamTX.then(() => {
+		return _updatePlayer(user)
 	})
-
-	let checkBalance = fetchMetadata.then(() => {
-		return _getTokenBalance()
-	})
-
-	return checkBalance.then(() => {
-
-		let txReceipt = streamTransaction.value()
-
+	return metadata.then(() => {
+		let txReceipt = streamTX.value()
 		let txSuccess = !!web3.utils.hexToNumber(txReceipt.status)
-
-		let metadata = fetchMetadata.value()
-		let balance = checkBalance.value()
-		metadata.txSuccess = txSuccess
-		metadata.balance = balance
-		return new Promise((resolve, reject) => resolve(metadata))
+		let metadataResult = metadata.value()
+		metadataResult.txSuccess = txSuccess
+		return new Promise((resolve, reject) => resolve(metadataResult))
 	})
 }
 
-
-export const getUserAddress = () => ({
-	type: GET_USER_ADDRESS,
-	payload: _getUserAddress,
-})
-
-export const getTokenBalance = () => ({
-	type: GET_TOKEN_BALANCE,
-	payload: _getTokenBalance,
-})
-
-export const getCurrentTrack = () => ({
-	type: GET_CURRENT_TRACK,
-	payload: _getCurrentTrackMetadata,
-})
 
 export const radioOptionChange = (value) => ({
 	type: RADIO_OPTION_CHANGE,
 	payload: value,
 })
 
-export const stream = selectedOption => ({
-	type: STREAM,
-	payload: new Promise((resolve, reject) => resolve(_stream_and_fetch_metadata(selectedOption))),
+export const updatePlayer = () => ({
+	type: UPDATE_PLAYER,
+	payload: _getUserAddress().then((receipt) => {
+			const user = receipt[0]
+			return new Promise((resolve, reject) => resolve(_updatePlayer(user)))
+		}),
 })
 
+export const stream = keccakTrackHash => ({
+	type: STREAM,
+	payload: _getUserAddress().then((receipt) => {
+			const user = receipt[0]
+			return new Promise((resolve, reject) => resolve(_stream_and_fetch_metadata(user, keccakTrackHash)))
+		}),
+})

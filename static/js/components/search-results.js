@@ -12,7 +12,7 @@ const BLESSINGS = '0xb8f1532472debea5faf67b3e4ce06e5931c891da5e3b632becf2a4ddf6f
 		selectedOption: radio.selectedOption,
 	};
 })
-class Radio extends React.Component {
+class SearchResults extends React.Component {
 
 
 	handleOptionChange(changeEvent) {
@@ -47,4 +47,4 @@ class Radio extends React.Component {
 	}
 };
 
-export default Radio;
+export default SearchResults;

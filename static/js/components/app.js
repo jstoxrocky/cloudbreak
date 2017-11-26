@@ -1,18 +1,16 @@
 import React from 'react';
 import TokensBalance from './tokens-balance'
-import CurrentTrack from './current-track'
-import Address from './address'
+import Player from './player'
 import Stream from './stream'
-import Radio from './radio'
+import SearchResults from './search-results'
 
 const App = () => {
 	return (
 		<div className="container">
 			<h1 className='site-title'>CloudBreak Player</h1>
-			<Address />
 			<TokensBalance />
-			<CurrentTrack />
-			<Radio />
+			<Player />
+			<SearchResults />
 			<Stream />
 		</div>
 	)

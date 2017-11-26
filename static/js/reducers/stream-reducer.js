@@ -4,10 +4,9 @@ import {
 	STREAM_PENDING_REJECTED,
 	STREAM_FULFILLED, 
 	STREAM_REJECTED,
-	GET_CURRENT_TRACK_PENDING, 
-	GET_CURRENT_TRACK_FULFILLED, 
-	GET_TOKEN_BALANCE_PENDING, 
-	GET_TOKEN_BALANCE_FULFILLED } from '../actions/actions';
+	UPDATE_PLAYER,
+	UPDATE_PLAYER_PENDING, 
+	UPDATE_PLAYER_FULFILLED } from '../actions/actions';
 
 const initialState = {
 	currentTrack: null,
@@ -26,7 +25,7 @@ function streamReducer(state=initialState, action) {
 			return state;
 		case STREAM_FULFILLED:
 			var nextState = merge({}, state);
-			nextState.currentTrack = action.payload.base58TrackHash;
+			nextState.currentTrack = action.payload.currentTrack;
 			nextState.artist = action.payload.artist;
 			nextState.artistIsVerified = action.payload.artistIsVerified;
 			nextState.title = action.payload.title;
@@ -42,21 +41,16 @@ function streamReducer(state=initialState, action) {
 			var nextState = merge({}, state);
 			nextState.txSuccess = false;
 			nextState.msg = 'Error streaming track'
-		case GET_CURRENT_TRACK_PENDING:
+		case UPDATE_PLAYER_PENDING:
 			return state;
-		case GET_CURRENT_TRACK_FULFILLED:
+		case UPDATE_PLAYER_FULFILLED:
 			var nextState = merge({}, state);
-			nextState.currentTrack = action.payload.base58TrackHash;
+			nextState.currentTrack = action.payload.currentTrack;
 			nextState.artist = action.payload.artist;
 			nextState.artistIsVerified = action.payload.artistIsVerified;
 			nextState.title = action.payload.title;
 			nextState.titleIsVerified = action.payload.titleIsVerified;
-			return nextState
-		case GET_TOKEN_BALANCE_PENDING:
-			return state;
-		case GET_TOKEN_BALANCE_FULFILLED:
-			var nextState = merge({}, state);
-			nextState.balance = action.payload;
+			nextState.balance = action.payload.balance;
 			return nextState
 		default:
 			return state;
