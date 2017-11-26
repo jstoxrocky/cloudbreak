@@ -2,9 +2,6 @@ import { default as Web3} from 'web3';
 
 export let web3 = new Web3(Web3.givenProvider);
 
-export const PROVIDER = '0x778626c4f776387092fbf5af6a22b7556f57fe8d814edb4c0e23f4a8e5fd9cd7'
-export const BLESSINGS = '0xb8f1532472debea5faf67b3e4ce06e5931c891da5e3b632becf2a4ddf6f5b64c'
-
 const TOKENS_ADDRESS = '0x0f4b5b22704831db94d9b2768e795298480878b3'
 const TOKENS_ABI = [{"constant":false,"inputs":[{"name":"user","type":"address"},{"name":"value","type":"uint256"}],"name":"incrementTokenBalance","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"addr","type":"address"}],"name":"setPlayerAddress","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"user","type":"address"}],"name":"getTokenBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getPlayerAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"user","type":"address"},{"name":"value","type":"uint256"}],"name":"decrementTokenBalance","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]
 export let Tokens = new web3.eth.Contract(TOKENS_ABI, TOKENS_ADDRESS)

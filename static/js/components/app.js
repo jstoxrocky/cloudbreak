@@ -3,6 +3,7 @@ import TokensBalance from './tokens-balance'
 import CurrentTrack from './current-track'
 import Address from './address'
 import Stream from './stream'
+import Radio from './radio'
 
 const App = () => {
 	return (
@@ -11,6 +12,7 @@ const App = () => {
 			<Address />
 			<TokensBalance />
 			<CurrentTrack />
+			<Radio />
 			<Stream />
 		</div>
 	)

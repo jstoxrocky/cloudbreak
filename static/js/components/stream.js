@@ -2,16 +2,17 @@ import React from 'react';
 import { connect } from "react-redux";
 import { stream } from '../actions/actions'
 
-@connect(({stream}) => {
+@connect(({stream, radio}) => {
 	return {
 		txSuccess: stream.txSuccess,
+		selectedOption: radio.selectedOption,
 	};
 })
 class Stream extends React.Component {
 
 
 	handleStreamClick() {
-		this.props.dispatch(stream());
+		this.props.dispatch(stream(this.props.selectedOption));
 	}
 
 	render() {

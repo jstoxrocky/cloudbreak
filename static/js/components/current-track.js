@@ -3,9 +3,6 @@ import { connect } from "react-redux";
 import {getCurrentTrack} from '../actions/actions'
 
 
-var web3 = new Web3(Web3.givenProvider);
-
-
 @connect(({stream}) => {
 	return {
 		artist: stream.artist,

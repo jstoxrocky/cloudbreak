@@ -28702,6 +28702,10 @@ var _stream = __webpack_require__(348);
 
 var _stream2 = _interopRequireDefault(_stream);
 
+var _radio = __webpack_require__(440);
+
+var _radio2 = _interopRequireDefault(_radio);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App() {
@@ -28716,6 +28720,7 @@ var App = function App() {
 		_react2.default.createElement(_address2.default, null),
 		_react2.default.createElement(_tokensBalance2.default, null),
 		_react2.default.createElement(_currentTrack2.default, null),
+		_react2.default.createElement(_radio2.default, null),
 		_react2.default.createElement(_stream2.default, null)
 	);
 };
@@ -70305,8 +70310,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var web3 = new Web3(Web3.givenProvider);
-
 var CurrentTrack = (_dec = (0, _reactRedux.connect)(function (_ref) {
 	var stream = _ref.stream;
 
@@ -70516,10 +70519,12 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Stream = (_dec = (0, _reactRedux.connect)(function (_ref) {
-	var stream = _ref.stream;
+	var stream = _ref.stream,
+	    radio = _ref.radio;
 
 	return {
-		txSuccess: stream.txSuccess
+		txSuccess: stream.txSuccess,
+		selectedOption: radio.selectedOption
 	};
 }), _dec(_class = function (_React$Component) {
 	_inherits(Stream, _React$Component);
@@ -70533,7 +70538,7 @@ var Stream = (_dec = (0, _reactRedux.connect)(function (_ref) {
 	_createClass(Stream, [{
 		key: 'handleStreamClick',
 		value: function handleStreamClick() {
-			this.props.dispatch((0, _actions.stream)());
+			this.props.dispatch((0, _actions.stream)(this.props.selectedOption));
 		}
 	}, {
 		key: 'render',
@@ -86754,13 +86759,18 @@ var _streamReducer = __webpack_require__(438);
 
 var _streamReducer2 = _interopRequireDefault(_streamReducer);
 
+var _radioReducer = __webpack_require__(441);
+
+var _radioReducer2 = _interopRequireDefault(_radioReducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var reducers = (0, _redux.combineReducers)({
 	// tokens: tokensReducer,
 	user: _userReducer2.default,
 	// currentTrack: currentTrackReducer,
-	stream: _streamReducer2.default
+	stream: _streamReducer2.default,
+	radio: _radioReducer2.default
 });
 
 exports.default = reducers;
@@ -88930,7 +88940,7 @@ module.exports = isIterateeCall;
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.stream = exports.getCurrentTrack = exports.getTokenBalance = exports.getUserAddress = exports.STREAM_FULFILLED = exports.STREAM_PENDING = exports.STREAM = exports.GET_CURRENT_TRACK_FULFILLED = exports.GET_CURRENT_TRACK_PENDING = exports.GET_CURRENT_TRACK = exports.GET_USER_ADDRESS_FULFILLED = exports.GET_USER_ADDRESS_PENDING = exports.GET_USER_ADDRESS = exports.GET_TOKEN_BALANCE_FULFILLED = exports.GET_TOKEN_BALANCE_PENDING = exports.GET_TOKEN_BALANCE = undefined;
+exports.stream = exports.radioOptionChange = exports.getCurrentTrack = exports.getTokenBalance = exports.getUserAddress = exports.RADIO_OPTION_CHANGE = exports.STREAM_FULFILLED = exports.STREAM_REJECTED = exports.STREAM_PENDING_REJECTED = exports.STREAM_PENDING = exports.STREAM = exports.GET_CURRENT_TRACK_FULFILLED = exports.GET_CURRENT_TRACK_PENDING = exports.GET_CURRENT_TRACK = exports.GET_USER_ADDRESS_FULFILLED = exports.GET_USER_ADDRESS_PENDING = exports.GET_USER_ADDRESS = exports.GET_TOKEN_BALANCE_FULFILLED = exports.GET_TOKEN_BALANCE_PENDING = exports.GET_TOKEN_BALANCE = undefined;
 
 var _bs = __webpack_require__(346);
 
@@ -88951,9 +88961,13 @@ var GET_USER_ADDRESS_FULFILLED = exports.GET_USER_ADDRESS_FULFILLED = "GET_USER_
 var GET_CURRENT_TRACK = exports.GET_CURRENT_TRACK = "GET_CURRENT_TRACK";
 var GET_CURRENT_TRACK_PENDING = exports.GET_CURRENT_TRACK_PENDING = "GET_CURRENT_TRACK_PENDING";
 var GET_CURRENT_TRACK_FULFILLED = exports.GET_CURRENT_TRACK_FULFILLED = "GET_CURRENT_TRACK_FULFILLED";
+
 var STREAM = exports.STREAM = "STREAM";
 var STREAM_PENDING = exports.STREAM_PENDING = "STREAM_PENDING";
+var STREAM_PENDING_REJECTED = exports.STREAM_PENDING_REJECTED = "STREAM_PENDING_REJECTED";
+var STREAM_REJECTED = exports.STREAM_REJECTED = "STREAM_REJECTED";
 var STREAM_FULFILLED = exports.STREAM_FULFILLED = "STREAM_FULFILLED";
+var RADIO_OPTION_CHANGE = exports.RADIO_OPTION_CHANGE = "RADIO_OPTION_CHANGE";
 
 var _getUserAddress = function _getUserAddress() {
 	return _contracts.web3.eth.getAccounts();
@@ -89029,22 +89043,25 @@ var _getCurrentTrackMetadata = function _getCurrentTrackMetadata() {
 	});
 };
 
-var _stream = function _stream() {
+var _stream = function _stream(selectedOption) {
 	return _getUserAddress().then(function (receipt) {
+
 		var user = receipt[0];
 		var options = {
 			gas: _contracts.gas,
 			gasPrice: _contracts.gasPrice,
 			from: user
-			// PROVIDER
-			// BLESSINGS
-		};return _contracts.Player.methods.stream(_contracts.PROVIDER).send(options);
+		};
+		return _contracts.Player.methods.stream('0xb8f1532472debea5faf67b3e4ce06e5931c891da5e3b632becf2a4ddf6f5b64c').send(options).catch(function (error) {
+			console.log('Metamask rejection');
+			return { 'status': '0x0' };
+		});
 	});
 };
 
-var _stream_and_fetch_metadata = function _stream_and_fetch_metadata() {
+var _stream_and_fetch_metadata = function _stream_and_fetch_metadata(selectedOption) {
 
-	var streamTransaction = _stream();
+	var streamTransaction = _stream(selectedOption);
 
 	var fetchMetadata = streamTransaction.then(function () {
 		return _getCurrentTrackMetadata();
@@ -89055,8 +89072,11 @@ var _stream_and_fetch_metadata = function _stream_and_fetch_metadata() {
 	});
 
 	return checkBalance.then(function () {
+
 		var txReceipt = streamTransaction.value();
+
 		var txSuccess = !!_contracts.web3.utils.hexToNumber(txReceipt.status);
+
 		var metadata = fetchMetadata.value();
 		var balance = checkBalance.value();
 		metadata.txSuccess = txSuccess;
@@ -89088,10 +89108,19 @@ var getCurrentTrack = exports.getCurrentTrack = function getCurrentTrack() {
 	};
 };
 
-var stream = exports.stream = function stream() {
+var radioOptionChange = exports.radioOptionChange = function radioOptionChange(value) {
+	return {
+		type: RADIO_OPTION_CHANGE,
+		payload: value
+	};
+};
+
+var stream = exports.stream = function stream(selectedOption) {
 	return {
 		type: STREAM,
-		payload: _stream_and_fetch_metadata
+		payload: new Promise(function (resolve, reject) {
+			return resolve(_stream_and_fetch_metadata(selectedOption));
+		})
 	};
 };
 
@@ -89418,6 +89447,14 @@ function streamReducer() {
 			nextState.txSuccess = action.payload.txSuccess;
 			nextState.balance = action.payload.balance;
 			return nextState;
+		case _actions.STREAM_REJECTED:
+			var nextState = (0, _merge2.default)({}, state);
+			nextState.txSuccess = false;
+			nextState.msg = 'Metamask rejection';
+		case _actions.STREAM_PENDING_REJECTED:
+			var nextState = (0, _merge2.default)({}, state);
+			nextState.txSuccess = false;
+			nextState.msg = 'Error streaming track';
 		case _actions.GET_CURRENT_TRACK_PENDING:
 			return state;
 		case _actions.GET_CURRENT_TRACK_FULFILLED:
@@ -89441,8 +89478,6 @@ function streamReducer() {
 
 exports.default = streamReducer;
 
-// STREAM_PENDING_REJECTED
-
 /***/ }),
 /* 439 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -89453,7 +89488,7 @@ exports.default = streamReducer;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.gasPrice = exports.gas = exports.Data = exports.Player = exports.Tokens = exports.BLESSINGS = exports.PROVIDER = exports.web3 = undefined;
+exports.gasPrice = exports.gas = exports.Data = exports.Player = exports.Tokens = exports.web3 = undefined;
 
 var _web = __webpack_require__(36);
 
@@ -89462,9 +89497,6 @@ var _web2 = _interopRequireDefault(_web);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var web3 = exports.web3 = new _web2.default(_web2.default.givenProvider);
-
-var PROVIDER = exports.PROVIDER = '0x778626c4f776387092fbf5af6a22b7556f57fe8d814edb4c0e23f4a8e5fd9cd7';
-var BLESSINGS = exports.BLESSINGS = '0xb8f1532472debea5faf67b3e4ce06e5931c891da5e3b632becf2a4ddf6f5b64c';
 
 var TOKENS_ADDRESS = '0x0f4b5b22704831db94d9b2768e795298480878b3';
 var TOKENS_ABI = [{ "constant": false, "inputs": [{ "name": "user", "type": "address" }, { "name": "value", "type": "uint256" }], "name": "incrementTokenBalance", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "addr", "type": "address" }], "name": "setPlayerAddress", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "name": "user", "type": "address" }], "name": "getTokenBalance", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getPlayerAddress", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "user", "type": "address" }, { "name": "value", "type": "uint256" }], "name": "decrementTokenBalance", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }];
@@ -89480,6 +89512,158 @@ var Data = exports.Data = new web3.eth.Contract(DATA_ABI, DATA_ADDRESS);
 
 var gas = exports.gas = 200000;
 var gasPrice = exports.gasPrice = 2000000000;
+
+/***/ }),
+/* 440 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _dec, _class;
+
+var _react = __webpack_require__(11);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(76);
+
+var _actions = __webpack_require__(431);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var PROVIDER = '0x778626c4f776387092fbf5af6a22b7556f57fe8d814edb4c0e23f4a8e5fd9cd7';
+var BLESSINGS = '0xb8f1532472debea5faf67b3e4ce06e5931c891da5e3b632becf2a4ddf6f5b64c';
+
+var Radio = (_dec = (0, _reactRedux.connect)(function (_ref) {
+	var radio = _ref.radio;
+
+	return {
+		selectedOption: radio.selectedOption
+	};
+}), _dec(_class = function (_React$Component) {
+	_inherits(Radio, _React$Component);
+
+	function Radio() {
+		_classCallCheck(this, Radio);
+
+		return _possibleConstructorReturn(this, (Radio.__proto__ || Object.getPrototypeOf(Radio)).apply(this, arguments));
+	}
+
+	_createClass(Radio, [{
+		key: 'handleOptionChange',
+		value: function handleOptionChange(changeEvent) {
+			var payload = { selectedOption: changeEvent.target.value };
+			this.props.dispatch((0, _actions.radioOptionChange)(payload));
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var selectedOption = this.props.selectedOption;
+
+			return _react2.default.createElement(
+				'div',
+				{ className: 'container' },
+				_react2.default.createElement(
+					'div',
+					{ className: 'row' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'col-sm-12' },
+						_react2.default.createElement(
+							'h3',
+							null,
+							'Change Track'
+						),
+						_react2.default.createElement(
+							'form',
+							null,
+							_react2.default.createElement(
+								'div',
+								{ className: 'radio' },
+								_react2.default.createElement('input', { type: 'radio', value: PROVIDER, onChange: this.handleOptionChange.bind(this), checked: selectedOption === PROVIDER }),
+								_react2.default.createElement(
+									'label',
+									null,
+									'Provider - Frank Ocean'
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'radio' },
+								_react2.default.createElement('input', { type: 'radio', value: BLESSINGS, onChange: this.handleOptionChange.bind(this), checked: selectedOption === BLESSINGS }),
+								_react2.default.createElement(
+									'label',
+									null,
+									'Blessings - Chance the Rapper'
+								)
+							)
+						)
+					)
+				)
+			);
+		}
+	}]);
+
+	return Radio;
+}(_react2.default.Component)) || _class);
+;
+
+exports.default = Radio;
+
+/***/ }),
+/* 441 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _merge = __webpack_require__(364);
+
+var _merge2 = _interopRequireDefault(_merge);
+
+var _actions = __webpack_require__(431);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var initialState = {
+	selectedOption: null
+};
+
+function radioReducer() {
+	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+	var action = arguments[1];
+
+	Object.freeze(state);
+	switch (action.type) {
+		case _actions.RADIO_OPTION_CHANGE:
+			var nextState = (0, _merge2.default)({}, state);
+			nextState.selectedOption = action.payload.selectedOption;
+			return nextState;
+		default:
+			return state;
+	}
+}
+
+exports.default = radioReducer;
+
+// STREAM_PENDING_REJECTED
 
 /***/ })
 /******/ ]);

@@ -1,7 +1,9 @@
 import merge from 'lodash/merge';
 import { 
 	STREAM_PENDING, 
+	STREAM_PENDING_REJECTED,
 	STREAM_FULFILLED, 
+	STREAM_REJECTED,
 	GET_CURRENT_TRACK_PENDING, 
 	GET_CURRENT_TRACK_FULFILLED, 
 	GET_TOKEN_BALANCE_PENDING, 
@@ -32,6 +34,14 @@ function streamReducer(state=initialState, action) {
 			nextState.txSuccess = action.payload.txSuccess;
 			nextState.balance = action.payload.balance;
 			return nextState
+		case STREAM_REJECTED:
+			var nextState = merge({}, state);
+			nextState.txSuccess = false;
+			nextState.msg = 'Metamask rejection'
+		case STREAM_PENDING_REJECTED:
+			var nextState = merge({}, state);
+			nextState.txSuccess = false;
+			nextState.msg = 'Error streaming track'
 		case GET_CURRENT_TRACK_PENDING:
 			return state;
 		case GET_CURRENT_TRACK_FULFILLED:
@@ -54,5 +64,3 @@ function streamReducer(state=initialState, action) {
 }
 
 export default streamReducer;
-
-// STREAM_PENDING_REJECTED

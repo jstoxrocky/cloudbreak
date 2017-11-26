@@ -1,5 +1,5 @@
 import bs58 from 'bs58';
-import {Tokens, Player, Data, web3, PROVIDER, BLESSINGS, gas, gasPrice} from "../contracts/contracts"
+import {Tokens, Player, Data, web3, gas, gasPrice} from "../contracts/contracts"
 
 
 export const GET_TOKEN_BALANCE = "GET_TOKEN_BALANCE";
@@ -11,9 +11,13 @@ export const GET_USER_ADDRESS_FULFILLED = "GET_USER_ADDRESS_FULFILLED";
 export const GET_CURRENT_TRACK = "GET_CURRENT_TRACK";
 export const GET_CURRENT_TRACK_PENDING = "GET_CURRENT_TRACK_PENDING";
 export const GET_CURRENT_TRACK_FULFILLED = "GET_CURRENT_TRACK_FULFILLED";
+
 export const STREAM = "STREAM";
 export const STREAM_PENDING = "STREAM_PENDING";
+export const STREAM_PENDING_REJECTED = "STREAM_PENDING_REJECTED"
+export const STREAM_REJECTED = "STREAM_REJECTED"
 export const STREAM_FULFILLED = "STREAM_FULFILLED";
+export const RADIO_OPTION_CHANGE = "RADIO_OPTION_CHANGE";
 
 
 const _getUserAddress = () => web3.eth.getAccounts();
@@ -83,22 +87,25 @@ const _getCurrentTrackMetadata = () => Promise.all([
 })
 
 
-const _stream = () => _getUserAddress().then(receipt => {
+const _stream = (selectedOption) => _getUserAddress().then(receipt => {
+
 	const user = receipt[0];
 	const options = {
 		gas: gas,
 		gasPrice: gasPrice,
 		from: user,
 	}
-	// PROVIDER
-	// BLESSINGS
-	return Player.methods.stream(PROVIDER).send(options)
+	return Player.methods.stream('0xb8f1532472debea5faf67b3e4ce06e5931c891da5e3b632becf2a4ddf6f5b64c').send(options)
+		.catch(function(error){
+		    console.log('Metamask rejection')
+		    return {'status':'0x0'}
+		});
 })
 
 
-const _stream_and_fetch_metadata = () => {
+const _stream_and_fetch_metadata = (selectedOption) => {
 
-	let streamTransaction = _stream();
+	let streamTransaction = _stream(selectedOption);
 
 	let fetchMetadata = streamTransaction.then(() => {
 		return _getCurrentTrackMetadata()
@@ -108,15 +115,18 @@ const _stream_and_fetch_metadata = () => {
 		return _getTokenBalance()
 	})
 
-    return checkBalance.then(() => {
-    	let txReceipt = streamTransaction.value()
-    	let txSuccess = !!web3.utils.hexToNumber(txReceipt.status)
-    	let metadata = fetchMetadata.value()
-    	let balance = checkBalance.value()
-    	metadata.txSuccess = txSuccess
-    	metadata.balance = balance
-    	return new Promise((resolve, reject) => resolve(metadata))
-    });
+	return checkBalance.then(() => {
+
+		let txReceipt = streamTransaction.value()
+
+		let txSuccess = !!web3.utils.hexToNumber(txReceipt.status)
+
+		let metadata = fetchMetadata.value()
+		let balance = checkBalance.value()
+		metadata.txSuccess = txSuccess
+		metadata.balance = balance
+		return new Promise((resolve, reject) => resolve(metadata))
+	})
 }
 
 
@@ -135,14 +145,13 @@ export const getCurrentTrack = () => ({
 	payload: _getCurrentTrackMetadata,
 })
 
-export const stream = () => ({
-	type: STREAM,
-	payload: _stream_and_fetch_metadata,	
+export const radioOptionChange = (value) => ({
+	type: RADIO_OPTION_CHANGE,
+	payload: value,
 })
 
-
-
-
-
-
+export const stream = selectedOption => ({
+	type: STREAM,
+	payload: new Promise((resolve, reject) => resolve(_stream_and_fetch_metadata(selectedOption))),
+})
 
