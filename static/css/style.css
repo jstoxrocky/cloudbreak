@@ -17,3 +17,17 @@
 	color: #999;
 	display: inline;
 }
+
+audio {
+	display:block;
+}
+
+.now-playing {
+	background-color: #99CDC9;
+	color:#fff;
+	padding:20px;
+}
+
+.site-title, .balance {
+	display: inline;
+}
