@@ -1,47 +1,48 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { radioOptionChange } from '../actions/actions'
+import { stream } from '../actions/actions'
 
 
-const PROVIDER = '0x778626c4f776387092fbf5af6a22b7556f57fe8d814edb4c0e23f4a8e5fd9cd7'
-const BLESSINGS = '0xb8f1532472debea5faf67b3e4ce06e5931c891da5e3b632becf2a4ddf6f5b64c'
-
-
-@connect(({radio}) => {
+@connect(({searchResults}) => {
 	return {
-		selectedOption: radio.selectedOption,
+		availableTracks: searchResults.availableTracks,
 	};
 })
 class SearchResults extends React.Component {
 
-
-	handleOptionChange(changeEvent) {
-		const payload = {selectedOption: changeEvent.target.value,}
-		this.props.dispatch(radioOptionChange(payload))
+	handleStreamClick(trackHash) {
+		this.props.dispatch(stream(trackHash));
 	}
 
-
 	render() {
-		const {selectedOption} = this.props;
-		return (
-			<div className="container">
-				<div className="row">
-					<div className="col-sm-12">
-						<h3>Change Track</h3>
-						<form>
-							<div className="radio">
-									<input type="radio" value={PROVIDER} onChange={this.handleOptionChange.bind(this)} checked={selectedOption === PROVIDER} />
-									<label>Provider - Frank Ocean
-								</label>
+		const {availableTracks} = this.props;
+		const artist_class = false ? 'fa fa-check-circle-o verified': 'fa fa-times-circle-o unverified'
+		const title_class = false ? 'fa fa-check-circle-o verified': 'fa fa-times-circle-o unverified'
+		const searchResults = availableTracks.map((metadata) =>
+			<div className='track-results' key={metadata.trackHash} onClick={() => this.handleStreamClick(metadata.trackHash)} className='track-item'>
+				<a href='#'>
+					<div className='row'>
+						<div className='col'>
+							<div className='artist'>
+								{metadata.artist} <i className={artist_class} aria-hidden="true"></i>
 							</div>
-							<div className="radio">
-									<input type="radio" value={BLESSINGS} onChange={this.handleOptionChange.bind(this)} checked={selectedOption === BLESSINGS} />
-									<label>Blessings - Chance the Rapper
-								</label>
-							</div>
-						</form>
+						</div>
 					</div>
-				</div>
+					<div className='row'>
+						<div className='col'>
+							<div className='title'>
+								{metadata.title} <i className={artist_class} aria-hidden="true"></i>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+		);
+
+		return (
+			<div>
+				<h3>{(searchResults.length > 0) ? "Results": ""}</h3>
+				{searchResults}
 			</div> 
 		)
 	}

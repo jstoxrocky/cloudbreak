@@ -7,6 +7,7 @@ import {
 	UPDATE_PLAYER,
 	UPDATE_PLAYER_PENDING, 
 	UPDATE_PLAYER_FULFILLED } from '../actions/actions';
+import { LOADING } from '../utils/reports'
 
 const initialState = {
 	currentTrack: null,
@@ -14,15 +15,17 @@ const initialState = {
 	artistIsVerified: null,
 	title: null,
 	titleIsVerified: null,
-	txSuccess: true,
 	balance: 0,
+	msg: null,
 }
 
 function streamReducer(state=initialState, action) {
 	Object.freeze(state);
 	switch (action.type) { 
 		case STREAM_PENDING:
-			return state;
+			var nextState = merge({}, state);
+			nextState.msg = LOADING
+			return nextState
 		case STREAM_FULFILLED:
 			var nextState = merge({}, state);
 			nextState.currentTrack = action.payload.currentTrack;
@@ -30,19 +33,13 @@ function streamReducer(state=initialState, action) {
 			nextState.artistIsVerified = action.payload.artistIsVerified;
 			nextState.title = action.payload.title;
 			nextState.titleIsVerified = action.payload.titleIsVerified;
-			nextState.txSuccess = action.payload.txSuccess;
 			nextState.balance = action.payload.balance;
+			nextState.msg = action.payload.msg;
 			return nextState
-		case STREAM_REJECTED:
-			var nextState = merge({}, state);
-			nextState.txSuccess = false;
-			nextState.msg = 'Metamask rejection'
-		case STREAM_PENDING_REJECTED:
-			var nextState = merge({}, state);
-			nextState.txSuccess = false;
-			nextState.msg = 'Error streaming track'
 		case UPDATE_PLAYER_PENDING:
-			return state;
+			var nextState = merge({}, state);
+			nextState.msg = LOADING
+			return nextState
 		case UPDATE_PLAYER_FULFILLED:
 			var nextState = merge({}, state);
 			nextState.currentTrack = action.payload.currentTrack;
@@ -51,6 +48,7 @@ function streamReducer(state=initialState, action) {
 			nextState.title = action.payload.title;
 			nextState.titleIsVerified = action.payload.titleIsVerified;
 			nextState.balance = action.payload.balance;
+			nextState.msg = action.payload.msg;
 			return nextState
 		default:
 			return state;

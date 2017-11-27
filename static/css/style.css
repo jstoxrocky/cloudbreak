@@ -31,3 +31,30 @@ audio {
 .site-title, .balance {
 	display: inline;
 }
+
+.track-item {
+	background-color: #D2ECF1; 
+	padding: 10px;
+	padding-left: 20px;
+}
+
+.track-item:hover {
+	background-color: #E2ECF1; 
+}
+
+.track-item a, a:hover, a:visited, a:link, a:active {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.artist {
+	color:#000;
+	font-size: 12px;
+    line-height: 16px;
+}
+
+.title {
+	color:#11545F;
+	font-size: 1rem;
+    line-height: 1.2;
+}

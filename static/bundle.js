@@ -28694,13 +28694,17 @@ var _player = __webpack_require__(442);
 
 var _player2 = _interopRequireDefault(_player);
 
-var _stream = __webpack_require__(348);
-
-var _stream2 = _interopRequireDefault(_stream);
-
 var _searchResults = __webpack_require__(450);
 
 var _searchResults2 = _interopRequireDefault(_searchResults);
+
+var _message = __webpack_require__(451);
+
+var _message2 = _interopRequireDefault(_message);
+
+var _search = __webpack_require__(454);
+
+var _search2 = _interopRequireDefault(_search);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28715,8 +28719,9 @@ var App = function App() {
 		),
 		_react2.default.createElement(_tokensBalance2.default, null),
 		_react2.default.createElement(_player2.default, null),
-		_react2.default.createElement(_searchResults2.default, null),
-		_react2.default.createElement(_stream2.default, null)
+		_react2.default.createElement(_message2.default, null),
+		_react2.default.createElement(_search2.default, null),
+		_react2.default.createElement(_searchResults2.default, null)
 	);
 };
 
@@ -70383,88 +70388,7 @@ module.exports = function base (ALPHABET) {
 
 
 /***/ }),
-/* 348 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _dec, _class;
-
-var _react = __webpack_require__(11);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(76);
-
-var _actions = __webpack_require__(431);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Stream = (_dec = (0, _reactRedux.connect)(function (_ref) {
-	var stream = _ref.stream,
-	    radio = _ref.radio;
-
-	return {
-		txSuccess: stream.txSuccess,
-		selectedOption: radio.selectedOption
-	};
-}), _dec(_class = function (_React$Component) {
-	_inherits(Stream, _React$Component);
-
-	function Stream() {
-		_classCallCheck(this, Stream);
-
-		return _possibleConstructorReturn(this, (Stream.__proto__ || Object.getPrototypeOf(Stream)).apply(this, arguments));
-	}
-
-	_createClass(Stream, [{
-		key: 'handleStreamClick',
-		value: function handleStreamClick() {
-			this.props.dispatch((0, _actions.stream)(this.props.selectedOption));
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			var txSuccess = this.props.txSuccess;
-
-			var msg = txSuccess ? "" : "Error";
-			return _react2.default.createElement(
-				'div',
-				null,
-				_react2.default.createElement(
-					'button',
-					{ onClick: this.handleStreamClick.bind(this), className: 'btn btn-primary' },
-					'Stream'
-				),
-				_react2.default.createElement(
-					'p',
-					null,
-					msg
-				)
-			);
-		}
-	}]);
-
-	return Stream;
-}(_react2.default.Component)) || _class);
-;
-
-exports.default = Stream;
-
-/***/ }),
+/* 348 */,
 /* 349 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -86642,15 +86566,15 @@ var _streamReducer = __webpack_require__(438);
 
 var _streamReducer2 = _interopRequireDefault(_streamReducer);
 
-var _radioReducer = __webpack_require__(441);
+var _searchResultsReducer = __webpack_require__(455);
 
-var _radioReducer2 = _interopRequireDefault(_radioReducer);
+var _searchResultsReducer2 = _interopRequireDefault(_searchResultsReducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var reducers = (0, _redux.combineReducers)({
 	stream: _streamReducer2.default,
-	radio: _radioReducer2.default
+	searchResults: _searchResultsReducer2.default
 });
 
 exports.default = reducers;
@@ -88820,13 +88744,15 @@ module.exports = isIterateeCall;
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.stream = exports.updatePlayer = exports.radioOptionChange = exports.RADIO_OPTION_CHANGE = exports.STREAM_FULFILLED = exports.STREAM_REJECTED = exports.STREAM_PENDING_REJECTED = exports.STREAM_PENDING = exports.STREAM = exports.UPDATE_PLAYER_FULFILLED = exports.UPDATE_PLAYER_PENDING = exports.UPDATE_PLAYER = undefined;
+exports.dbCall = exports.stream = exports.updatePlayer = exports.radioOptionChange = exports.DB_CALL_FULFILLED = exports.DB_CALL_PENDING = exports.DB_CALL = exports.RADIO_OPTION_CHANGE = exports.STREAM_FULFILLED = exports.STREAM_REJECTED = exports.STREAM_PENDING_REJECTED = exports.STREAM_PENDING = exports.STREAM = exports.UPDATE_PLAYER_FULFILLED = exports.UPDATE_PLAYER_PENDING = exports.UPDATE_PLAYER = undefined;
 
 var _bs = __webpack_require__(346);
 
 var _bs2 = _interopRequireDefault(_bs);
 
-var _contracts = __webpack_require__(439);
+var _contracts = __webpack_require__(452);
+
+var _reports = __webpack_require__(453);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -88835,14 +88761,15 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 var UPDATE_PLAYER = exports.UPDATE_PLAYER = "UPDATE_PLAYER";
 var UPDATE_PLAYER_PENDING = exports.UPDATE_PLAYER_PENDING = "UPDATE_PLAYER_PENDING";
 var UPDATE_PLAYER_FULFILLED = exports.UPDATE_PLAYER_FULFILLED = "UPDATE_PLAYER_FULFILLED";
-
 var STREAM = exports.STREAM = "STREAM";
 var STREAM_PENDING = exports.STREAM_PENDING = "STREAM_PENDING";
 var STREAM_PENDING_REJECTED = exports.STREAM_PENDING_REJECTED = "STREAM_PENDING_REJECTED";
 var STREAM_REJECTED = exports.STREAM_REJECTED = "STREAM_REJECTED";
 var STREAM_FULFILLED = exports.STREAM_FULFILLED = "STREAM_FULFILLED";
-
 var RADIO_OPTION_CHANGE = exports.RADIO_OPTION_CHANGE = "RADIO_OPTION_CHANGE";
+var DB_CALL = exports.DB_CALL = "DB_CALL";
+var DB_CALL_PENDING = exports.DB_CALL_PENDING = "DB_CALL_PENDING";
+var DB_CALL_FULFILLED = exports.DB_CALL_FULFILLED = "DB_CALL_FULFILLED";
 
 var toIPFSHash = function toIPFSHash(hexArray) {
 	var hexHashFunction = hexArray[0];
@@ -88875,20 +88802,26 @@ var _getTrackBasicMetadataByHash = function _getTrackBasicMetadataByHash(trackHa
 var _getCurrentTrackMetadata = function _getCurrentTrackMetadata(user) {
 	var track = _getCurrentTrack(user);
 	var metadata = track.then(function (receipt) {
-		var currentTrack = receipt[2];
+		var currentTrack = track.value()[2];
 		return Promise.all([_getTrackBasicMetadataByHash(currentTrack, 'artist'), _getTrackBasicMetadataByHash(currentTrack, 'title')]);
 	});
 	return metadata.then(function () {
+
 		var result = metadata.value();
-		var hex_track_values = track.value();
-		var IPFSHash = toIPFSHash(hex_track_values);
+		var hexTrackValues = track.value();
+		var hexTrackHash = track.value()[2];
+		var currentTrack = toIPFSHash(hexTrackValues);
 		var payload = {
 			artist: result[0][0],
 			artistIsVerified: result[0][1],
 			title: result[1][0],
 			titleIsVerified: result[1][1],
-			currentTrack: IPFSHash
+			currentTrack: currentTrack,
+			msg: _reports.CURRENT_TRACK_LOADED
 		};
+		if (hexTrackHash == _contracts.ZERO_HEX) {
+			payload.msg = _reports.NO_CURRENT_TRACK;
+		}
 		return new Promise(function (resolve, reject) {
 			return resolve(payload);
 		});
@@ -88917,7 +88850,6 @@ var _stream = function _stream(user, keccakTrackHash) {
 		from: user
 	};
 	return _contracts.Player.methods.stream(keccakTrackHash).send(options).catch(function (error) {
-		console.log('Metamask rejection');
 		return { 'status': '0x0' };
 	});
 };
@@ -88930,10 +88862,10 @@ var _stream_and_fetch_metadata = function _stream_and_fetch_metadata(user, kecca
 	return metadata.then(function () {
 		var txReceipt = streamTX.value();
 		var txSuccess = !!_contracts.web3.utils.hexToNumber(txReceipt.status);
-		var metadataResult = metadata.value();
-		metadataResult.txSuccess = txSuccess;
+		var payload = metadata.value();
+		payload.msg = txSuccess ? _reports.TX_SUCCESS : _reports.TX_FAILURE;
 		return new Promise(function (resolve, reject) {
-			return resolve(metadataResult);
+			return resolve(payload);
 		});
 	});
 };
@@ -88965,6 +88897,25 @@ var stream = exports.stream = function stream(keccakTrackHash) {
 			return new Promise(function (resolve, reject) {
 				return resolve(_stream_and_fetch_metadata(user, keccakTrackHash));
 			});
+		})
+	};
+};
+
+var FROM_DB = [{
+	trackHash: '0x778626c4f776387092fbf5af6a22b7556f57fe8d814edb4c0e23f4a8e5fd9cd7',
+	artist: 'Frank Ocean',
+	title: 'Provider'
+}, {
+	trackHash: '0xb8f1532472debea5faf67b3e4ce06e5931c891da5e3b632becf2a4ddf6f5b64c',
+	artist: 'Chance the Rapper',
+	title: 'Blessings'
+}];
+
+var dbCall = exports.dbCall = function dbCall() {
+	return {
+		type: DB_CALL,
+		payload: new Promise(function (resolve, reject) {
+			return resolve(FROM_DB);
 		})
 	};
 };
@@ -89057,6 +89008,8 @@ var _merge2 = _interopRequireDefault(_merge);
 
 var _actions = __webpack_require__(431);
 
+var _reports = __webpack_require__(453);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var initialState = {
@@ -89065,8 +89018,8 @@ var initialState = {
 	artistIsVerified: null,
 	title: null,
 	titleIsVerified: null,
-	txSuccess: true,
-	balance: 0
+	balance: 0,
+	msg: null
 };
 
 function streamReducer() {
@@ -89076,7 +89029,9 @@ function streamReducer() {
 	Object.freeze(state);
 	switch (action.type) {
 		case _actions.STREAM_PENDING:
-			return state;
+			var nextState = (0, _merge2.default)({}, state);
+			nextState.msg = _reports.LOADING;
+			return nextState;
 		case _actions.STREAM_FULFILLED:
 			var nextState = (0, _merge2.default)({}, state);
 			nextState.currentTrack = action.payload.currentTrack;
@@ -89084,19 +89039,13 @@ function streamReducer() {
 			nextState.artistIsVerified = action.payload.artistIsVerified;
 			nextState.title = action.payload.title;
 			nextState.titleIsVerified = action.payload.titleIsVerified;
-			nextState.txSuccess = action.payload.txSuccess;
 			nextState.balance = action.payload.balance;
+			nextState.msg = action.payload.msg;
 			return nextState;
-		case _actions.STREAM_REJECTED:
-			var nextState = (0, _merge2.default)({}, state);
-			nextState.txSuccess = false;
-			nextState.msg = 'Metamask rejection';
-		case _actions.STREAM_PENDING_REJECTED:
-			var nextState = (0, _merge2.default)({}, state);
-			nextState.txSuccess = false;
-			nextState.msg = 'Error streaming track';
 		case _actions.UPDATE_PLAYER_PENDING:
-			return state;
+			var nextState = (0, _merge2.default)({}, state);
+			nextState.msg = _reports.LOADING;
+			return nextState;
 		case _actions.UPDATE_PLAYER_FULFILLED:
 			var nextState = (0, _merge2.default)({}, state);
 			nextState.currentTrack = action.payload.currentTrack;
@@ -89105,6 +89054,7 @@ function streamReducer() {
 			nextState.title = action.payload.title;
 			nextState.titleIsVerified = action.payload.titleIsVerified;
 			nextState.balance = action.payload.balance;
+			nextState.msg = action.payload.msg;
 			return nextState;
 		default:
 			return state;
@@ -89114,84 +89064,9 @@ function streamReducer() {
 exports.default = streamReducer;
 
 /***/ }),
-/* 439 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.GAS_PRICE = exports.GAS = exports.Data = exports.Player = exports.Tokens = exports.web3 = undefined;
-
-var _web = __webpack_require__(36);
-
-var _web2 = _interopRequireDefault(_web);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var web3 = exports.web3 = new _web2.default(_web2.default.givenProvider);
-
-var TOKENS_ADDRESS = '0x0f4b5b22704831db94d9b2768e795298480878b3';
-var TOKENS_ABI = [{ "constant": false, "inputs": [{ "name": "user", "type": "address" }, { "name": "value", "type": "uint256" }], "name": "incrementTokenBalance", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "addr", "type": "address" }], "name": "setPlayerAddress", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "name": "user", "type": "address" }], "name": "getTokenBalance", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getPlayerAddress", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "user", "type": "address" }, { "name": "value", "type": "uint256" }], "name": "decrementTokenBalance", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }];
-var Tokens = exports.Tokens = new web3.eth.Contract(TOKENS_ABI, TOKENS_ADDRESS);
-
-var PLAYER_ADDRESS = '0xf7729b4d76900088f3ed0323da8b8733f7146932';
-var PLAYER_ABI = [{ "constant": false, "inputs": [{ "name": "addr", "type": "address" }], "name": "setDataAddress", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getTokensAddress", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "addr", "type": "address" }], "name": "setTokensAddress", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "keccakTrackHash", "type": "bytes32" }], "name": "stream", "outputs": [{ "name": "", "type": "bytes32" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "newAmount", "type": "uint256" }], "name": "setpricePerStream", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getDataAddress", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "name": "listener", "type": "address" }], "name": "getCurrentTrack", "outputs": [{ "name": "", "type": "bytes1" }, { "name": "", "type": "bytes1" }, { "name": "", "type": "bytes32" }], "payable": false, "stateMutability": "view", "type": "function" }];
-var Player = exports.Player = new web3.eth.Contract(PLAYER_ABI, PLAYER_ADDRESS);
-
-var DATA_ADDRESS = '0xcb240b795dc6214b1c4b8fc05583ad657e738a18';
-var DATA_ABI = [{ "constant": false, "inputs": [{ "name": "keccakTrackHash", "type": "bytes32" }], "name": "convertKeccackHashToIPFSHash", "outputs": [{ "name": "", "type": "bytes32" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "addr", "type": "address" }], "name": "setPlayerAddress", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getTokensAddress", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "addr", "type": "address" }], "name": "setTokensAddress", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getPlayerAddress", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "newAmount", "type": "uint256" }], "name": "setCaptchaReward", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "name": "trackHash", "type": "bytes32" }, { "name": "key", "type": "string" }], "name": "getTrackBasicMetadataByHash", "outputs": [{ "name": "", "type": "string" }, { "name": "", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "trackHash", "type": "bytes32" }, { "name": "key", "type": "string" }, { "name": "value", "type": "string" }, { "name": "userToPay", "type": "address" }], "name": "uploadMetadata", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "trackHash", "type": "bytes32" }], "name": "getIpfsHashMetadata", "outputs": [{ "name": "", "type": "bytes1" }, { "name": "", "type": "bytes1" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "newAmount", "type": "uint256" }], "name": "setVerificationRequirement", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "hashFunction", "type": "bytes1" }, { "name": "size", "type": "bytes1" }, { "name": "trackHash", "type": "bytes32" }, { "name": "artist", "type": "string" }, { "name": "title", "type": "string" }], "name": "uploadTrack", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "trackHash", "type": "bytes32" }], "name": "incrementPlayCount", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "anonymous": false, "inputs": [{ "indexed": false, "name": "trackHash", "type": "bytes32" }], "name": "newUpload", "type": "event" }];
-var Data = exports.Data = new web3.eth.Contract(DATA_ABI, DATA_ADDRESS);
-
-var GAS = exports.GAS = 200000;
-var GAS_PRICE = exports.GAS_PRICE = 2000000000;
-
-/***/ }),
+/* 439 */,
 /* 440 */,
-/* 441 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _merge = __webpack_require__(364);
-
-var _merge2 = _interopRequireDefault(_merge);
-
-var _actions = __webpack_require__(431);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var initialState = {
-	selectedOption: null
-};
-
-function radioReducer() {
-	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-	var action = arguments[1];
-
-	Object.freeze(state);
-	switch (action.type) {
-		case _actions.RADIO_OPTION_CHANGE:
-			var nextState = (0, _merge2.default)({}, state);
-			nextState.selectedOption = action.payload.selectedOption;
-			return nextState;
-		default:
-			return state;
-	}
-}
-
-exports.default = radioReducer;
-
-// STREAM_PENDING_REJECTED
-
-/***/ }),
+/* 441 */,
 /* 442 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -89334,20 +89209,19 @@ var _actions = __webpack_require__(431);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var PROVIDER = '0x778626c4f776387092fbf5af6a22b7556f57fe8d814edb4c0e23f4a8e5fd9cd7';
-var BLESSINGS = '0xb8f1532472debea5faf67b3e4ce06e5931c891da5e3b632becf2a4ddf6f5b64c';
-
 var SearchResults = (_dec = (0, _reactRedux.connect)(function (_ref) {
-	var radio = _ref.radio;
+	var searchResults = _ref.searchResults;
 
 	return {
-		selectedOption: radio.selectedOption
+		availableTracks: searchResults.availableTracks
 	};
 }), _dec(_class = function (_React$Component) {
 	_inherits(SearchResults, _React$Component);
@@ -89359,56 +89233,71 @@ var SearchResults = (_dec = (0, _reactRedux.connect)(function (_ref) {
 	}
 
 	_createClass(SearchResults, [{
-		key: 'handleOptionChange',
-		value: function handleOptionChange(changeEvent) {
-			var payload = { selectedOption: changeEvent.target.value };
-			this.props.dispatch((0, _actions.radioOptionChange)(payload));
+		key: 'handleStreamClick',
+		value: function handleStreamClick(trackHash) {
+			this.props.dispatch((0, _actions.stream)(trackHash));
 		}
 	}, {
 		key: 'render',
 		value: function render() {
-			var selectedOption = this.props.selectedOption;
+			var _this2 = this;
 
-			return _react2.default.createElement(
-				'div',
-				{ className: 'container' },
-				_react2.default.createElement(
+			var availableTracks = this.props.availableTracks;
+
+			var artist_class = false ? 'fa fa-check-circle-o verified' : 'fa fa-times-circle-o unverified';
+			var title_class = false ? 'fa fa-check-circle-o verified' : 'fa fa-times-circle-o unverified';
+			var searchResults = availableTracks.map(function (metadata) {
+				return _react2.default.createElement(
 					'div',
-					{ className: 'row' },
+					_defineProperty({ className: 'track-results', key: metadata.trackHash, onClick: function onClick() {
+							return _this2.handleStreamClick(metadata.trackHash);
+						} }, 'className', 'track-item'),
 					_react2.default.createElement(
-						'div',
-						{ className: 'col-sm-12' },
+						'a',
+						{ href: '#' },
 						_react2.default.createElement(
-							'h3',
-							null,
-							'Change Track'
+							'div',
+							{ className: 'row' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'col' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'artist' },
+									metadata.artist,
+									' ',
+									_react2.default.createElement('i', { className: artist_class, 'aria-hidden': 'true' })
+								)
+							)
 						),
 						_react2.default.createElement(
-							'form',
-							null,
+							'div',
+							{ className: 'row' },
 							_react2.default.createElement(
 								'div',
-								{ className: 'radio' },
-								_react2.default.createElement('input', { type: 'radio', value: PROVIDER, onChange: this.handleOptionChange.bind(this), checked: selectedOption === PROVIDER }),
+								{ className: 'col' },
 								_react2.default.createElement(
-									'label',
-									null,
-									'Provider - Frank Ocean'
-								)
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'radio' },
-								_react2.default.createElement('input', { type: 'radio', value: BLESSINGS, onChange: this.handleOptionChange.bind(this), checked: selectedOption === BLESSINGS }),
-								_react2.default.createElement(
-									'label',
-									null,
-									'Blessings - Chance the Rapper'
+									'div',
+									{ className: 'title' },
+									metadata.title,
+									' ',
+									_react2.default.createElement('i', { className: artist_class, 'aria-hidden': 'true' })
 								)
 							)
 						)
 					)
-				)
+				);
+			});
+
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					'h3',
+					null,
+					searchResults.length > 0 ? "Results" : ""
+				),
+				searchResults
 			);
 		}
 	}]);
@@ -89418,6 +89307,249 @@ var SearchResults = (_dec = (0, _reactRedux.connect)(function (_ref) {
 ;
 
 exports.default = SearchResults;
+
+/***/ }),
+/* 451 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _dec, _class;
+
+var _react = __webpack_require__(11);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(76);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Message = (_dec = (0, _reactRedux.connect)(function (_ref) {
+	var stream = _ref.stream;
+
+	return {
+		msg: stream.msg
+	};
+}), _dec(_class = function (_React$Component) {
+	_inherits(Message, _React$Component);
+
+	function Message() {
+		_classCallCheck(this, Message);
+
+		return _possibleConstructorReturn(this, (Message.__proto__ || Object.getPrototypeOf(Message)).apply(this, arguments));
+	}
+
+	_createClass(Message, [{
+		key: "render",
+		value: function render() {
+			var msg = this.props.msg;
+
+			return _react2.default.createElement(
+				"div",
+				{ className: "alert alert-info col-md-6", role: "alert" },
+				msg
+			);
+		}
+	}]);
+
+	return Message;
+}(_react2.default.Component)) || _class);
+;
+
+exports.default = Message;
+
+/***/ }),
+/* 452 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ZERO_HEX = exports.GAS_PRICE = exports.GAS = exports.Data = exports.Player = exports.Tokens = exports.web3 = undefined;
+
+var _web = __webpack_require__(36);
+
+var _web2 = _interopRequireDefault(_web);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var web3 = exports.web3 = new _web2.default(_web2.default.givenProvider);
+
+var TOKENS_ADDRESS = '0x0f4b5b22704831db94d9b2768e795298480878b3';
+var TOKENS_ABI = [{ "constant": false, "inputs": [{ "name": "user", "type": "address" }, { "name": "value", "type": "uint256" }], "name": "incrementTokenBalance", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "addr", "type": "address" }], "name": "setPlayerAddress", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "name": "user", "type": "address" }], "name": "getTokenBalance", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getPlayerAddress", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "user", "type": "address" }, { "name": "value", "type": "uint256" }], "name": "decrementTokenBalance", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }];
+var Tokens = exports.Tokens = new web3.eth.Contract(TOKENS_ABI, TOKENS_ADDRESS);
+
+var PLAYER_ADDRESS = '0xf7729b4d76900088f3ed0323da8b8733f7146932';
+var PLAYER_ABI = [{ "constant": false, "inputs": [{ "name": "addr", "type": "address" }], "name": "setDataAddress", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getTokensAddress", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "addr", "type": "address" }], "name": "setTokensAddress", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "keccakTrackHash", "type": "bytes32" }], "name": "stream", "outputs": [{ "name": "", "type": "bytes32" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "newAmount", "type": "uint256" }], "name": "setpricePerStream", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getDataAddress", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "name": "listener", "type": "address" }], "name": "getCurrentTrack", "outputs": [{ "name": "", "type": "bytes1" }, { "name": "", "type": "bytes1" }, { "name": "", "type": "bytes32" }], "payable": false, "stateMutability": "view", "type": "function" }];
+var Player = exports.Player = new web3.eth.Contract(PLAYER_ABI, PLAYER_ADDRESS);
+
+var DATA_ADDRESS = '0xcb240b795dc6214b1c4b8fc05583ad657e738a18';
+var DATA_ABI = [{ "constant": false, "inputs": [{ "name": "keccakTrackHash", "type": "bytes32" }], "name": "convertKeccackHashToIPFSHash", "outputs": [{ "name": "", "type": "bytes32" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "addr", "type": "address" }], "name": "setPlayerAddress", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getTokensAddress", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "addr", "type": "address" }], "name": "setTokensAddress", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getPlayerAddress", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "newAmount", "type": "uint256" }], "name": "setCaptchaReward", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "name": "trackHash", "type": "bytes32" }, { "name": "key", "type": "string" }], "name": "getTrackBasicMetadataByHash", "outputs": [{ "name": "", "type": "string" }, { "name": "", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "trackHash", "type": "bytes32" }, { "name": "key", "type": "string" }, { "name": "value", "type": "string" }, { "name": "userToPay", "type": "address" }], "name": "uploadMetadata", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "trackHash", "type": "bytes32" }], "name": "getIpfsHashMetadata", "outputs": [{ "name": "", "type": "bytes1" }, { "name": "", "type": "bytes1" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "newAmount", "type": "uint256" }], "name": "setVerificationRequirement", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "hashFunction", "type": "bytes1" }, { "name": "size", "type": "bytes1" }, { "name": "trackHash", "type": "bytes32" }, { "name": "artist", "type": "string" }, { "name": "title", "type": "string" }], "name": "uploadTrack", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "trackHash", "type": "bytes32" }], "name": "incrementPlayCount", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "anonymous": false, "inputs": [{ "indexed": false, "name": "trackHash", "type": "bytes32" }], "name": "newUpload", "type": "event" }];
+var Data = exports.Data = new web3.eth.Contract(DATA_ABI, DATA_ADDRESS);
+
+var GAS = exports.GAS = 200000;
+var GAS_PRICE = exports.GAS_PRICE = 2000000000;
+
+var ZERO_HEX = exports.ZERO_HEX = "0x0000000000000000000000000000000000000000000000000000000000000000";
+
+/***/ }),
+/* 453 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var NO_CURRENT_TRACK = exports.NO_CURRENT_TRACK = "No current track associated with this user";
+var CURRENT_TRACK_LOADED = exports.CURRENT_TRACK_LOADED = "Track metadata retrieved";
+var TX_SUCCESS = exports.TX_SUCCESS = "Transaction succeeded";
+var TX_FAILURE = exports.TX_FAILURE = "Transaction failed";
+var LOADING = exports.LOADING = "Loading...";
+
+/***/ }),
+/* 454 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _dec, _class;
+
+var _react = __webpack_require__(11);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(76);
+
+var _actions = __webpack_require__(431);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Message = (_dec = (0, _reactRedux.connect)(function (_ref) {
+	var stream = _ref.stream;
+
+	return {};
+}), _dec(_class = function (_React$Component) {
+	_inherits(Message, _React$Component);
+
+	function Message() {
+		_classCallCheck(this, Message);
+
+		return _possibleConstructorReturn(this, (Message.__proto__ || Object.getPrototypeOf(Message)).apply(this, arguments));
+	}
+
+	_createClass(Message, [{
+		key: 'handleSearch',
+		value: function handleSearch() {
+			this.props.dispatch((0, _actions.dbCall)());
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var msg = this.props.msg;
+
+			return _react2.default.createElement(
+				'div',
+				{ className: 'row' },
+				_react2.default.createElement(
+					'div',
+					{ className: 'col-md-6' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'input-group' },
+						_react2.default.createElement('input', { ref: 'search', type: 'text', className: 'form-control', placeholder: 'Frank Ocean...' }),
+						_react2.default.createElement(
+							'span',
+							{ className: 'input-group-btn' },
+							_react2.default.createElement(
+								'button',
+								{ className: 'btn btn-secondary', type: 'button', onClick: this.handleSearch.bind(this) },
+								'Search'
+							)
+						)
+					)
+				)
+			);
+		}
+	}]);
+
+	return Message;
+}(_react2.default.Component)) || _class);
+;
+
+exports.default = Message;
+
+/***/ }),
+/* 455 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _merge = __webpack_require__(364);
+
+var _merge2 = _interopRequireDefault(_merge);
+
+var _actions = __webpack_require__(431);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var initialState = {
+	availableTracks: []
+};
+
+function searchResultsReducer() {
+	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+	var action = arguments[1];
+
+	Object.freeze(state);
+	switch (action.type) {
+		case _actions.DB_CALL_PENDING:
+			return state;
+		case _actions.DB_CALL_FULFILLED:
+			var nextState = (0, _merge2.default)({}, state);
+			nextState.availableTracks = action.payload;
+			return nextState;
+		default:
+			return state;
+	}
+}
+
+exports.default = searchResultsReducer;
 
 /***/ })
 /******/ ]);

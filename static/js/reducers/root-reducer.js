@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import streamReducer from "./stream-reducer"
-import radioReducer from "./radio-reducer"
+import searchResultsReducer from "./search-results-reducer"
  
 const reducers = combineReducers({
 	stream: streamReducer, 
-	radio: radioReducer,
+	searchResults: searchResultsReducer,
 })
 
 export default reducers;
