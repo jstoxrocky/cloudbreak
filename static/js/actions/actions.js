@@ -1,6 +1,7 @@
 import bs58 from 'bs58';
 import {Tokens, Player, Data, web3, GAS, GAS_PRICE, ZERO_HEX} from "../utils/contracts"
 import { NO_CURRENT_TRACK, TX_SUCCESS, TX_FAILURE, CURRENT_TRACK_LOADED } from '../utils/reports'
+import axios from 'axios'
 
 export const UPDATE_PLAYER = "UPDATE_PLAYER";
 export const UPDATE_PLAYER_PENDING = "UPDATE_PLAYER_PENDING";
@@ -143,3 +144,11 @@ export const dbCall = () => ({
 	type: DB_CALL,
 	payload: new Promise((resolve, reject) => resolve(FROM_DB)),
 })
+
+
+export const search = () => {
+	return {
+		type: "SEARCH", 
+		payload: axios.get('http://localhost:5000/search')
+	}
+}
