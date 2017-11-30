@@ -1,23 +1,28 @@
 import React from 'react';
 import { connect } from "react-redux";
-import Report from '../report';
-import SearchGroup from './search-group';
+import SearchGroup from './search-group'
 
 
-@connect(({nav, captcha}) => {
+@connect(({search, nav}) => {
 	return {
-		currentStage: nav.currentStage,
-	}
+		currentPage: nav.currentStage,
+		availableTracks: search.availableTracks,
+	};
 })
-export default class Search extends React.Component {   
+export default class Search extends React.Component {
 
-  	render() {
-  		const {currentStage} = this.props;
-  		const visible = currentStage == 'SEARCH';
-  		return (
-	  		<div>
-	  			{(visible) ? <SearchGroup /> : <div></div>}
-	  		</div>
-  		)
-  	}
-}
+	handleStreamClick(trackHash) {
+		this.props.dispatch(stream(trackHash));
+	}
+
+	render() {
+		const {currentPage, availableTracks} = this.props;
+		const onHomePage = currentPage == 'HOME';
+		let hasResults = availableTracks.length > 0;
+		return (
+			<div className="container">
+				{(onHomePage && hasResults) ? <SearchGroup /> : <div></div>}
+			</div> 
+		)
+	}
+};

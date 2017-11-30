@@ -1,19 +1,20 @@
 import React from 'react';
-import MatchingArtists from './matching-artists';
-import MatchingTracks from './matching-tracks';
 import { connect } from "react-redux";
+import SearchResults from './search-results'
 
-@connect(({ nav, search }) => {
+
+@connect((store) => {
 	return {
 	};
 })
-export default class SearchGroup extends React.Component {    
-  	render() {
-		return ( 
+export default class SearchGroup extends React.Component {
+
+	render() {
+		return (
 			<div>
-				<MatchingTracks />
-				<MatchingArtists />
+				<h3>Top Results</h3>
+				<SearchResults />
 			</div>
 		)
-  	}
-}
+	}
+};

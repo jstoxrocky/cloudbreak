@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
-import ActionableSubmit from '../core/actionable-submit'
-import ActionableInput from '../core/actionable-input'
+import ActionableSubmit from '../utils/actionable-submit'
+import ActionableInput from '../utils/actionable-input'
 import { inputUploadTransaction, inputUploadSignature, signAndSubmitUploadTransaction } from "../../actions/upload-actions"
 
 @connect(({upload}) => {

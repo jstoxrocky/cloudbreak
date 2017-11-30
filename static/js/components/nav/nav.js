@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { navClick } from "../actions/nav-actions"
-import { getCaptcha } from "../actions/captcha-actions"
-import { getUpload } from "../actions/upload-actions"
-import SearchBar from "./search/search-bar"
+import { navClick } from "../../actions/nav-actions"
+import { getCaptcha } from "../../actions/captcha-actions"
+import { getUpload } from "../../actions/upload-actions"
+import SearchBar from "./nav-search"
 
 @connect((store) => {
 	return {};

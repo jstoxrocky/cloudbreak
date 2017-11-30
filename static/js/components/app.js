@@ -1,11 +1,10 @@
 import React from 'react';
-import SearchResults from './search-results'
-import Message from './message'
-import Nav from './nav'
-import NavPlayer from './nav-player'
+import Nav from './nav/nav'
+import NavPlayer from './nav/nav-player'
 import Captcha from './captcha/captcha'
 import Home from './home/home'
 import Upload from './upload/upload'
+import Search from './search/search'
 
 const App = () => {
 	return (
@@ -14,7 +13,7 @@ const App = () => {
 			<Home />
 			<Captcha />
 			<Upload />
-			<SearchResults />
+			<Search />
 			<NavPlayer />
 		</div>
 	)

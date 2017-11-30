@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { updatePlayer } from '../actions/player-actions'
+import { updatePlayer } from '../../actions/player-actions'
 
 @connect(({stream}) => {
     return {

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from "react-redux";
 import CaptchaItem from './captcha-item'
 import { submitCaptcha, inputCaptchaValue1, inputCaptchaValue2 } from '../../actions/captcha-actions'
-import ActionableSubmit from '../core/actionable-submit'
+import ActionableSubmit from '../utils/actionable-submit'
 
 @connect(({captcha}) => {
 	return {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
-import ActionableInput from '../core/actionable-input';
-import ActionableSubmit from '../core/actionable-submit';
+import ActionableInput from '../utils/actionable-input';
+import ActionableSubmit from '../utils/actionable-submit';
 import { inputUploadHash, inputUploadArtist, inputUploadTitle, submitUpload } from "../../actions/upload-actions"
 
 

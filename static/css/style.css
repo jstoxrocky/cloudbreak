@@ -33,13 +33,15 @@ audio {
 }
 
 .track-item {
-	background-color: #D2ECF1; 
+	background-color: #99CDC9; 
 	padding: 10px;
 	padding-left: 20px;
+	border-color: #E2ECF1;
+	border-width: 1px;
 }
 
 .track-item:hover {
-	background-color: #E2ECF1; 
+	background-color: #D2ECF1; 
 }
 
 .track-item a, a:hover, a:visited, a:link, a:active {

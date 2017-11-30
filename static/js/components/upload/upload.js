@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
-import Report from '../report';
+import Report from '../utils/report';
 import UploadGroup from './upload-group';
 import UploadTransaction from './upload-transaction'
 

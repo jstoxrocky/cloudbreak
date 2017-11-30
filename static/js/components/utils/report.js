@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
-import Message from './core/message';
+import Message from './message';
 
 
 @connect((store) => {

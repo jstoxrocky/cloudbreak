@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
-import ActionableInput from '../core/actionable-input'
+import ActionableInput from '../utils/actionable-input'
 
 @connect((store) => {
 	return {};

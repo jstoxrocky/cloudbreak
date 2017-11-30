@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
-import ActionableSubmit from '../core/actionable-submit'
-import ActionableInput from '../core/actionable-input'
+import ActionableSubmit from '../utils/actionable-submit'
+import ActionableInput from '../utils/actionable-input'
 import { inputCaptchaTransaction, inputCaptchaSignature,  } from "../../actions/captcha-actions"
 import { signAndSubmitCaptchaTransaction } from "../../actions/captcha-actions"
 
