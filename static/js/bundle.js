@@ -29341,14 +29341,6 @@ var _react = __webpack_require__(9);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _tokensBalance = __webpack_require__(195);
-
-var _tokensBalance2 = _interopRequireDefault(_tokensBalance);
-
-var _player = __webpack_require__(376);
-
-var _player2 = _interopRequireDefault(_player);
-
 var _searchResults = __webpack_require__(377);
 
 var _searchResults2 = _interopRequireDefault(_searchResults);
@@ -29360,6 +29352,10 @@ var _message2 = _interopRequireDefault(_message);
 var _nav = __webpack_require__(380);
 
 var _nav2 = _interopRequireDefault(_nav);
+
+var _navPlayer = __webpack_require__(493);
+
+var _navPlayer2 = _interopRequireDefault(_navPlayer);
 
 var _captcha = __webpack_require__(475);
 
@@ -29375,7 +29371,6 @@ var _upload2 = _interopRequireDefault(_upload);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import Search from './search'
 var App = function App() {
 	return _react2.default.createElement(
 		'div',
@@ -29383,86 +29378,20 @@ var App = function App() {
 		_react2.default.createElement(_nav2.default, null),
 		_react2.default.createElement(_home2.default, null),
 		_react2.default.createElement(_captcha2.default, null),
-		_react2.default.createElement(_upload2.default, null)
+		_react2.default.createElement(_upload2.default, null),
+		_react2.default.createElement(_navPlayer2.default, null)
 	);
 };
 // import Search from './search/search'
+
+// import Search from './search'
 exports.default = App;
 
-// <h1 className='site-title'>CloudBreak Player</h1>
-// <TokensBalance />
-// <Player />
-// <Message />
 // <Search />
 // <SearchResults />
 
 /***/ }),
-/* 195 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _dec, _class;
-
-var _react = __webpack_require__(9);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(18);
-
-var _playerActions = __webpack_require__(464);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var TokensBalance = (_dec = (0, _reactRedux.connect)(function (_ref) {
-	var stream = _ref.stream;
-
-	return {
-		balance: stream.balance
-	};
-}), _dec(_class = function (_React$Component) {
-	_inherits(TokensBalance, _React$Component);
-
-	function TokensBalance() {
-		_classCallCheck(this, TokensBalance);
-
-		return _possibleConstructorReturn(this, (TokensBalance.__proto__ || Object.getPrototypeOf(TokensBalance)).apply(this, arguments));
-	}
-
-	_createClass(TokensBalance, [{
-		key: 'render',
-		value: function render() {
-			var balance = this.props.balance;
-
-			return _react2.default.createElement(
-				'h5',
-				{ className: 'balance' },
-				balance,
-				' tokens remaining'
-			);
-		}
-	}]);
-
-	return TokensBalance;
-}(_react2.default.Component)) || _class);
-;
-
-exports.default = TokensBalance;
-
-/***/ }),
+/* 195 */,
 /* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29800,16 +29729,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var web3 = exports.web3 = new _web2.default(_web2.default.givenProvider);
 
-var TOKENS_ADDRESS = '0x0f4b5b22704831db94d9b2768e795298480878b3';
-var TOKENS_ABI = [{ "constant": false, "inputs": [{ "name": "user", "type": "address" }, { "name": "value", "type": "uint256" }], "name": "incrementTokenBalance", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "addr", "type": "address" }], "name": "setPlayerAddress", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "name": "user", "type": "address" }], "name": "getTokenBalance", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getPlayerAddress", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "user", "type": "address" }, { "name": "value", "type": "uint256" }], "name": "decrementTokenBalance", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }];
+var TOKENS_ADDRESS = '0x498cf54820a30404e678b0135e5ea6e19305a501';
+var TOKENS_ABI = [{ "constant": false, "inputs": [{ "name": "trackHash", "type": "bytes32" }, { "name": "value", "type": "uint256" }], "name": "decrementTrackBalance", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "addr", "type": "address" }], "name": "setPlayerAddress", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "name": "user", "type": "address" }], "name": "getUserBalance", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "newBalance", "type": "uint256" }], "name": "setOwnerTokenBalance", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getPlayerAddress", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "user", "type": "address" }, { "name": "value", "type": "uint256" }], "name": "decrementUserBalance", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "name": "trackHash", "type": "bytes32" }], "name": "getTrackBalance", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "user", "type": "address" }, { "name": "value", "type": "uint256" }], "name": "incrementUserBalance", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "trackHash", "type": "bytes32" }, { "name": "value", "type": "uint256" }], "name": "incrementTrackBalance", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }];
 var Tokens = exports.Tokens = new web3.eth.Contract(TOKENS_ABI, TOKENS_ADDRESS);
 
-var PLAYER_ADDRESS = '0xf7729b4d76900088f3ed0323da8b8733f7146932';
+var PLAYER_ADDRESS = '0x836c9d1a8a942284a95abed2feb60f7eef0e34e1';
 var PLAYER_ABI = [{ "constant": false, "inputs": [{ "name": "addr", "type": "address" }], "name": "setDataAddress", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getTokensAddress", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "addr", "type": "address" }], "name": "setTokensAddress", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "keccakTrackHash", "type": "bytes32" }], "name": "stream", "outputs": [{ "name": "", "type": "bytes32" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "newAmount", "type": "uint256" }], "name": "setpricePerStream", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getDataAddress", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "name": "listener", "type": "address" }], "name": "getCurrentTrack", "outputs": [{ "name": "", "type": "bytes1" }, { "name": "", "type": "bytes1" }, { "name": "", "type": "bytes32" }], "payable": false, "stateMutability": "view", "type": "function" }];
 var Player = exports.Player = new web3.eth.Contract(PLAYER_ABI, PLAYER_ADDRESS);
 
-var DATA_ADDRESS = '0xcb240b795dc6214b1c4b8fc05583ad657e738a18';
-var DATA_ABI = [{ "constant": false, "inputs": [{ "name": "keccakTrackHash", "type": "bytes32" }], "name": "convertKeccackHashToIPFSHash", "outputs": [{ "name": "", "type": "bytes32" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "addr", "type": "address" }], "name": "setPlayerAddress", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getTokensAddress", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "addr", "type": "address" }], "name": "setTokensAddress", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getPlayerAddress", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "newAmount", "type": "uint256" }], "name": "setCaptchaReward", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "name": "trackHash", "type": "bytes32" }, { "name": "key", "type": "string" }], "name": "getTrackBasicMetadataByHash", "outputs": [{ "name": "", "type": "string" }, { "name": "", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "trackHash", "type": "bytes32" }, { "name": "key", "type": "string" }, { "name": "value", "type": "string" }, { "name": "userToPay", "type": "address" }], "name": "uploadMetadata", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "trackHash", "type": "bytes32" }], "name": "getIpfsHashMetadata", "outputs": [{ "name": "", "type": "bytes1" }, { "name": "", "type": "bytes1" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "newAmount", "type": "uint256" }], "name": "setVerificationRequirement", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "hashFunction", "type": "bytes1" }, { "name": "size", "type": "bytes1" }, { "name": "trackHash", "type": "bytes32" }, { "name": "artist", "type": "string" }, { "name": "title", "type": "string" }], "name": "uploadTrack", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "trackHash", "type": "bytes32" }], "name": "incrementPlayCount", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "anonymous": false, "inputs": [{ "indexed": false, "name": "trackHash", "type": "bytes32" }], "name": "newUpload", "type": "event" }];
+var DATA_ADDRESS = '0x35d54a036f7f6b589e37fa31d9b3f32066dcb590';
+var DATA_ABI = [{ "constant": true, "inputs": [{ "name": "keccakTrackHash", "type": "bytes32" }], "name": "convertKeccackHashToIPFSHash", "outputs": [{ "name": "", "type": "bytes32" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "addr", "type": "address" }], "name": "setPlayerAddress", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getTokensAddress", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "addr", "type": "address" }], "name": "setTokensAddress", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getPlayerAddress", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "name": "trackHash", "type": "bytes32" }], "name": "getPlayCount", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "newAmount", "type": "uint256" }], "name": "setCaptchaReward", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "name": "trackHash", "type": "bytes32" }, { "name": "key", "type": "string" }], "name": "getTrackBasicMetadataByHash", "outputs": [{ "name": "", "type": "string" }, { "name": "", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "trackHash", "type": "bytes32" }, { "name": "key", "type": "string" }, { "name": "value", "type": "string" }, { "name": "userToPay", "type": "address" }], "name": "uploadMetadata", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "name": "trackHash", "type": "bytes32" }], "name": "getIpfsHashMetadata", "outputs": [{ "name": "", "type": "bytes1" }, { "name": "", "type": "bytes1" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "newAmount", "type": "uint256" }], "name": "setVerificationRequirement", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "hashFunction", "type": "bytes1" }, { "name": "size", "type": "bytes1" }, { "name": "trackHash", "type": "bytes32" }, { "name": "artist", "type": "string" }, { "name": "title", "type": "string" }], "name": "uploadTrack", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "trackHash", "type": "bytes32" }], "name": "incrementPlayCount", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "anonymous": false, "inputs": [{ "indexed": false, "name": "trackHash", "type": "bytes32" }], "name": "newUpload", "type": "event" }];
 var Data = exports.Data = new web3.eth.Contract(DATA_ABI, DATA_ADDRESS);
 
 var GAS = exports.GAS = 200000;
@@ -72133,117 +72062,7 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 376 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _dec, _class;
-
-var _react = __webpack_require__(9);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(18);
-
-var _playerActions = __webpack_require__(464);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Player = (_dec = (0, _reactRedux.connect)(function (_ref) {
-	var stream = _ref.stream;
-
-	return {
-		artist: stream.artist,
-		artistIsVerified: stream.artistIsVerified,
-		title: stream.title,
-		titleIsVerified: stream.titleIsVerified,
-		currentTrack: stream.currentTrack
-	};
-}), _dec(_class = function (_React$Component) {
-	_inherits(Player, _React$Component);
-
-	function Player() {
-		_classCallCheck(this, Player);
-
-		return _possibleConstructorReturn(this, (Player.__proto__ || Object.getPrototypeOf(Player)).apply(this, arguments));
-	}
-
-	_createClass(Player, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			this.props.dispatch((0, _playerActions.updatePlayer)());
-		}
-	}, {
-		key: 'onTrackChange',
-		value: function onTrackChange(source) {
-			console.log(source);
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			var _props = this.props,
-			    artist = _props.artist,
-			    artistIsVerified = _props.artistIsVerified,
-			    title = _props.title,
-			    titleIsVerified = _props.titleIsVerified,
-			    currentTrack = _props.currentTrack;
-
-			var artist_class = artistIsVerified == 'true' ? 'fa fa-check-circle-o verified' : 'fa fa-times-circle-o unverified';
-			var title_class = titleIsVerified == 'true' ? 'fa fa-check-circle-o verified' : 'fa fa-times-circle-o unverified';
-			if (this.refs.audio) {
-				this.refs.audio.load();
-			}
-			return _react2.default.createElement(
-				'div',
-				{ className: 'now-playing col-md-6' },
-				_react2.default.createElement(
-					'h5',
-					null,
-					artist,
-					' ',
-					_react2.default.createElement('i', { className: artist_class, 'aria-hidden': 'true' })
-				),
-				_react2.default.createElement(
-					'h3',
-					null,
-					_react2.default.createElement(
-						'strong',
-						null,
-						title
-					),
-					' ',
-					_react2.default.createElement('i', { className: title_class, 'aria-hidden': 'true' })
-				),
-				_react2.default.createElement(
-					'audio',
-					{ controls: true, ref: 'audio', controlsList: 'nodownload', onChange: this.onTrackChange.bind(this) },
-					_react2.default.createElement('source', { src: 'https://gateway.ipfs.io/ipfs/' + currentTrack, type: 'audio/mp3' })
-				)
-			);
-		}
-	}]);
-
-	return Player;
-}(_react2.default.Component)) || _class);
-;
-
-exports.default = Player;
-
-/***/ }),
+/* 376 */,
 /* 377 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -88796,7 +88615,9 @@ var initialState = {
 	artistIsVerified: null,
 	title: null,
 	titleIsVerified: null,
-	balance: 0,
+	userBalance: 0,
+	trackBalance: 0,
+	playCount: 0,
 	msg: null
 };
 
@@ -88817,7 +88638,9 @@ function streamReducer() {
 			nextState.artistIsVerified = action.payload.artistIsVerified;
 			nextState.title = action.payload.title;
 			nextState.titleIsVerified = action.payload.titleIsVerified;
-			nextState.balance = action.payload.balance;
+			nextState.userBalance = action.payload.userBalance;
+			nextState.trackBalance = action.payload.trackBalance;
+			nextState.playCount = action.payload.playCount;
 			nextState.msg = action.payload.msg;
 			return nextState;
 		case _playerActions.UPDATE_PLAYER_PENDING:
@@ -88831,7 +88654,9 @@ function streamReducer() {
 			nextState.artistIsVerified = action.payload.artistIsVerified;
 			nextState.title = action.payload.title;
 			nextState.titleIsVerified = action.payload.titleIsVerified;
-			nextState.balance = action.payload.balance;
+			nextState.userBalance = action.payload.userBalance;
+			nextState.trackBalance = action.payload.trackBalance;
+			nextState.playCount = action.payload.playCount;
 			nextState.msg = action.payload.msg;
 			return nextState;
 		default:
@@ -91071,8 +90896,16 @@ var _getUserAddress = function _getUserAddress() {
 	return _contracts.web3.eth.getAccounts();
 };
 
-var _getTokenBalance = function _getTokenBalance(user) {
-	return _contracts.Tokens.methods.getTokenBalance(user).call();
+var _getUserBalance = function _getUserBalance(user) {
+	return _contracts.Tokens.methods.getUserBalance(user).call();
+};
+
+var _getTrackBalance = function _getTrackBalance(trackHash) {
+	return _contracts.Tokens.methods.getTrackBalance(trackHash).call();
+};
+
+var _getPlayCount = function _getPlayCount(trackHash) {
+	return _contracts.Data.methods.getPlayCount(trackHash).call();
 };
 
 var _getCurrentTrack = function _getCurrentTrack(user) {
@@ -91087,10 +90920,9 @@ var _getCurrentTrackMetadata = function _getCurrentTrackMetadata(user) {
 	var track = _getCurrentTrack(user);
 	var metadata = track.then(function (receipt) {
 		var currentTrack = track.value()[2];
-		return Promise.all([_getTrackBasicMetadataByHash(currentTrack, 'artist'), _getTrackBasicMetadataByHash(currentTrack, 'title')]);
+		return Promise.all([_getTrackBasicMetadataByHash(currentTrack, 'artist'), _getTrackBasicMetadataByHash(currentTrack, 'title'), _getTrackBalance(currentTrack), _getPlayCount(currentTrack)]);
 	});
 	return metadata.then(function () {
-
 		var result = metadata.value();
 		var hexTrackValues = track.value();
 		var hexTrackHash = track.value()[2];
@@ -91101,7 +90933,9 @@ var _getCurrentTrackMetadata = function _getCurrentTrackMetadata(user) {
 			title: result[1][0],
 			titleIsVerified: result[1][1],
 			currentTrack: currentTrack,
-			msg: _reports.CURRENT_TRACK_LOADED
+			msg: _reports.CURRENT_TRACK_LOADED,
+			trackBalance: result[2],
+			playCount: result[3]
 		};
 		if (hexTrackHash == _contracts.ZERO_HEX) {
 			payload.msg = _reports.NO_CURRENT_TRACK;
@@ -91114,13 +90948,12 @@ var _getCurrentTrackMetadata = function _getCurrentTrackMetadata(user) {
 
 var _updatePlayer = function _updatePlayer(user) {
 	var metadata = _getCurrentTrackMetadata(user);
-	var balance = metadata.then(function () {
-		return _getTokenBalance(user);
+	var userBalance = metadata.then(function () {
+		return _getUserBalance(user);
 	});
-	return balance.then(function () {
-		var tokenBalance = balance.value();
+	return userBalance.then(function () {
 		var metadataResult = metadata.value();
-		metadataResult.balance = tokenBalance;
+		metadataResult.userBalance = userBalance.value();
 		return new Promise(function (resolve, reject) {
 			return resolve(metadataResult);
 		});
@@ -92895,6 +92728,187 @@ function getSearch(query) {
 		})
 	};
 }
+
+/***/ }),
+/* 493 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _dec, _class;
+
+var _react = __webpack_require__(9);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(18);
+
+var _playerActions = __webpack_require__(464);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var NavPlayer = (_dec = (0, _reactRedux.connect)(function (_ref) {
+    var stream = _ref.stream;
+
+    return {
+        artist: stream.artist,
+        artistIsVerified: stream.artistIsVerified,
+        title: stream.title,
+        titleIsVerified: stream.titleIsVerified,
+        currentTrack: stream.currentTrack,
+        userBalance: stream.userBalance,
+        trackBalance: stream.trackBalance,
+        playCount: stream.playCount
+    };
+}), _dec(_class = function (_React$Component) {
+    _inherits(NavPlayer, _React$Component);
+
+    function NavPlayer() {
+        _classCallCheck(this, NavPlayer);
+
+        return _possibleConstructorReturn(this, (NavPlayer.__proto__ || Object.getPrototypeOf(NavPlayer)).apply(this, arguments));
+    }
+
+    _createClass(NavPlayer, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.props.dispatch((0, _playerActions.updatePlayer)());
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _props = this.props,
+                artist = _props.artist,
+                artistIsVerified = _props.artistIsVerified,
+                title = _props.title,
+                titleIsVerified = _props.titleIsVerified,
+                currentTrack = _props.currentTrack,
+                userBalance = _props.userBalance,
+                trackBalance = _props.trackBalance,
+                playCount = _props.playCount;
+
+            var artist_class = artistIsVerified == 'true' ? 'fa fa-check-circle-o verified' : 'fa fa-times-circle-o unverified';
+            var title_class = titleIsVerified == 'true' ? 'fa fa-check-circle-o verified' : 'fa fa-times-circle-o unverified';
+            if (this.refs.audio) {
+                this.refs.audio.load();
+            }
+            return _react2.default.createElement(
+                'footer',
+                { className: 'footer' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'container' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'row' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'col-md-2' },
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'row' },
+                                _react2.default.createElement(
+                                    'p',
+                                    { className: 'footer-artist' },
+                                    artist,
+                                    ' ',
+                                    _react2.default.createElement('i', { className: artist_class, 'aria-hidden': 'true' })
+                                )
+                            ),
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'row' },
+                                _react2.default.createElement(
+                                    'p',
+                                    { className: 'footer-title' },
+                                    _react2.default.createElement(
+                                        'strong',
+                                        null,
+                                        title
+                                    ),
+                                    ' ',
+                                    _react2.default.createElement('i', { className: title_class, 'aria-hidden': 'true' })
+                                )
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'col-md-4' },
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'footer-audio' },
+                                _react2.default.createElement(
+                                    'audio',
+                                    { controls: true, ref: 'audio', controlsList: 'nodownload' },
+                                    _react2.default.createElement('source', { src: 'https://gateway.ipfs.io/ipfs/' + currentTrack, type: 'audio/mp3' })
+                                )
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'col-md-2' },
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'footer-balance' },
+                                _react2.default.createElement(
+                                    'p',
+                                    { className: 'user-balance' },
+                                    'You: ',
+                                    userBalance
+                                )
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'col-md-2' },
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'footer-audio' },
+                                _react2.default.createElement(
+                                    'p',
+                                    { className: 'user-balance' },
+                                    'Track: ',
+                                    trackBalance
+                                )
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'col-md-2' },
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'footer-audio' },
+                                _react2.default.createElement(
+                                    'p',
+                                    { className: 'user-balance' },
+                                    'Streams: ',
+                                    playCount
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return NavPlayer;
+}(_react2.default.Component)) || _class);
+exports.default = NavPlayer;
 
 /***/ })
 /******/ ]);

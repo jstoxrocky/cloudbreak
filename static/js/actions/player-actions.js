@@ -34,7 +34,11 @@ const toIPFSHash = (hexArray) => {
 
 const _getUserAddress = () => web3.eth.getAccounts()
 
-const _getTokenBalance = (user) => Tokens.methods.getTokenBalance(user).call()
+const _getUserBalance = (user) => Tokens.methods.getUserBalance(user).call()
+
+const _getTrackBalance = (trackHash) => Tokens.methods.getTrackBalance(trackHash).call()
+
+const _getPlayCount = (trackHash) => Data.methods.getPlayCount(trackHash).call()
 
 const _getCurrentTrack = (user) => Player.methods.getCurrentTrack(user).call()
 
@@ -47,10 +51,11 @@ const _getCurrentTrackMetadata = (user) => {
 		return Promise.all([
 			_getTrackBasicMetadataByHash(currentTrack, 'artist'), 
 			_getTrackBasicMetadataByHash(currentTrack, 'title'),
+			_getTrackBalance(currentTrack),
+			_getPlayCount(currentTrack),
 		])
 	})
 	return metadata.then(() => {
-
 		let result = metadata.value()
 		let hexTrackValues = track.value()
 		let hexTrackHash = track.value()[2]
@@ -62,6 +67,8 @@ const _getCurrentTrackMetadata = (user) => {
 			titleIsVerified: result[1][1],
 			currentTrack: currentTrack,
 			msg: CURRENT_TRACK_LOADED,
+			trackBalance: result[2],
+			playCount: result[3],
 		}
 		if (hexTrackHash == ZERO_HEX) {
 			payload.msg = NO_CURRENT_TRACK;
@@ -72,13 +79,12 @@ const _getCurrentTrackMetadata = (user) => {
 
 const _updatePlayer = (user) => {
 	let metadata = _getCurrentTrackMetadata(user)
-	let balance = metadata.then(() => {
-		return _getTokenBalance(user)
+	let userBalance = metadata.then(() => {
+		return _getUserBalance(user)
 	})
-	return balance.then(() => {
-		let tokenBalance = balance.value()
+	return userBalance.then(() => {
 		let metadataResult = metadata.value()
-		metadataResult.balance = tokenBalance
+		metadataResult.userBalance = userBalance.value()
 		return new Promise((resolve, reject) => resolve(metadataResult))
 	})
 }

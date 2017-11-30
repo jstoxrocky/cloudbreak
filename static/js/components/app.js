@@ -1,10 +1,9 @@
 import React from 'react';
-import TokensBalance from './tokens-balance'
-import Player from './player'
 import SearchResults from './search-results'
 import Message from './message'
 // import Search from './search'
 import Nav from './nav'
+import NavPlayer from './nav-player'
 // import Search from './search/search'
 import Captcha from './captcha/captcha'
 import Home from './home/home'
@@ -17,15 +16,12 @@ const App = () => {
 			<Home />
 			<Captcha />
 			<Upload />
+			<NavPlayer />
 		</div>
 	)
 };
 
 export default App;
 
-			// <h1 className='site-title'>CloudBreak Player</h1>
-			// <TokensBalance />
-			// <Player />
-			// <Message />
 			// <Search />
 			// <SearchResults />

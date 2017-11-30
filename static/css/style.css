@@ -55,7 +55,7 @@ audio {
 
 .title {
 	color:#11545F;
-	font-size: 1rem;
+	font-size: 0.5rem;
     line-height: 1.2;
 }
 
@@ -88,4 +88,54 @@ body {
 	background-color:#99CDC9;
 	padding:20px;
 	color:white;
+}
+
+
+
+
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  /*margin-bottom: 60px;*/
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+
+
+.container .text-muted {
+  /*margin: 20px 0;*/
+}
+
+
+.footer-artist {
+	color:#11545F;
+	font-size: 1rem;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+.footer-title {
+	color:#11545F;
+	font-size: 1rem;
+	margin-bottom: 0px;
+    /*line-height: 1.2;*/
+}
+
+.footer-audio {
+	padding: 15px;
+}
+
+.footer-balance {
+	padding: 15px;
 }

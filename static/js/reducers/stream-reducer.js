@@ -15,7 +15,9 @@ const initialState = {
 	artistIsVerified: null,
 	title: null,
 	titleIsVerified: null,
-	balance: 0,
+	userBalance: 0,
+	trackBalance: 0,
+	playCount: 0,
 	msg: null,
 }
 
@@ -33,7 +35,9 @@ function streamReducer(state=initialState, action) {
 			nextState.artistIsVerified = action.payload.artistIsVerified;
 			nextState.title = action.payload.title;
 			nextState.titleIsVerified = action.payload.titleIsVerified;
-			nextState.balance = action.payload.balance;
+			nextState.userBalance = action.payload.userBalance;
+			nextState.trackBalance = action.payload.trackBalance;
+			nextState.playCount = action.payload.playCount;
 			nextState.msg = action.payload.msg;
 			return nextState
 		case UPDATE_PLAYER_PENDING:
@@ -47,7 +51,9 @@ function streamReducer(state=initialState, action) {
 			nextState.artistIsVerified = action.payload.artistIsVerified;
 			nextState.title = action.payload.title;
 			nextState.titleIsVerified = action.payload.titleIsVerified;
-			nextState.balance = action.payload.balance;
+			nextState.userBalance = action.payload.userBalance;
+			nextState.trackBalance = action.payload.trackBalance;
+			nextState.playCount = action.payload.playCount;
 			nextState.msg = action.payload.msg;
 			return nextState
 		default:
