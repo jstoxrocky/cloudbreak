@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { getTokenBalance } from '../actions/actions'
+import { getTokenBalance } from '../actions/player-actions'
 
 @connect(({stream}) => {
 	return {

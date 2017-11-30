@@ -58,3 +58,34 @@ audio {
 	font-size: 1rem;
     line-height: 1.2;
 }
+
+body {
+	font-family: sans-serif;
+}
+
+.jumbotron {
+	background-color:#99CDC9;
+}
+
+.jumbotron h1 {word-wrap: break-word;}
+
+.top-buffer { 
+	margin-top:20px; 
+}
+
+.verified {
+	color:#3D9140;
+	font-size: 12px;
+    line-height: 16px;
+}
+.unverified {
+	color:#999;
+	font-size: 12px;
+    line-height: 16px;
+}
+
+.captcha-square {
+	background-color:#99CDC9;
+	padding:20px;
+	color:white;
+}

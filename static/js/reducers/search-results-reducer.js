@@ -1,5 +1,5 @@
 import merge from 'lodash/merge';
-import { DB_CALL_PENDING, DB_CALL_FULFILLED } from '../actions/actions';
+import { DB_CALL_PENDING, DB_CALL_FULFILLED } from '../actions/player-actions';
 
 const initialState = {
 	availableTracks:[],

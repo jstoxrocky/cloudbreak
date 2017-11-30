@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { dbCall } from '../actions/actions'
+import { dbCall } from '../actions/player-actions'
 
 @connect(({stream}) => {
 	return {

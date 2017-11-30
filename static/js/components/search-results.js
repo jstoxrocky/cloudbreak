@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { stream } from '../actions/actions'
+import { stream } from '../actions/player-actions'
 
 
 @connect(({searchResults}) => {

@@ -16,6 +16,10 @@ export const DB_CALL = "DB_CALL"
 export const DB_CALL_PENDING = "DB_CALL_PENDING"
 export const DB_CALL_FULFILLED = "DB_CALL_FULFILLED"
 
+const api = axios.create({
+	withCredentials: true
+});
+
 const toIPFSHash = (hexArray) => {
 	const hexHashFunction = hexArray[0];
 	const hexSize = hexArray[1];
@@ -149,6 +153,6 @@ export const dbCall = () => ({
 export const search = () => {
 	return {
 		type: "SEARCH", 
-		payload: axios.get('http://localhost:5000/search')
+		payload: api.get('http://localhost:5000/search')
 	}
 }

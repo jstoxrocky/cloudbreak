@@ -6,7 +6,7 @@ import {
 	STREAM_REJECTED,
 	UPDATE_PLAYER,
 	UPDATE_PLAYER_PENDING, 
-	UPDATE_PLAYER_FULFILLED } from '../actions/actions';
+	UPDATE_PLAYER_FULFILLED } from '../actions/player-actions';
 import { LOADING } from '../utils/reports'
 
 const initialState = {
