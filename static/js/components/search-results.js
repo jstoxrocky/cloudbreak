@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import { stream } from '../actions/player-actions'
 
 
-@connect(({searchResults}) => {
+@connect(({search}) => {
 	return {
-		availableTracks: searchResults.availableTracks,
+		availableTracks: search.availableTracks,
 	};
 })
 class SearchResults extends React.Component {

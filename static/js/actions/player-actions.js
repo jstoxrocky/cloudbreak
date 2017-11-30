@@ -12,9 +12,9 @@ export const STREAM_PENDING_REJECTED = "STREAM_PENDING_REJECTED"
 export const STREAM_REJECTED = "STREAM_REJECTED"
 export const STREAM_FULFILLED = "STREAM_FULFILLED";
 export const RADIO_OPTION_CHANGE = "RADIO_OPTION_CHANGE";
-export const DB_CALL = "DB_CALL"
-export const DB_CALL_PENDING = "DB_CALL_PENDING"
-export const DB_CALL_FULFILLED = "DB_CALL_FULFILLED"
+export const SEARCH = "SEARCH"
+export const SEARCH_PENDING = "SEARCH_PENDING"
+export const SEARCH_FULFILLED = "SEARCH_FULFILLED"
 
 const api = axios.create({
 	withCredentials: true
@@ -135,24 +135,6 @@ export const stream = keccakTrackHash => ({
 			const user = receipt[0]
 			return new Promise((resolve, reject) => resolve(_stream_and_fetch_metadata(user, keccakTrackHash)))
 		}),
-})
-
-const FROM_DB = [
-	{
-		trackHash: '0x778626c4f776387092fbf5af6a22b7556f57fe8d814edb4c0e23f4a8e5fd9cd7',
-		artist: 'Frank Ocean',
-		title: 'Provider',
-	},
-	{
-		trackHash: '0xb8f1532472debea5faf67b3e4ce06e5931c891da5e3b632becf2a4ddf6f5b64c',
-		artist: 'Chance the Rapper',
-		title: 'Blessings',
-	},
-]
-
-export const dbCall = () => ({
-	type: DB_CALL,
-	payload: new Promise((resolve, reject) => resolve(FROM_DB)),
 })
 
 

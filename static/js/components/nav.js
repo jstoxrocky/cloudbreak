@@ -23,6 +23,7 @@ export default class Nav extends React.Component {
     handleHomeClick() {
         this.props.dispatch(navClick("HOME_CLICK"))
     }
+    
 
   	render() {
 		return ( 

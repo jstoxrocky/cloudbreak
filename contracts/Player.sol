@@ -4,7 +4,8 @@ contract Tokens {
     function setOwnerTokenBalance(uint) external;
     function setPlayerAddress(address) external;
     function getPlayerAddress() view external returns (address);
-    function getTokenBalance(address) view external returns (uint);
+    function getUserBalance(address) view public returns (uint);
+    function getTrackBalance(bytes32) view external returns (uint);
     function incrementUserBalance(address, uint) external;
     function decrementUserBalance(address, uint) external;
     function incrementTrackBalance(bytes32, uint) external;
@@ -42,7 +43,7 @@ contract Player {
     }
 
     modifier hasEnoughTokens() {
-        require(tokens.getTokenBalance(msg.sender) >= pricePerStream);
+        require(tokens.getUserBalance(msg.sender) >= pricePerStream);
         _;
     }
 

@@ -29379,16 +29379,12 @@ var App = function App() {
 		_react2.default.createElement(_home2.default, null),
 		_react2.default.createElement(_captcha2.default, null),
 		_react2.default.createElement(_upload2.default, null),
+		_react2.default.createElement(_searchResults2.default, null),
 		_react2.default.createElement(_navPlayer2.default, null)
 	);
 };
-// import Search from './search/search'
 
-// import Search from './search'
 exports.default = App;
-
-// <Search />
-// <SearchResults />
 
 /***/ }),
 /* 195 */,
@@ -72096,10 +72092,10 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var SearchResults = (_dec = (0, _reactRedux.connect)(function (_ref) {
-	var searchResults = _ref.searchResults;
+	var search = _ref.search;
 
 	return {
-		availableTracks: searchResults.availableTracks
+		availableTracks: search.availableTracks
 	};
 }), _dec(_class = function (_React$Component) {
 	_inherits(SearchResults, _React$Component);
@@ -88555,10 +88551,6 @@ var _streamReducer = __webpack_require__(395);
 
 var _streamReducer2 = _interopRequireDefault(_streamReducer);
 
-var _searchResultsReducer = __webpack_require__(462);
-
-var _searchResultsReducer2 = _interopRequireDefault(_searchResultsReducer);
-
 var _captchaReducer = __webpack_require__(468);
 
 var _captchaReducer2 = _interopRequireDefault(_captchaReducer);
@@ -88579,7 +88571,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var reducers = (0, _redux.combineReducers)({
 	stream: _streamReducer2.default,
-	searchResults: _searchResultsReducer2.default,
 	search: _searchReducer2.default,
 	captcha: _captchaReducer2.default,
 	nav: _navReducer2.default,
@@ -90776,48 +90767,7 @@ module.exports = isIterateeCall;
 
 
 /***/ }),
-/* 462 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _merge = __webpack_require__(147);
-
-var _merge2 = _interopRequireDefault(_merge);
-
-var _playerActions = __webpack_require__(464);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var initialState = {
-	availableTracks: []
-};
-
-function searchResultsReducer() {
-	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-	var action = arguments[1];
-
-	Object.freeze(state);
-	switch (action.type) {
-		case _playerActions.DB_CALL_PENDING:
-			return state;
-		case _playerActions.DB_CALL_FULFILLED:
-			var nextState = (0, _merge2.default)({}, state);
-			nextState.availableTracks = action.payload;
-			return nextState;
-		default:
-			return state;
-	}
-}
-
-exports.default = searchResultsReducer;
-
-/***/ }),
+/* 462 */,
 /* 463 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -90845,7 +90795,7 @@ function navClick(value) {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.search = exports.dbCall = exports.stream = exports.updatePlayer = exports.radioOptionChange = exports.DB_CALL_FULFILLED = exports.DB_CALL_PENDING = exports.DB_CALL = exports.RADIO_OPTION_CHANGE = exports.STREAM_FULFILLED = exports.STREAM_REJECTED = exports.STREAM_PENDING_REJECTED = exports.STREAM_PENDING = exports.STREAM = exports.UPDATE_PLAYER_FULFILLED = exports.UPDATE_PLAYER_PENDING = exports.UPDATE_PLAYER = undefined;
+exports.search = exports.stream = exports.updatePlayer = exports.radioOptionChange = exports.SEARCH_FULFILLED = exports.SEARCH_PENDING = exports.SEARCH = exports.RADIO_OPTION_CHANGE = exports.STREAM_FULFILLED = exports.STREAM_REJECTED = exports.STREAM_PENDING_REJECTED = exports.STREAM_PENDING = exports.STREAM = exports.UPDATE_PLAYER_FULFILLED = exports.UPDATE_PLAYER_PENDING = exports.UPDATE_PLAYER = undefined;
 
 var _bs = __webpack_require__(196);
 
@@ -90872,9 +90822,9 @@ var STREAM_PENDING_REJECTED = exports.STREAM_PENDING_REJECTED = "STREAM_PENDING_
 var STREAM_REJECTED = exports.STREAM_REJECTED = "STREAM_REJECTED";
 var STREAM_FULFILLED = exports.STREAM_FULFILLED = "STREAM_FULFILLED";
 var RADIO_OPTION_CHANGE = exports.RADIO_OPTION_CHANGE = "RADIO_OPTION_CHANGE";
-var DB_CALL = exports.DB_CALL = "DB_CALL";
-var DB_CALL_PENDING = exports.DB_CALL_PENDING = "DB_CALL_PENDING";
-var DB_CALL_FULFILLED = exports.DB_CALL_FULFILLED = "DB_CALL_FULFILLED";
+var SEARCH = exports.SEARCH = "SEARCH";
+var SEARCH_PENDING = exports.SEARCH_PENDING = "SEARCH_PENDING";
+var SEARCH_FULFILLED = exports.SEARCH_FULFILLED = "SEARCH_FULFILLED";
 
 var api = _axios2.default.create({
 	withCredentials: true
@@ -91014,25 +90964,6 @@ var stream = exports.stream = function stream(keccakTrackHash) {
 			return new Promise(function (resolve, reject) {
 				return resolve(_stream_and_fetch_metadata(user, keccakTrackHash));
 			});
-		})
-	};
-};
-
-var FROM_DB = [{
-	trackHash: '0x778626c4f776387092fbf5af6a22b7556f57fe8d814edb4c0e23f4a8e5fd9cd7',
-	artist: 'Frank Ocean',
-	title: 'Provider'
-}, {
-	trackHash: '0xb8f1532472debea5faf67b3e4ce06e5931c891da5e3b632becf2a4ddf6f5b64c',
-	artist: 'Chance the Rapper',
-	title: 'Blessings'
-}];
-
-var dbCall = exports.dbCall = function dbCall() {
-	return {
-		type: DB_CALL,
-		payload: new Promise(function (resolve, reject) {
-			return resolve(FROM_DB);
 		})
 	};
 };
@@ -91494,38 +91425,37 @@ function uploadReducer() {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.default = searchReducer;
-var initialSearch = {
-	matching_tracks: [],
-	matching_artists: [],
-	success: null
 
+var _merge = __webpack_require__(147);
+
+var _merge2 = _interopRequireDefault(_merge);
+
+var _playerActions = __webpack_require__(464);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var initialState = {
+	availableTracks: []
 };
 
-function searchReducer() {
-	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialSearch;
+function searchResultsReducer() {
+	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
 	var action = arguments[1];
 
+	Object.freeze(state);
 	switch (action.type) {
-		case "GET_SEARCH_PENDING":
-			{
-				state = Object.assign({}, state, {
-					success: null
-				});
-				break;
-			}
-		case "GET_SEARCH_FULFILLED":
-			{
-				state = Object.assign({}, state, {
-					matching_tracks: action.payload.data.matching_tracks,
-					matching_artists: action.payload.data.matching_artists,
-					success: true
-				});
-				break;
-			}
+		case _playerActions.SEARCH_PENDING:
+			return state;
+		case _playerActions.SEARCH_FULFILLED:
+			var nextState = (0, _merge2.default)({}, state);
+			nextState.availableTracks = action.payload.data;
+			return nextState;
+		default:
+			return state;
 	}
-	return state;
 }
+
+exports.default = searchResultsReducer;
 
 /***/ }),
 /* 471 */
@@ -92631,7 +92561,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(18);
 
-var _searchActions = __webpack_require__(492);
+var _playerActions = __webpack_require__(464);
 
 var _navActions = __webpack_require__(463);
 
@@ -92655,32 +92585,20 @@ var SearchBar = (_dec = (0, _reactRedux.connect)(function (store) {
 	}
 
 	_createClass(SearchBar, [{
-		key: "getInputValue",
-		value: function getInputValue() {
-			return this.refs.input.value;
-		}
-	}, {
-		key: "handleClick",
-		value: function handleClick(e) {
-			e.preventDefault();
-			var query = this.getInputValue();
-			this.props.dispatch((0, _searchActions.getSearch)(query));
-			this.props.dispatch((0, _navActions.navClick)("SEARCH_CLICK"));
+		key: "handleSearch",
+		value: function handleSearch() {
+			this.props.dispatch((0, _playerActions.search)(this.refs.input.value));
 		}
 	}, {
 		key: "render",
 		value: function render() {
-			var _this2 = this;
-
 			return _react2.default.createElement(
-				"form",
-				{ className: "form-inline my-1 my-lg-0" },
+				"div",
+				null,
 				_react2.default.createElement("input", { ref: "input", className: "form-control mr-sm-2", type: "text", placeholder: "Search", "aria-label": "Search" }),
 				_react2.default.createElement(
 					"button",
-					{ onClick: function onClick(e) {
-							return _this2.handleClick(e);
-						}, className: "btn btn-outline-success my-2 my-sm-0" },
+					{ onClick: this.handleSearch.bind(this), className: "btn btn-outline-success my-2 my-sm-0" },
 					"Search"
 				)
 			);
@@ -92692,44 +92610,7 @@ var SearchBar = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = SearchBar;
 
 /***/ }),
-/* 492 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.getSearch = getSearch;
-
-var _axios = __webpack_require__(357);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// export function getSearch(query) {
-// 	return {
-// 		type: "GET_SEARCH", 
-// 		payload: axios.get("/search", {
-// 			params: {
-//       			query: query,
-//     		}
-//     	}),
-// 	}
-// }
-
-function getSearch(query) {
-	return {
-		type: "GET_SEARCH",
-		payload: fetch('http://localhost:5000/search', {
-			method: 'GET'
-		})
-	};
-}
-
-/***/ }),
+/* 492 */,
 /* 493 */
 /***/ (function(module, exports, __webpack_require__) {
 

@@ -1,26 +1,22 @@
-const initialSearch = {
-	matching_tracks: [],
-	matching_artists: [],
-	success: null,
+import merge from 'lodash/merge';
+import { SEARCH_PENDING, SEARCH_FULFILLED } from '../actions/player-actions';
 
+const initialState = {
+	availableTracks:[],
 }
 
-export default function searchReducer(state=initialSearch, action) {
-switch (action.type) { 
-		case "GET_SEARCH_PENDING": {
-			state = Object.assign({}, state, {
-				success: null,
-			});
-			break;
-		}
-		case "GET_SEARCH_FULFILLED": {
-			state = Object.assign({}, state, {
-				matching_tracks: action.payload.data.matching_tracks,
-				matching_artists: action.payload.data.matching_artists,
-				success: true,
-			});
-			break;
-		}
+function searchResultsReducer(state=initialState, action) {
+	Object.freeze(state);
+	switch (action.type) { 
+		case SEARCH_PENDING:
+			return state
+		case SEARCH_FULFILLED:
+			var nextState = merge({}, state);
+			nextState.availableTracks = action.payload.data
+			return nextState
+		default:
+			return state;
 	}
-	return state;
 }
+
+export default searchResultsReducer;

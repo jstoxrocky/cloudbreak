@@ -29,7 +29,7 @@ contract Tokens {
         return playerAddress;
     }
 
-    function getUserBalance(address user) view external returns (uint) {
+    function getUserBalance(address user) view public returns (uint) {
         return userBalances[user];
     }
 
