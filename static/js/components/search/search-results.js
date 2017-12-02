@@ -23,19 +23,27 @@ export default class SearchResults extends React.Component {
 			<div className='track-results' key={metadata.trackHash} onClick={() => this.handleStreamClick(metadata.trackHash)} className='track-item'>
 				<a href='#'>
 					<div className='row'>
-						<div className='col'>
-							<div className='artist'>
-								{metadata.artist} <i className={artist_class} aria-hidden="true"></i>
+						<div className='col-md-2'>
+							<div className='row'>
+								<div className='col'>
+									<div className='artist'>
+										{metadata.artist} <i className={artist_class} aria-hidden="true"></i>
+									</div>
+								</div>
+							</div>
+							<div className='row'>
+								<div className='col'>
+									<div className='title'>
+										{metadata.title} <i className={artist_class} aria-hidden="true"></i>
+									</div>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div className='row'>
-						<div className='col'>
-							<div className='title'>
-								{metadata.title} <i className={artist_class} aria-hidden="true"></i>
-							</div>
+						<div className='col-md-6'>
+							<div className='artist'>Price per stream: <strong>2</strong></div>
 						</div>
 					</div>
+
 				</a>
 			</div>)
 		)

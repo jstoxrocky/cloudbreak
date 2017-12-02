@@ -49,19 +49,13 @@ export default class NavPlayer extends React.Component {
 
                         <div className="col-md-2">
                             <div className="footer-balance">
-                                <p className='user-balance'>You: {userBalance}</p>
+                                <p className='user-balance'>Track Balance: <strong>{trackBalance}</strong></p>
                             </div>
                         </div>
 
                         <div className="col-md-2">
-                            <div className="footer-audio">
-                                <p className='user-balance'>Track: {trackBalance}</p>
-                            </div>
-                        </div>
-
-                        <div className="col-md-2">
-                            <div className="footer-audio">
-                                <p className='user-balance'>Streams: {playCount}</p>
+                            <div className="footer-balance">
+                                <p className='user-balance'>Stream Count: <strong>{playCount}</strong></p>
                             </div>
                         </div>
                     

@@ -114,7 +114,6 @@ body {
 }
 
 
-
 .container .text-muted {
   /*margin: 20px 0;*/
 }
@@ -138,6 +137,12 @@ body {
 	padding: 15px;
 }
 
+
 .footer-balance {
 	padding: 15px;
+	font-size:0.8rem;
+}
+
+.token-balance {
+	padding-right:10px;
 }

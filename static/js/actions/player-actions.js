@@ -138,9 +138,13 @@ export const stream = keccakTrackHash => ({
 })
 
 
-export const search = () => {
+export const search = (query) => {
 	return {
 		type: "SEARCH", 
-		payload: api.get('http://localhost:5000/search')
+		payload: api.get('http://localhost:5000/search', {
+		    params: {
+		      query: query,
+		    }
+  		})
 	}
 }

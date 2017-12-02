@@ -10,7 +10,7 @@ class Jumbotron extends React.Component {
 		return (
 			<div className="jumbotron jumbotron-fluid">
 		        <div className="container text-white text-center">
-		            <h1 className="display-3">CloudBreak</h1>
+		            <h1 className="display-3">Cloudbreak</h1>
 		            <p className="lead">Pay-per-play streaming, User-uploaded-content, Token reward for CAPTCHA completed metadata </p>
 		        </div>
 		    </div>
