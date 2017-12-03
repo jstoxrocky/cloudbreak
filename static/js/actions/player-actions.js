@@ -2,6 +2,7 @@ import bs58 from 'bs58';
 import {Tokens, Player, Data, web3, GAS, GAS_PRICE, ZERO_HEX} from "../utils/contracts"
 import { NO_CURRENT_TRACK, TX_SUCCESS, TX_FAILURE, CURRENT_TRACK_LOADED } from '../utils/reports'
 import axios from 'axios'
+import {BASE_URL} from '../utils/endpoints'
 
 export const UPDATE_PLAYER = "UPDATE_PLAYER";
 export const UPDATE_PLAYER_PENDING = "UPDATE_PLAYER_PENDING";
@@ -141,7 +142,7 @@ export const stream = keccakTrackHash => ({
 export const search = (query) => {
 	return {
 		type: "SEARCH", 
-		payload: api.get('http://localhost:5000/search', {
+		payload: api.get(BASE_URL+'/search', {
 		    params: {
 		      query: query,
 		    }

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {web3, getUserAddress, sign} from '../utils/blockchain'
+import {BASE_URL} from '../utils/endpoints'
 
 const api = axios.create({
 	withCredentials: true
@@ -51,7 +52,7 @@ export const inputUploadTransaction = (payload) => {
 export const submitUpload = (payload) => {
 	return {
 		type: "SUBMIT_UPLOAD", 
-		payload: api.post('http://localhost:5000/upload', {
+		payload: api.post(BASE_URL+'/upload', {
 			payload: payload,
 		})
 	}
@@ -64,7 +65,7 @@ export const signAndSubmitUploadTransaction = (value) => ({
 		const valueHash = web3.utils.asciiToHex(value)
 		return sign(valueHash, user)
 	}).then((receipt) => {
-		return api.post('http://localhost:5000/tx/upload', {
+		return api.post(BASE_URL+'/tx/upload', {
 			payload: {
 				txhash: value,
 				signature: receipt,

@@ -10380,6 +10380,8 @@ var _axios = __webpack_require__(62);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _endpoints = __webpack_require__(483);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -10542,7 +10544,7 @@ var stream = exports.stream = function stream(keccakTrackHash) {
 var search = exports.search = function search(query) {
 	return {
 		type: "SEARCH",
-		payload: api.get('http://localhost:5000/search', {
+		payload: api.get(_endpoints.BASE_URL + '/search', {
 			params: {
 				query: query
 			}
@@ -12030,6 +12032,8 @@ var _axios2 = _interopRequireDefault(_axios);
 
 var _blockchain = __webpack_require__(100);
 
+var _endpoints = __webpack_require__(483);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var api = _axios2.default.create({
@@ -12039,14 +12043,14 @@ var api = _axios2.default.create({
 var getCaptcha = exports.getCaptcha = function getCaptcha() {
 	return {
 		type: "GET_CAPTCHA",
-		payload: api.get('http://localhost:5000/question')
+		payload: api.get(_endpoints.BASE_URL + '/question')
 	};
 };
 
 var submitCaptcha = exports.submitCaptcha = function submitCaptcha(payload) {
 	return {
 		type: "SUBMIT_CAPTCHA",
-		payload: api.post('http://localhost:5000/answer', {
+		payload: api.post(_endpoints.BASE_URL + '/answer', {
 			payload: payload
 		})
 	};
@@ -12096,7 +12100,7 @@ var signAndSubmitCaptchaTransaction = exports.signAndSubmitCaptchaTransaction = 
 			var valueHash = _blockchain.web3.utils.asciiToHex(value);
 			return (0, _blockchain.sign)(valueHash, user);
 		}).then(function (receipt) {
-			return api.post('http://localhost:5000/tx/captcha', {
+			return api.post(_endpoints.BASE_URL + '/tx/captcha', {
 				payload: {
 					txhash: value,
 					signature: receipt
@@ -14469,6 +14473,8 @@ var _axios2 = _interopRequireDefault(_axios);
 
 var _blockchain = __webpack_require__(100);
 
+var _endpoints = __webpack_require__(483);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var api = _axios2.default.create({
@@ -14520,7 +14526,7 @@ var inputUploadTransaction = exports.inputUploadTransaction = function inputUplo
 var submitUpload = exports.submitUpload = function submitUpload(payload) {
 	return {
 		type: "SUBMIT_UPLOAD",
-		payload: api.post('http://localhost:5000/upload', {
+		payload: api.post(_endpoints.BASE_URL + '/upload', {
 			payload: payload
 		})
 	};
@@ -14534,7 +14540,7 @@ var signAndSubmitUploadTransaction = exports.signAndSubmitUploadTransaction = fu
 			var valueHash = _blockchain.web3.utils.asciiToHex(value);
 			return (0, _blockchain.sign)(valueHash, user);
 		}).then(function (receipt) {
-			return api.post('http://localhost:5000/tx/upload', {
+			return api.post(_endpoints.BASE_URL + '/tx/upload', {
 				payload: {
 					txhash: value,
 					signature: receipt
@@ -92887,6 +92893,19 @@ function navReducer() {
 			return state;
 	}
 }
+
+/***/ }),
+/* 483 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var BASE_URL = exports.BASE_URL = "http://teahupoo-dev.us-west-2.elasticbeanstalk.com";
+// export const BASE_URL = "http://localhost:5000"
 
 /***/ })
 /******/ ]);

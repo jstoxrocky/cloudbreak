@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {web3, getUserAddress, sign} from '../utils/blockchain'
+import {BASE_URL} from '../utils/endpoints'
 
 
 const api = axios.create({
@@ -10,7 +11,7 @@ const api = axios.create({
 export const getCaptcha = () => {
 	return {
 		type: "GET_CAPTCHA", 
-		payload: api.get('http://localhost:5000/question')
+		payload: api.get(BASE_URL+'/question')
 	}
 }
 
@@ -18,7 +19,7 @@ export const getCaptcha = () => {
 export const submitCaptcha = (payload) => {
 	return {
 		type: "SUBMIT_CAPTCHA", 
-		payload: api.post('http://localhost:5000/answer', {
+		payload: api.post(BASE_URL+'/answer', {
 			payload: payload
 		})
 	}
@@ -70,7 +71,7 @@ export const signAndSubmitCaptchaTransaction = (value) => ({
 		const valueHash = web3.utils.asciiToHex(value)
 		return sign(valueHash, user)
 	}).then((receipt) => {
-		return api.post('http://localhost:5000/tx/captcha', {
+		return api.post(BASE_URL+'/tx/captcha', {
 			payload: {
 				txhash: value,
 				signature: receipt,
