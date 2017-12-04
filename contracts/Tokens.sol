@@ -5,6 +5,7 @@ contract Tokens {
     mapping (bytes32 => uint) trackBalances;
     address owner = msg.sender;
     address playerAddress;
+    address dataAddress;
 
     modifier meOnly() {
         require(msg.sender == owner);
@@ -16,6 +17,11 @@ contract Tokens {
         _;
     }
     
+    modifier playerOrDataOnly() {
+        require(msg.sender == playerAddress || msg.sender == dataAddress);
+        _;
+    }
+    
     function setOwnerTokenBalance(uint newBalance) meOnly() external {
         // TO BE REMOVED. TEST PURPOSES ONLY
         userBalances[owner] = newBalance;
@@ -24,9 +30,17 @@ contract Tokens {
     function setPlayerAddress(address addr) meOnly() external {
         playerAddress = addr;
     }
+    
+    function setDataAddress(address addr) meOnly() external {
+        dataAddress = addr;
+    }
         
     function getPlayerAddress() view external returns (address) {
         return playerAddress;
+    }
+
+    function getDataAddress() view external returns (address) {
+        return dataAddress;
     }
 
     function getUserBalance(address user) view public returns (uint) {
@@ -37,7 +51,7 @@ contract Tokens {
         return trackBalances[trackHash];
     }
 
-    function incrementUserBalance(address user, uint value) playerOnly() external {
+    function incrementUserBalance(address user, uint value) playerOrDataOnly() external {
         userBalances[user] += value;
     }
 

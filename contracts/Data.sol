@@ -143,7 +143,7 @@ contract Data {
         return keccackHashToIPFSHash[keccakTrackHash];
     }
 
-    function getIpfsHashMetadata(bytes32 trackHash) view public returns (bytes1, bytes1) {
+    function getIpfsHashMetadata(bytes32 trackHash) view external returns (bytes1, bytes1) {
         return (ipfsHashMetadata[trackHash]['hashFunction'], ipfsHashMetadata[trackHash]['size']);
     }
 }

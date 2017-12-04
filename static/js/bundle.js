@@ -92904,8 +92904,8 @@ function navReducer() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var BASE_URL = exports.BASE_URL = "http://teahupoo-dev.us-west-2.elasticbeanstalk.com";
-// export const BASE_URL = "http://localhost:5000"
+// export const BASE_URL = "http://teahupoo-dev.us-west-2.elasticbeanstalk.com"
+var BASE_URL = exports.BASE_URL = "http://localhost:5000";
 
 /***/ })
 /******/ ]);
