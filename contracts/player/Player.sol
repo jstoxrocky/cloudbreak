@@ -1,20 +1,15 @@
 pragma solidity ^0.4.2;
 
-import './Base.sol';
+import './PlayerSpecificAddresses.sol';
 
-contract Player is Base {
-    address owner = msg.sender;
+contract Player is PlayerSpecificAddresses {
+
     mapping (address => bytes32) currentTrack;
-    uint pricePerStream = 2;
-
-    function setpricePerStream(uint newAmount) meOnly() external {
-        pricePerStream = newAmount;
-    }
 
     function stream(bytes32 keccakTrackHash) external returns (bytes32) {
         address listener = msg.sender;
         bytes32 trackHash = data.convertKeccackHashToIPFSHash(keccakTrackHash);
-        mp3.transferFromUserToTrack(listener, trackHash, pricePerStream);
+        mp3.transferFromUserToTrack(listener, trackHash, constants.pricePerStream());
         data.incrementPlayCount(trackHash);
         currentTrack[listener] = trackHash;
     }
@@ -24,5 +19,6 @@ contract Player is Base {
         var (hashFunction, size) = data.getIpfsHashMetadata(trackHash);
         return (hashFunction, size, trackHash);
     }
+
 }
 

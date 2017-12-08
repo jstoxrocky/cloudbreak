@@ -2,7 +2,6 @@ pragma solidity ^0.4.18;
 
 
 import './ERC20Basic.sol';
-import './TokenMetadata.sol';
 import '../math/SafeMath.sol';
 
 
@@ -10,11 +9,10 @@ import '../math/SafeMath.sol';
  * @title Basic token
  * @dev Basic version of StandardToken, with no allowances.
  */
-contract BasicToken is ERC20Basic, TokenMetadata {
+contract BasicToken is ERC20Basic {
     using SafeMath for uint256;
 
     mapping(address => uint256) balances;
-    event Transfer(address _from, address _to, uint256 _value);
 
     /**
     * @dev transfer token for a specified address
