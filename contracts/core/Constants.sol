@@ -11,7 +11,7 @@ contract Constants is Ownable {
 
     function Constants() public {
         verificationRequirement = 3;
-        pricePerStream = 2;
+        pricePerStream = 200000000000000;
         captchaMultiplier = 5;
         captchaReward = captchaMultiplier*pricePerStream;
     }

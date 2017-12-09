@@ -1,7 +1,7 @@
 pragma solidity ^0.4.18;
 
-import '../core/Base.sol';
 import '../math/SafeMath.sol';
+import './CrowdsaleSpecificAddresses.sol';
 
 /**
  * @title Crowdsale
@@ -11,11 +11,8 @@ import '../math/SafeMath.sol';
  * on a token per ETH rate. Funds collected are forwarded to a wallet
  * as they arrive.
  */
-contract Crowdsale, Base {
+contract Crowdsale is CrowdsaleSpecificAddresses {
   using SafeMath for uint256;
-
-  // The token being sold
-  MintableToken public token;
 
   // address where funds are collected
   address public wallet;
@@ -40,15 +37,8 @@ contract Crowdsale, Base {
     require(_rate > 0);
     require(_wallet != address(0));
 
-    token = createTokenContract();
     rate = _rate;
     wallet = _wallet;
-  }
-
-  // creates the token to be sold.
-  // override this method to have crowdsale of a specific mintable token.
-  function createTokenContract() internal returns (MintableToken) {
-    return new MintableToken();
   }
 
 
@@ -64,13 +54,13 @@ contract Crowdsale, Base {
 
     uint256 weiAmount = msg.value;
 
-    // calculate token amount to be created
+    // // calculate token amount to be created
     uint256 tokens = weiAmount.mul(rate);
 
-    // update state
+    // // update state
     weiRaised = weiRaised.add(weiAmount);
 
-    token.mint(beneficiary, tokens);
+    mp3.mint(beneficiary, tokens);
     TokenPurchase(msg.sender, beneficiary, weiAmount, tokens);
 
     forwardFunds();

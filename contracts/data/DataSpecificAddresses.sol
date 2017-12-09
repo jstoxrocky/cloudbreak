@@ -1,7 +1,6 @@
 pragma solidity ^0.4.2;
 
 import '../ownership/Ownable.sol';
-import '../player/Player.sol';
 import '../tokens/MP3.sol';
 import '../core/Constants.sol';
 
