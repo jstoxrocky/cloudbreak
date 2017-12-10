@@ -8,6 +8,7 @@ import SearchBar from "./nav-search"
 @connect(({stream}) => {
 	return {
         userBalance: stream.userBalance,
+        serviceAllowance: stream.serviceAllowance,
     };
 })
 export default class Nav extends React.Component {    
@@ -25,10 +26,18 @@ export default class Nav extends React.Component {
     handleHomeClick() {
         this.props.dispatch(navClick("HOME"))
     }
+
+    handleBuyClick() {
+        this.props.dispatch(navClick("BUY"))
+    }
+
+    handleApproveClick() {
+        this.props.dispatch(navClick("APPROVE"))
+    }
     
 
   	render() {
-        const {userBalance} = this.props;
+        const {userBalance, serviceAllowance} = this.props;
 		return ( 
             <div id="nav-btns" className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container-fluid">
@@ -41,10 +50,17 @@ export default class Nav extends React.Component {
                             <a className="nav-link" href="#" onClick={() => this.handleUploadClick()}>Upload</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href='#' onClick={() => this.handleCaptchaClick()}>CAPTCHA</a>
+                            <a className="nav-link" href='#' onClick={() => this.handleBuyClick()}>Buy</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href='#' onClick={() => this.handleCaptchaClick()}>Earn</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href='#' onClick={() => this.handleApproveClick()}>Approve</a>
                         </li>
                     </ul>
                     <span className="token-balance navbar-text">Tokens: {userBalance}</span>
+                    <span className="token-balance navbar-text">Service: {serviceAllowance}</span>
                     <SearchBar />
                 </div>
             </div>

@@ -9,7 +9,7 @@ contract Player is PlayerSpecificAddresses {
     function stream(bytes32 keccakTrackHash) external returns (bytes32) {
         address listener = msg.sender;
         bytes32 trackHash = data.convertKeccackHashToIPFSHash(keccakTrackHash);
-        mp3.transferFromUserToTrack(listener, trackHash, constants.pricePerStream());
+        mp3.transferFromUserToTrack(listener, trackHash, constants.tokensPerStream());
         data.incrementPlayCount(trackHash);
         currentTrack[listener] = trackHash;
     }

@@ -1,5 +1,5 @@
 import bs58 from 'bs58';
-import {Tokens, Player, Data, web3, GAS, GAS_PRICE, ZERO_HEX} from "../utils/contracts"
+import {Tokens, Player, Data, PLAYER_ADDRESS, web3, GAS, GAS_PRICE, ZERO_HEX} from "../utils/contracts"
 import { NO_CURRENT_TRACK, TX_SUCCESS, TX_FAILURE, CURRENT_TRACK_LOADED } from '../utils/reports'
 import axios from 'axios'
 import {BASE_URL} from '../utils/endpoints'
@@ -16,6 +16,7 @@ export const RADIO_OPTION_CHANGE = "RADIO_OPTION_CHANGE";
 export const SEARCH = "SEARCH"
 export const SEARCH_PENDING = "SEARCH_PENDING"
 export const SEARCH_FULFILLED = "SEARCH_FULFILLED"
+export const APPROVE = "APPROVE"
 
 const api = axios.create({
 	withCredentials: true
@@ -35,15 +36,18 @@ const toIPFSHash = (hexArray) => {
 
 const _getUserAddress = () => web3.eth.getAccounts()
 
-const _getUserBalance = (user) => Tokens.methods.getUserBalance(user).call()
+const _getUserBalance = (user) => Tokens.methods.balanceOf(user).call()
 
-const _getTrackBalance = (trackHash) => Tokens.methods.getTrackBalance(trackHash).call()
+const _getServiceAllowance = (owner, spender) => Tokens.methods.allowance(owner, spender).call()
+
+const _getTrackBalance = (trackHash) => Tokens.methods.trackBalanceOf(trackHash).call()
 
 const _getPlayCount = (trackHash) => Data.methods.getPlayCount(trackHash).call()
 
 const _getCurrentTrack = (user) => Player.methods.getCurrentTrack(user).call()
 
 const _getTrackBasicMetadataByHash = (trackHash, key) => Data.methods.getTrackBasicMetadataByHash(trackHash, key).call()
+
 
 const _getCurrentTrackMetadata = (user) => {
 	let track = _getCurrentTrack(user)
@@ -83,11 +87,27 @@ const _updatePlayer = (user) => {
 	let userBalance = metadata.then(() => {
 		return _getUserBalance(user)
 	})
-	return userBalance.then(() => {
+	let serviceAllowance = userBalance.then(() => {
+		return _getServiceAllowance(user, PLAYER_ADDRESS)
+	})
+	return serviceAllowance.then(() => {
 		let metadataResult = metadata.value()
 		metadataResult.userBalance = userBalance.value()
+		metadataResult.serviceAllowance = serviceAllowance.value()
 		return new Promise((resolve, reject) => resolve(metadataResult))
 	})
+}
+
+const _approve = (user, spender, value) => {
+	const options = {
+		gas: GAS,
+		gasPrice: GAS_PRICE,
+		from: user,
+	}
+	return Tokens.methods.approve(spender, value).send(options)
+		.catch(function(error){
+		    return {'status':'0x0'}
+		});
 }
 
 const _stream = (user, keccakTrackHash) => {
@@ -134,7 +154,15 @@ export const stream = keccakTrackHash => ({
 	type: STREAM,
 	payload: _getUserAddress().then((receipt) => {
 			const user = receipt[0]
-			return new Promise((resolve, reject) => resolve(_stream_and_fetch_metadata(user, keccakTrackHash)))
+			return new Promise((resolve, reject) => resolve(_stream(user, keccakTrackHash)))
+		}),
+})
+
+export const approve = value => ({
+	type: APPROVE,
+	payload: _getUserAddress().then((receipt) => {
+			const user = receipt[0]
+			return new Promise((resolve, reject) => resolve(_approve(user, PLAYER_ADDRESS, value)))
 		}),
 })
 

@@ -31,6 +31,18 @@ export default function navReducer(state=initialCaptcha, action) {
 			});
 			return nextState
 		} 
+		case "BUY": {
+			let nextState = merge({}, state, {
+				currentStage: 'BUY',
+			});
+			return nextState
+		} 
+		case "APPROVE": {
+			let nextState = merge({}, state, {
+				currentStage: 'APPROVE',
+			});
+			return nextState
+		} 
 		default:
 			return state
 	}

@@ -5,6 +5,7 @@ import Captcha from './captcha/captcha'
 import Home from './home/home'
 import Upload from './upload/upload'
 import Search from './search/search'
+import Buy from './buy/buy'
 
 const App = () => {
 	return (
@@ -14,6 +15,7 @@ const App = () => {
 			<Captcha />
 			<Upload />
 			<Search />
+			<Buy />
 			<NavPlayer />
 		</div>
 	)

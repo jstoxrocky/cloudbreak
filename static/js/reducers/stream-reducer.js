@@ -16,9 +16,12 @@ const initialState = {
 	title: null,
 	titleIsVerified: null,
 	userBalance: 0,
+	serviceAllowance: 0,
 	trackBalance: 0,
 	playCount: 0,
 	msg: null,
+	eth: null,
+	wei: null,
 }
 
 function streamReducer(state=initialState, action) {
@@ -36,6 +39,7 @@ function streamReducer(state=initialState, action) {
 			nextState.title = action.payload.title;
 			nextState.titleIsVerified = action.payload.titleIsVerified;
 			nextState.userBalance = action.payload.userBalance;
+			nextState.serviceAllowance = action.payload.serviceAllowance;
 			nextState.trackBalance = action.payload.trackBalance;
 			nextState.playCount = action.payload.playCount;
 			nextState.msg = action.payload.msg;
@@ -52,10 +56,16 @@ function streamReducer(state=initialState, action) {
 			nextState.title = action.payload.title;
 			nextState.titleIsVerified = action.payload.titleIsVerified;
 			nextState.userBalance = action.payload.userBalance;
+			nextState.serviceAllowance = action.payload.serviceAllowance;
 			nextState.trackBalance = action.payload.trackBalance;
 			nextState.playCount = action.payload.playCount;
 			nextState.msg = action.payload.msg;
 			return nextState
+		case "SUBMIT_BUY_FULFILLED": {
+			let nextState = merge({}, state);
+			nextState.userBalance = action.payload;
+			return nextState
+		}
 		default:
 			return state;
 	}

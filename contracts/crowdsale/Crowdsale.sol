@@ -33,11 +33,8 @@ contract Crowdsale is CrowdsaleSpecificAddresses {
   event TokenPurchase(address indexed purchaser, address indexed beneficiary, uint256 value, uint256 amount);
 
 
-  function Crowdsale(uint256 _rate, address _wallet) public {
-    require(_rate > 0);
+  function Crowdsale(address _wallet) public {
     require(_wallet != address(0));
-
-    rate = _rate;
     wallet = _wallet;
   }
 
@@ -55,7 +52,7 @@ contract Crowdsale is CrowdsaleSpecificAddresses {
     uint256 weiAmount = msg.value;
 
     // // calculate token amount to be created
-    uint256 tokens = weiAmount.mul(rate);
+    uint256 tokens = weiAmount.div(constants.weiPerTokens());
 
     // // update state
     weiRaised = weiRaised.add(weiAmount);
