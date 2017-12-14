@@ -5,10 +5,10 @@ import CaptchaGroup from './captcha-group';
 import CaptchaTransaction from './captcha-transaction'
 
 
-@connect(({nav, captcha}) => {
+@connect(({nav, captcha, msg}) => {
 	return {
-		msg: captcha.msg,
-		currentPage: nav.currentStage,
+		msg: msg.captcha.value,
+		currentPage: nav.currentPage,
 		lastStageCompleted: captcha.currentStage,
 	}
 })

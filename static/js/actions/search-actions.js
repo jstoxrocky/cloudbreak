@@ -1,12 +1,21 @@
 import axios from 'axios'
 import {BASE_URL} from '../utils/endpoints'
 
-export function getSearch(query) {
+export const SEARCH = "SEARCH"
+export const SEARCH_PENDING = "SEARCH_PENDING"
+export const SEARCH_FULFILLED = "SEARCH_FULFILLED"
+
+const api = axios.create({
+	withCredentials: true
+});
+
+export const search = (query) => {
 	return {
-		type: "GET_SEARCH", 
-		payload: fetch(BASE_URL+'/search', {
-			method: 'GET',
-		})
+		type: SEARCH, 
+		payload: api.get(BASE_URL+'/search', {
+		    params: {
+		      query: query,
+		    }
+  		})
 	}
 }
-

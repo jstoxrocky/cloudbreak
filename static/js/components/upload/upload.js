@@ -5,10 +5,10 @@ import UploadGroup from './upload-group';
 import UploadTransaction from './upload-transaction'
 
 
-@connect(({nav, upload}) => {
+@connect(({nav, upload, msg}) => {
 	return {
-		msg: upload.msg,
-		currentPage: nav.currentStage,
+		msg: msg.upload.value,
+		currentPage: nav.currentPage,
 		lastStageCompleted: upload.currentStage,
 	}
 })

@@ -2,6 +2,12 @@ import {web3} from '../utils/blockchain'
 import {Crowdsale, Tokens, Constants, GAS, GAS_PRICE, ZERO_HEX} from "../utils/contracts"
 
 
+export const BUY_INPUT = "BUY_INPUT"
+export const BUY_INPUT_PENDING = "BUY_INPUT_PENDING";
+export const BUY_INPUT_FULFILLED = "BUY_INPUT_FULFILLED";
+export const BUY_SUBMIT = "BUY_SUBMIT"
+export const BUY_SUBMIT_PENDING = "BUY_SUBMIT_PENDING";
+export const BUY_SUBMIT_FULFILLED = "BUY_SUBMIT_FULFILLED";
 
 
 export const inputBuy = (eth) => {
@@ -10,7 +16,7 @@ export const inputBuy = (eth) => {
 		wei = web3.utils.toWei(eth, 'ether')
 	}
 	return {
-		type: "INPUT_BUY", 
+		type: BUY_INPUT, 
 		payload: Constants.methods.weiPerTokens().call().then(weiPerTokens => {
 			let tokensPerEth = 1000000000000000000 / weiPerTokens;
 			let tokens = tokensPerEth*eth;
@@ -41,7 +47,7 @@ const _buyTokens = (user, wei) => {
 }
 
 export const submitBuy = (wei) => ({
-	type: "SUBMIT_BUY",
+	type: BUY_SUBMIT,
 	payload: _submitBuy(wei),
 })
 
@@ -58,8 +64,18 @@ const _submitBuy = (wei) => {
 		return _getUserBalance(_user)
 	})
 	return userBalance.then(() => {
+		let purchaseReceipt = purchase.value()
+		let status = !!web3.utils.hexToNumber(purchaseReceipt.status)
+		let msg = 'Success'
+		if (!status) {
+			msg = 'Transaction failed'
+		}
 		let newBalance = userBalance.value()
-		return new Promise((resolve, reject) => resolve(newBalance))
+		let payload = {
+			msg:msg,
+			userBalance:newBalance,
+		}
+		return new Promise((resolve, reject) => resolve(payload))
 	})
 }
 

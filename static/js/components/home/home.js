@@ -4,13 +4,13 @@ import Jumbotron from './jumbotron'
 
 @connect(({nav}) => {
 	return {
-		currentStage: nav.currentStage,
+		currentPage: nav.currentPage,
 	};
 })
 class Home extends React.Component {  
 	render() {
-		const {currentStage} = this.props;
-		const visible = currentStage == 'HOME';
+		const {currentPage} = this.props;
+		const visible = currentPage == 'HOME';
 		return (
 			<div>
 	  			{(visible) ? <Jumbotron /> : <div></div>}

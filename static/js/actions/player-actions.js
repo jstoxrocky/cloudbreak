@@ -4,19 +4,14 @@ import { NO_CURRENT_TRACK, TX_SUCCESS, TX_FAILURE, CURRENT_TRACK_LOADED } from '
 import axios from 'axios'
 import {BASE_URL} from '../utils/endpoints'
 
-export const UPDATE_PLAYER = "UPDATE_PLAYER";
-export const UPDATE_PLAYER_PENDING = "UPDATE_PLAYER_PENDING";
-export const UPDATE_PLAYER_FULFILLED = "UPDATE_PLAYER_FULFILLED";
-export const STREAM = "STREAM";
-export const STREAM_PENDING = "STREAM_PENDING";
-export const STREAM_PENDING_REJECTED = "STREAM_PENDING_REJECTED"
-export const STREAM_REJECTED = "STREAM_REJECTED"
-export const STREAM_FULFILLED = "STREAM_FULFILLED";
-export const RADIO_OPTION_CHANGE = "RADIO_OPTION_CHANGE";
-export const SEARCH = "SEARCH"
-export const SEARCH_PENDING = "SEARCH_PENDING"
-export const SEARCH_FULFILLED = "SEARCH_FULFILLED"
-export const APPROVE = "APPROVE"
+export const PLAYER_UPDATE = "PLAYER_UPDATE";
+export const PLAYER_UPDATE_PENDING = "PLAYER_UPDATE_PENDING";
+export const PLAYER_UPDATE_FULFILLED = "PLAYER_UPDATE_FULFILLED";
+export const PLAYER_STREAM = "PLAYER_STREAM";
+export const PLAYER_STREAM_PENDING = "PLAYER_STREAM_PENDING";
+export const PLAYER_STREAM_REJECTED = "PLAYER_STREAM_REJECTED"
+export const PLAYER_STREAM_FULFILLED = "PLAYER_STREAM_FULFILLED";
+
 
 const api = axios.create({
 	withCredentials: true
@@ -137,13 +132,8 @@ const _stream_and_fetch_metadata = (user, keccakTrackHash) => {
 }
 
 
-export const radioOptionChange = (value) => ({
-	type: RADIO_OPTION_CHANGE,
-	payload: value,
-})
-
 export const updatePlayer = () => ({
-	type: UPDATE_PLAYER,
+	type: PLAYER_UPDATE,
 	payload: _getUserAddress().then((receipt) => {
 			const user = receipt[0]
 			return new Promise((resolve, reject) => resolve(_updatePlayer(user)))
@@ -151,29 +141,13 @@ export const updatePlayer = () => ({
 })
 
 export const stream = keccakTrackHash => ({
-	type: STREAM,
+	type: PLAYER_STREAM,
 	payload: _getUserAddress().then((receipt) => {
 			const user = receipt[0]
 			return new Promise((resolve, reject) => resolve(_stream(user, keccakTrackHash)))
 		}),
 })
 
-export const approve = value => ({
-	type: APPROVE,
-	payload: _getUserAddress().then((receipt) => {
-			const user = receipt[0]
-			return new Promise((resolve, reject) => resolve(_approve(user, PLAYER_ADDRESS, value)))
-		}),
-})
 
 
-export const search = (query) => {
-	return {
-		type: "SEARCH", 
-		payload: api.get(BASE_URL+'/search', {
-		    params: {
-		      query: query,
-		    }
-  		})
-	}
-}
+

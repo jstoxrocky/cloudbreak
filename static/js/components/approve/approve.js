@@ -1,24 +1,24 @@
 import React from 'react';
 import { connect } from "react-redux";
 import Report from '../utils/report';
-import BuyGroup from './buy-group';
+import ApproveGroup from './approve-group';
 
 
-@connect(({nav, buy, msg}) => {
+@connect(({nav, approve, msg}) => {
 	return {
 		currentPage: nav.currentPage,
-		msg: msg.buy.value,
+		msg: msg.approve.value,
 	}
 })
 export default class Buy extends React.Component {   
 
 	render() {
   		const {currentPage, msg} = this.props;
-  		const onBuyPage = currentPage == 'BUY';
+  		const onApprovePage = currentPage == 'APPROVE';
   		return (
 	  		<div>
-	  			{(onBuyPage) ? <Report msg={msg} /> : <div></div>}
-	  			{(onBuyPage) ? <BuyGroup /> : <div></div>}
+	  			{(onApprovePage) ? <Report msg={msg} /> : <div></div>}
+	  			{(onApprovePage) ? <ApproveGroup /> : <div></div>}
 	  		</div>
   		)
   	}

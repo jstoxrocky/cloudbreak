@@ -4,35 +4,42 @@ import { navClick } from "../../actions/nav-actions"
 import { getCaptcha } from "../../actions/captcha-actions"
 import { getUpload } from "../../actions/upload-actions"
 import SearchBar from "./nav-search"
+import { 
+    NAV_CAPTCHA, 
+    NAV_UPLOAD,
+    NAV_HOME, 
+    NAV_SEARCH,
+    NAV_BUY,
+    NAV_APPROVE,} from '../../actions/nav-actions';
 
-@connect(({stream}) => {
+@connect(({stream, balance}) => {
 	return {
-        userBalance: stream.userBalance,
-        serviceAllowance: stream.serviceAllowance,
+        userBalance: balance.userBalance,
+        serviceAllowance: balance.serviceAllowance,
     };
 })
 export default class Nav extends React.Component {    
 
 	handleCaptchaClick() {
-        this.props.dispatch(navClick("CAPTCHA"))
+        this.props.dispatch(navClick(NAV_CAPTCHA))
         this.props.dispatch(getCaptcha())
   	}
 
   	handleUploadClick() {
-  		this.props.dispatch(navClick("UPLOAD"))
+  		this.props.dispatch(navClick(NAV_UPLOAD))
       this.props.dispatch(getUpload())
   	}
 
     handleHomeClick() {
-        this.props.dispatch(navClick("HOME"))
+        this.props.dispatch(navClick(NAV_HOME))
     }
 
     handleBuyClick() {
-        this.props.dispatch(navClick("BUY"))
+        this.props.dispatch(navClick(NAV_BUY))
     }
 
     handleApproveClick() {
-        this.props.dispatch(navClick("APPROVE"))
+        this.props.dispatch(navClick(NAV_APPROVE))
     }
     
 

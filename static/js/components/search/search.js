@@ -5,7 +5,7 @@ import SearchGroup from './search-group'
 
 @connect(({search, nav}) => {
 	return {
-		currentPage: nav.currentStage,
+		currentPage: nav.currentPage,
 		availableTracks: search.availableTracks,
 	};
 })

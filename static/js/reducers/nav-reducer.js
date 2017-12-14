@@ -1,45 +1,52 @@
 import merge from 'lodash/merge';
+import { 
+	NAV_CAPTCHA, 
+	NAV_UPLOAD,
+	NAV_HOME, 
+	NAV_SEARCH,
+	NAV_BUY,
+	NAV_APPROVE,} from '../actions/nav-actions';
 
 const initialCaptcha = {
-	currentStage: 'HOME',
+	currentPage: 'HOME',
 }
 
 export default function navReducer(state=initialCaptcha, action) {
 	Object.freeze(state);
 	switch (action.type) { 
-		case "CAPTCHA": {
+		case NAV_CAPTCHA: {
 			let nextState = merge({}, state, {
-				currentStage: 'CAPTCHA',
+				currentPage: 'CAPTCHA',
 			});
 			return nextState
 		}
-		case "UPLOAD": {
+		case NAV_UPLOAD: {
 			let nextState = merge({}, state, {
-				currentStage: 'UPLOAD',
+				currentPage: 'UPLOAD',
 			});
 			return nextState
 		}
-		case "HOME": {
+		case NAV_HOME: {
 			let nextState = merge({}, state, {
-				currentStage: 'HOME',
+				currentPage: 'HOME',
 			});
 			return nextState
 		}
-		case "SEARCH": {
+		case NAV_SEARCH: {
 			let nextState = merge({}, state, {
-				currentStage: 'SEARCH',
+				currentPage: 'SEARCH',
 			});
 			return nextState
 		} 
-		case "BUY": {
+		case NAV_BUY: {
 			let nextState = merge({}, state, {
-				currentStage: 'BUY',
+				currentPage: 'BUY',
 			});
 			return nextState
 		} 
-		case "APPROVE": {
+		case NAV_APPROVE: {
 			let nextState = merge({}, state, {
-				currentStage: 'APPROVE',
+				currentPage: 'APPROVE',
 			});
 			return nextState
 		} 

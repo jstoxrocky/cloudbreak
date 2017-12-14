@@ -1,4 +1,13 @@
 import merge from 'lodash/merge';
+import {
+	UPLOAD_INPUT_HASH,
+	UPLOAD_INPUT_ARTIST,
+	UPLOAD_INPUT_TITLE,
+	UPLOAD_INPUT_TRANSACTION,
+	UPLOAD_GET,
+	UPLOAD_SUBMIT_FULFILLED,
+	UPLOAD_SIGN_FULFILLED,
+} from '../actions/upload-actions'
 
 const initialUpload = {
 	data: { 
@@ -13,63 +22,48 @@ const initialUpload = {
     transaction: {
     	txHash: null,
     },
-	msg: null,
 	currentStage: null,
 }
 
 export default function uploadReducer(state=initialUpload, action) {
 	Object.freeze(state);
 	switch (action.type) {
-		case "INPUT_UPLOAD_HASH": {
+		case UPLOAD_INPUT_HASH: {
 			let nextState = merge({}, state);
 			nextState.submission = merge({}, nextState.submission, action.payload)
 			return nextState
 		}
-		case "INPUT_UPLOAD_ARTIST": {
+		case UPLOAD_INPUT_ARTIST: {
 			let nextState = merge({}, state);
 			nextState.submission = merge({}, nextState.submission, action.payload)
 			return nextState
 		}
-		case "INPUT_UPLOAD_TITLE": {
+		case UPLOAD_INPUT_TITLE: {
 			let nextState = merge({}, state);
 			nextState.submission = merge({}, nextState.submission, action.payload)
 			return nextState
 		}
-		case "INPUT_UPLOAD_TRANSACTION": {
+		case UPLOAD_INPUT_TRANSACTION: {
 			let nextState = merge({}, state);
 			nextState.transaction = merge({}, nextState.transaction, action.payload)
 			return nextState
 		}
-		case "GET_UPLOAD": {
+		case UPLOAD_GET: {
 			let nextState = merge({}, state, {
 				currentStage: 'UPLOAD_PAGE_LANDED',
 			});
 			return nextState
 		}
-		case "SUBMIT_UPLOAD_PENDING": {
-			let nextState = merge({}, state, {
-				msg: "Checking Upload...",
-			});
-			return nextState
-		}
-		case "SUBMIT_UPLOAD_FULFILLED": {
+		case UPLOAD_SUBMIT_FULFILLED: {
 			let nextState = merge({}, state, {
 				data: action.payload.data.data,
-				msg: action.payload.data.msg,
 				currentStage: action.payload.data.data.upload ? 'UPLOAD' : 'UPLOAD_PAGE_LANDED',
 			});
 			return nextState
 		}
-		case "SIGN_AND_SUBMIT_UPLOAD_PENDING": {
-			let nextState = merge({}, state, {
-				msg: "Loading...",
-			});
-			return nextState
-		}
-		case "SIGN_AND_SUBMIT_UPLOAD_FULFILLED": {
+		case UPLOAD_SIGN_FULFILLED: {
 			let nextState = merge({}, state, {
 				data: action.payload.data.data,
-				msg: action.payload.data.msg,
 				currentStage: action.payload.data.data.tx_upload ? 'TX_UPLOAD' : 'UPLOAD',
 			});
 			return nextState

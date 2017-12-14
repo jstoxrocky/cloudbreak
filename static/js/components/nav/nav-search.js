@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { search } from "../../actions/player-actions"
+import { search } from "../../actions/search-actions"
 import { navClick } from "../../actions/nav-actions"
 
 @connect((store) => {

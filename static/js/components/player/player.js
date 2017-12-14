@@ -2,26 +2,25 @@ import React from 'react';
 import { connect } from "react-redux";
 import { updatePlayer } from '../../actions/player-actions'
 
-@connect(({stream}) => {
+@connect(({player, balance}) => {
     return {
-        artist: stream.artist,
-        artistIsVerified: stream.artistIsVerified,
-        title: stream.title,
-        titleIsVerified: stream.titleIsVerified,
-        currentTrack: stream.currentTrack,
-        userBalance: stream.userBalance,
-        trackBalance: stream.trackBalance,
-        playCount: stream.playCount,
+        artist: player.artist,
+        artistIsVerified: player.artistIsVerified,
+        title: player.title,
+        titleIsVerified: player.titleIsVerified,
+        currentTrack: player.currentTrack,
+        trackBalance: balance.trackBalance,
+        playCount: balance.playCount,
     };
 })
-export default class NavPlayer extends React.Component {    
+export default class Player extends React.Component {    
 
     componentDidMount() {
         this.props.dispatch(updatePlayer());
     }       
 
   	render() {
-        const {artist, artistIsVerified, title, titleIsVerified, currentTrack, userBalance, trackBalance, playCount} = this.props;
+        const {artist, artistIsVerified, title, titleIsVerified, currentTrack, trackBalance, playCount} = this.props;
         const artist_class = artistIsVerified == 'true' ? 'fa fa-check-circle-o verified': 'fa fa-times-circle-o unverified'
         const title_class = titleIsVerified == 'true' ? 'fa fa-check-circle-o verified': 'fa fa-times-circle-o unverified'
 		if (this.refs.audio) {this.refs.audio.load()}
