@@ -3,7 +3,6 @@ import {
 	BUY_INPUT_FULFILLED, } from '../actions/buy-actions';
 
 const initialState = {
-	eth:null,
 	wei:null,
 	tokens:0,
 }

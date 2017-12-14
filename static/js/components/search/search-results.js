@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { stream } from '../../actions/player-actions'
+import { submitStream } from '../../actions/player-actions'
 
 
 @connect(({search}) => {
@@ -11,7 +11,7 @@ import { stream } from '../../actions/player-actions'
 export default class SearchResults extends React.Component {
 
 	handleStreamClick(trackHash) {
-		this.props.dispatch(stream(trackHash));
+		this.props.dispatch(submitStream(trackHash));
 	}
 
 	render() {
