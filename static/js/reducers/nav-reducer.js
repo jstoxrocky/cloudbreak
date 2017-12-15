@@ -5,7 +5,7 @@ import {
 	NAV_HOME, 
 	NAV_SEARCH,
 	NAV_BUY,
-	NAV_APPROVE,} from '../actions/nav-actions';
+	NAV_ALLOWANCE,} from '../actions/nav-actions';
 
 const initialCaptcha = {
 	currentPage: 'HOME',
@@ -34,7 +34,7 @@ export default function navReducer(state=initialCaptcha, action) {
 		}
 		case NAV_SEARCH: {
 			let nextState = merge({}, state, {
-				currentPage: 'SEARCH',
+				currentPage: 'HOME',
 			});
 			return nextState
 		} 
@@ -44,9 +44,9 @@ export default function navReducer(state=initialCaptcha, action) {
 			});
 			return nextState
 		} 
-		case NAV_APPROVE: {
+		case NAV_ALLOWANCE: {
 			let nextState = merge({}, state, {
-				currentPage: 'APPROVE',
+				currentPage: 'ALLOWANCE',
 			});
 			return nextState
 		} 

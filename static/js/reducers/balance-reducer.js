@@ -7,8 +7,9 @@ import {
 	BUY_SUBMIT_FULFILLED
 } from '../actions/buy-actions';
 import {
-	APPROVE_SUBMIT_FULFILLED
-} from '../actions/approve-actions';
+	ALLOWANCE_APPROVE_SUBMIT_FULFILLED,
+	ALLOWANCE_WITHDRAW_SUBMIT_FULFILLED,
+} from '../actions/allowance-actions';
 
 const initialState = {
 	userBalance: 0,
@@ -25,7 +26,8 @@ function balanceReducer(state=initialState, action) {
 			var nextState = merge({}, state);
 			nextState.userBalance = action.payload.userBalance;
 			return nextState
-		case APPROVE_SUBMIT_FULFILLED:
+		case ALLOWANCE_WITHDRAW_SUBMIT_FULFILLED:
+		case ALLOWANCE_APPROVE_SUBMIT_FULFILLED:
 			var nextState = merge({}, state);
 			nextState.serviceAllowance = action.payload.serviceAllowance;
 			return nextState

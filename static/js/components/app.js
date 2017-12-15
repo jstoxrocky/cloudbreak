@@ -6,7 +6,7 @@ import Home from './home/home'
 import Upload from './upload/upload'
 import Search from './search/search'
 import Buy from './buy/buy'
-import Approve from './approve/approve'
+import Allowance from './allowance/allowance'
 
 const App = () => {
 	return (
@@ -17,7 +17,7 @@ const App = () => {
 			<Upload />
 			<Search />
 			<Buy />
-			<Approve />
+			<Allowance />
 			<Player />
 		</div>
 	)

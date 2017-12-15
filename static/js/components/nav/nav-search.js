@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from "react-redux";
 import { search } from "../../actions/search-actions"
 import { navClick } from "../../actions/nav-actions"
+import { 
+    NAV_SEARCH, } from '../../actions/nav-actions';
 
 @connect((store) => {
 	return {};
@@ -15,7 +17,7 @@ export default class SearchBar extends React.Component {
 	handleSearch(e) {
 		e.preventDefault()
 		this.props.dispatch(search(this.refs.input.value))
-		this.props.dispatch(navClick("HOME"))
+		this.props.dispatch(navClick(NAV_SEARCH))
 	}
 
 	render() {

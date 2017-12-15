@@ -8,9 +8,8 @@ import {
     NAV_CAPTCHA, 
     NAV_UPLOAD,
     NAV_HOME, 
-    NAV_SEARCH,
     NAV_BUY,
-    NAV_APPROVE,} from '../../actions/nav-actions';
+    NAV_ALLOWANCE,} from '../../actions/nav-actions';
 
 @connect(({stream, balance}) => {
 	return {
@@ -39,7 +38,7 @@ export default class Nav extends React.Component {
     }
 
     handleApproveClick() {
-        this.props.dispatch(navClick(NAV_APPROVE))
+        this.props.dispatch(navClick(NAV_ALLOWANCE))
     }
     
 
@@ -66,8 +65,7 @@ export default class Nav extends React.Component {
                             <a className="nav-link" href='#' onClick={() => this.handleApproveClick()}>Approve</a>
                         </li>
                     </ul>
-                    <span className="token-balance navbar-text">Tokens: {userBalance}</span>
-                    <span className="token-balance navbar-text">Service: {serviceAllowance}</span>
+                    <span className="token-balance navbar-text"><strong>{serviceAllowance}</strong>/{userBalance} Tokens</span>
                     <SearchBar />
                 </div>
             </div>

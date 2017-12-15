@@ -40,7 +40,7 @@ export default class SearchResults extends React.Component {
 							</div>
 						</div>
 						<div className='col-md-6'>
-							<div className='artist'>Price per stream: <strong>2</strong></div>
+							<div className='artist'>Price per stream: <strong>1</strong></div>
 						</div>
 					</div>
 

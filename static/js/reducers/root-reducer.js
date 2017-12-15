@@ -7,7 +7,7 @@ import navReducer from "./nav-reducer";
 import buyReducer from "./buy-reducer";
 import msgReducer from "./msg-reducer";
 import balanceReducer from "./balance-reducer";
-import approveReducer from "./approve-reducer"
+import allowanceReducer from "./allowance-reducer"
  
 const reducers = combineReducers({
 	player: playerReducer, 
@@ -16,7 +16,7 @@ const reducers = combineReducers({
 	nav: navReducer,
 	upload: uploadReducer,
 	buy: buyReducer,
-	approve: approveReducer,
+	allowance: allowanceReducer,
 	msg: msgReducer,
 	balance: balanceReducer,
 })

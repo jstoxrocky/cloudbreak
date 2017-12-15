@@ -74,7 +74,6 @@ async function getCurrentState() {
 
 async function streamAndUpdateState(keccakTrackHash) {
 	let users = await getUserAddress();
-	console.log(users)
 	let user = users[0];
 	let receipt = await stream(user, keccakTrackHash)
 	let status = !!web3.utils.hexToNumber(receipt.status)
