@@ -27,10 +27,16 @@ import {
 	SEARCH_PENDING,
 	SEARCH_FULFILLED, 
 } from '../actions/search-actions';
+import {
+	ALLOWANCE_APPROVE_SUBMIT_PENDING,
+	ALLOWANCE_WITHDRAW_SUBMIT_PENDING,
+	ALLOWANCE_APPROVE_SUBMIT_FULFILLED,
+	ALLOWANCE_WITHDRAW_SUBMIT_FULFILLED,
+} from '../actions/allowance-actions'
 import { LOADING } from '../utils/reports'
 
 const initialState = {
-	approve: {
+	allowance: {
 		value: null,
 	},
 	buy: {
@@ -83,6 +89,11 @@ function msgReducer(state=initialState, action) {
 			var nextState = merge({}, state);
 			nextState.search.value = LOADING;
 			return nextState
+		case ALLOWANCE_APPROVE_SUBMIT_PENDING:
+		case ALLOWANCE_WITHDRAW_SUBMIT_PENDING:
+			var nextState = merge({}, state);
+			nextState.allowance.value = LOADING;
+			return nextState
 
 
 		// BUY
@@ -113,7 +124,11 @@ function msgReducer(state=initialState, action) {
 			var nextState = merge({}, state);
 			nextState.search.value = action.payload.data.msg;
 			return nextState
-
+		case ALLOWANCE_APPROVE_SUBMIT_FULFILLED:
+		case ALLOWANCE_WITHDRAW_SUBMIT_FULFILLED:
+		var nextState = merge({}, state);
+			nextState.allowance.value = action.payload.msg;
+			return nextState
 		default:
 			return state;
 	}

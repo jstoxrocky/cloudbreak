@@ -4,10 +4,10 @@ import Report from '../utils/report';
 import AllowanceGroup from './allowance-group';
 
 
-@connect(({nav, approve, msg}) => {
+@connect(({nav, allowance, msg}) => {
 	return {
 		currentPage: nav.currentPage,
-		msg: msg.approve.value,
+		msg: msg.allowance.value,
 	}
 })
 export default class Allowance extends React.Component {   
