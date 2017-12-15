@@ -74656,12 +74656,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var Allowance = (_dec = (0, _reactRedux.connect)(function (_ref) {
 	var nav = _ref.nav,
-	    approve = _ref.approve,
+	    allowance = _ref.allowance,
 	    msg = _ref.msg;
 
 	return {
 		currentPage: nav.currentPage,
-		msg: msg.approve.value
+		msg: msg.allowance.value
 	};
 }), _dec(_class = function (_React$Component) {
 	_inherits(Allowance, _React$Component);
@@ -93671,7 +93671,7 @@ function msgReducer() {
 		case _allowanceActions.ALLOWANCE_APPROVE_SUBMIT_FULFILLED:
 		case _allowanceActions.ALLOWANCE_WITHDRAW_SUBMIT_FULFILLED:
 			var nextState = (0, _merge2.default)({}, state);
-			nextState.allowance.value = action.payload.data.msg;
+			nextState.allowance.value = action.payload.msg;
 			return nextState;
 		default:
 			return state;
