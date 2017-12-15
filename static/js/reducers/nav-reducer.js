@@ -34,7 +34,7 @@ export default function navReducer(state=initialCaptcha, action) {
 		}
 		case NAV_SEARCH: {
 			let nextState = merge({}, state, {
-				currentPage: 'HOME',
+				currentPage: 'SEARCH',
 			});
 			return nextState
 		} 

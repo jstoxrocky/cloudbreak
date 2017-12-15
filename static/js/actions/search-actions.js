@@ -9,13 +9,16 @@ const api = axios.create({
 	withCredentials: true
 });
 
+const callAPI = (query) => api.get(
+	BASE_URL+'/search', {
+		params: {
+		  query: query,
+		}
+	}) 
+
 export const search = (query) => {
 	return {
 		type: SEARCH, 
-		payload: api.get(BASE_URL+'/search', {
-		    params: {
-		      query: query,
-		    }
-  		})
+		payload: callAPI(query)
 	}
 }

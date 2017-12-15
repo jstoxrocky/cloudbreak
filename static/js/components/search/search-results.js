@@ -16,36 +16,34 @@ export default class SearchResults extends React.Component {
 
 	render() {
 		const {availableTracks} = this.props;
-		const artist_class = false ? 'fa fa-check-circle-o verified': 'fa fa-times-circle-o unverified'
-		const title_class = false ? 'fa fa-check-circle-o verified': 'fa fa-times-circle-o unverified'
 		return (
-			availableTracks.map((metadata) =>
-			<div className='track-results' key={metadata.trackHash} onClick={() => this.handleStreamClick(metadata.trackHash)} className='track-item'>
-				<a href='#'>
-					<div className='row'>
-						<div className='col-md-2'>
+			availableTracks.map((metadata) => {
+				let artist_class = metadata.artist.is_verified == 'true' ? 'fa fa-check-circle-o verified': 'fa fa-times-circle-o unverified'
+				let title_class = metadata.title.is_verified == 'true' ? 'fa fa-check-circle-o verified': 'fa fa-times-circle-o unverified'
+				return (
+					<a href='#' key={metadata.keccak_hash}>
+						<div className='track-results' onClick={() => this.handleStreamClick(metadata.keccak_hash)} className='track-item'>
 							<div className='row'>
-								<div className='col'>
-									<div className='artist'>
-										{metadata.artist} <i className={artist_class} aria-hidden="true"></i>
+								<div className='col-md-2'>
+									<div className='row'>
+										<div className='col'>
+											<div className='artist'>
+												{metadata.artist.value} <i className={artist_class} aria-hidden="true"></i>
+											</div>
+										</div>
+									</div>
+									<div className='row'>
+										<div className='col'>
+											<div className='title'>
+												{metadata.title.value} <i className={title_class} aria-hidden="true"></i>
+											</div>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div className='row'>
-								<div className='col'>
-									<div className='title'>
-										{metadata.title} <i className={artist_class} aria-hidden="true"></i>
-									</div>
-								</div>
-							</div>
+							</div>	
 						</div>
-						<div className='col-md-6'>
-							<div className='artist'>Price per stream: <strong>1</strong></div>
-						</div>
-					</div>
-
-				</a>
-			</div>)
+					</a>)
+			})
 		)
 	}
 };

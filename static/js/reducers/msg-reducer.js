@@ -23,6 +23,10 @@ import {
 	UPLOAD_SIGN_PENDING,
 	UPLOAD_SIGN_FULFILLED,
 } from '../actions/upload-actions'
+import {
+	SEARCH_PENDING,
+	SEARCH_FULFILLED, 
+} from '../actions/search-actions';
 import { LOADING } from '../utils/reports'
 
 const initialState = {
@@ -41,6 +45,9 @@ const initialState = {
 	upload: {
 		value: null,
 	},
+	search: {
+		value: null,
+	}
 }
 
 
@@ -72,6 +79,10 @@ function msgReducer(state=initialState, action) {
 			var nextState = merge({}, state);
 			nextState.upload.value = LOADING;
 			return nextState
+		case SEARCH_PENDING:
+			var nextState = merge({}, state);
+			nextState.search.value = LOADING;
+			return nextState
 
 
 		// BUY
@@ -84,7 +95,7 @@ function msgReducer(state=initialState, action) {
 		case CAPTCHA_SUBMIT_FULFILLED:
 		case CAPTCHA_SIGN_FULFILLED:
 			var nextState = merge({}, state);
-			nextState.captcha.value = action.payload.msg;
+			nextState.captcha.value = action.payload.data.msg;
 			return nextState
 		// STREAM
 		case PLAYER_STREAM_FULFILLED:
@@ -96,7 +107,11 @@ function msgReducer(state=initialState, action) {
 		case UPLOAD_SUBMIT_FULFILLED:
 		case UPLOAD_SIGN_FULFILLED:
 			var nextState = merge({}, state);
-			nextState.upload.value = action.payload.msg;
+			nextState.upload.value = action.payload.data.msg;
+			return nextState
+		case SEARCH_FULFILLED:
+			var nextState = merge({}, state);
+			nextState.search.value = action.payload.data.msg;
 			return nextState
 
 		default:
