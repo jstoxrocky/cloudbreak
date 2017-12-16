@@ -4,7 +4,7 @@ import Report from '../utils/report';
 import AllowanceGroup from './allowance-group';
 
 
-@connect(({nav, allowance, msg}) => {
+@connect(({nav, msg}) => {
 	return {
 		currentPage: nav.currentPage,
 		msg: msg.allowance.value,

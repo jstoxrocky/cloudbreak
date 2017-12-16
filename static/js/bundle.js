@@ -74656,7 +74656,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var Allowance = (_dec = (0, _reactRedux.connect)(function (_ref) {
 	var nav = _ref.nav,
-	    allowance = _ref.allowance,
 	    msg = _ref.msg;
 
 	return {
