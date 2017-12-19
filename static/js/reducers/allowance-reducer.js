@@ -14,12 +14,12 @@ function allowanceReducer(state=initialState, action) {
 	switch (action.type) {
 		case ALLOWANCE_APPROVE_INPUT: {
 			let nextState = merge({}, state);
-			nextState.approval = action.payload;
+			nextState.approval = action.payload.tokens;
 			return nextState
 		}
 		case ALLOWANCE_WITHDRAW_INPUT: {
 			let nextState = merge({}, state);
-			nextState.withdrawl = action.payload;
+			nextState.withdrawl = action.payload.tokens;
 			return nextState
 		}
 		default:

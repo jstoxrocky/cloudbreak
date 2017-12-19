@@ -10,7 +10,7 @@ function searchResultsReducer(state=initialState, action) {
 	switch (action.type) { 
 		case SEARCH_FULFILLED:
 			var nextState = merge({}, state);
-			nextState.availableTracks = action.payload.data
+			nextState.availableTracks = action.payload.data.data
 			return nextState
 		default:
 			return state;

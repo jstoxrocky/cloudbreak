@@ -10928,7 +10928,7 @@ var submitStream = exports.submitStream = function submitStream(keccakTrackHash)
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 exports.default = undefined;
 
@@ -10955,26 +10955,26 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Report = (_dec = (0, _reactRedux.connect)(function (store) {
-	return {};
+  return {};
 }), _dec(_class = function (_React$Component) {
-	_inherits(Report, _React$Component);
+  _inherits(Report, _React$Component);
 
-	function Report() {
-		_classCallCheck(this, Report);
+  function Report() {
+    _classCallCheck(this, Report);
 
-		return _possibleConstructorReturn(this, (Report.__proto__ || Object.getPrototypeOf(Report)).apply(this, arguments));
-	}
+    return _possibleConstructorReturn(this, (Report.__proto__ || Object.getPrototypeOf(Report)).apply(this, arguments));
+  }
 
-	_createClass(Report, [{
-		key: 'render',
-		value: function render() {
-			var msg = this.props.msg;
+  _createClass(Report, [{
+    key: 'render',
+    value: function render() {
+      var msg = this.props.msg;
 
-			return _react2.default.createElement(_message2.default, { msg: msg, alert_level: 'alert-danger' });
-		}
-	}]);
+      _react2.default.createElement(_message2.default, { msg: msg });
+    }
+  }]);
 
-	return Report;
+  return Report;
 }(_react2.default.Component)) || _class);
 exports.default = Report;
 
@@ -11876,8 +11876,8 @@ function decrypt (data, password) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var BASE_URL = exports.BASE_URL = "https://www.cloudbreak-int.net";
-// export const BASE_URL = "http://localhost:5000"
+// export const BASE_URL = "https://www.cloudbreak-int.net"
+var BASE_URL = exports.BASE_URL = "http://localhost:5000";
 
 /***/ }),
 /* 56 */
@@ -73366,9 +73366,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(5);
 
-var _report = __webpack_require__(42);
+var _message = __webpack_require__(390);
 
-var _report2 = _interopRequireDefault(_report);
+var _message2 = _interopRequireDefault(_message);
 
 var _captchaGroup = __webpack_require__(391);
 
@@ -73393,6 +73393,7 @@ var Captcha = (_dec = (0, _reactRedux.connect)(function (_ref) {
 
 	return {
 		msg: msg.captcha.value,
+		msgIsVisible: msg.captcha.visible,
 		currentPage: nav.currentPage,
 		lastStageCompleted: captcha.currentStage
 	};
@@ -73411,7 +73412,8 @@ var Captcha = (_dec = (0, _reactRedux.connect)(function (_ref) {
 			var _props = this.props,
 			    currentPage = _props.currentPage,
 			    lastStageCompleted = _props.lastStageCompleted,
-			    msg = _props.msg;
+			    msg = _props.msg,
+			    msgIsVisible = _props.msgIsVisible;
 
 			var onCaptchaPage = currentPage == 'CAPTCHA';
 			var onPromptAnswerStage = lastStageCompleted == 'QUESTION';
@@ -73420,7 +73422,7 @@ var Captcha = (_dec = (0, _reactRedux.connect)(function (_ref) {
 			return _react2.default.createElement(
 				'div',
 				null,
-				onCaptchaPage ? _react2.default.createElement(_report2.default, { msg: msg }) : _react2.default.createElement('div', null),
+				onCaptchaPage && msgIsVisible ? _react2.default.createElement(_message2.default, { msg: msg }) : _react2.default.createElement('div', null),
 				onCaptchaPage && onPromptAnswerStage ? _react2.default.createElement(_captchaGroup2.default, null) : _react2.default.createElement('div', null),
 				onCaptchaPage && onPromptTransactionStage ? _react2.default.createElement(_captchaTransaction2.default, null) : _react2.default.createElement('div', null),
 				onCaptchaPage && onPromptTransactionConfirmationStage ? _react2.default.createElement(
@@ -73454,8 +73456,7 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Message = function Message(_ref) {
-	var alert_level = _ref.alert_level,
-	    msg = _ref.msg;
+	var msg = _ref.msg;
 	return _react2.default.createElement(
 		"div",
 		{ className: "container" },
@@ -73464,7 +73465,7 @@ var Message = function Message(_ref) {
 			{ className: "row top-buffer" },
 			_react2.default.createElement(
 				"div",
-				{ className: alert_level.concat(' alert') },
+				{ className: "alert-danger alert" },
 				msg
 			)
 		)
@@ -73908,9 +73909,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(5);
 
-var _report = __webpack_require__(42);
+var _message = __webpack_require__(390);
 
-var _report2 = _interopRequireDefault(_report);
+var _message2 = _interopRequireDefault(_message);
 
 var _uploadGroup = __webpack_require__(397);
 
@@ -73935,6 +73936,7 @@ var Upload = (_dec = (0, _reactRedux.connect)(function (_ref) {
 
 	return {
 		msg: msg.upload.value,
+		msgIsVisible: msg.upload.visible,
 		currentPage: nav.currentPage,
 		lastStageCompleted: upload.currentStage
 	};
@@ -73953,7 +73955,8 @@ var Upload = (_dec = (0, _reactRedux.connect)(function (_ref) {
 			var _props = this.props,
 			    currentPage = _props.currentPage,
 			    lastStageCompleted = _props.lastStageCompleted,
-			    msg = _props.msg;
+			    msg = _props.msg,
+			    msgIsVisible = _props.msgIsVisible;
 
 			var onUploadPage = currentPage == 'UPLOAD';
 			var onPromptUploadStage = lastStageCompleted == 'UPLOAD_PAGE_LANDED';
@@ -73962,7 +73965,7 @@ var Upload = (_dec = (0, _reactRedux.connect)(function (_ref) {
 			return _react2.default.createElement(
 				'div',
 				null,
-				onUploadPage ? _react2.default.createElement(_report2.default, { msg: msg }) : _react2.default.createElement('div', null),
+				onUploadPage && msgIsVisible ? _react2.default.createElement(_message2.default, { msg: msg }) : _react2.default.createElement('div', null),
 				onUploadPage && onPromptUploadStage ? _react2.default.createElement(_uploadGroup2.default, null) : _react2.default.createElement('div', null),
 				onUploadPage && onPromptTransactionStage ? _react2.default.createElement(_uploadTransaction2.default, null) : _react2.default.createElement('div', null),
 				onUploadPage && onPromptTransactionConfirmationStage ? _react2.default.createElement(
@@ -74195,9 +74198,9 @@ var _searchGroup = __webpack_require__(400);
 
 var _searchGroup2 = _interopRequireDefault(_searchGroup);
 
-var _report = __webpack_require__(42);
+var _message = __webpack_require__(390);
 
-var _report2 = _interopRequireDefault(_report);
+var _message2 = _interopRequireDefault(_message);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -74214,6 +74217,7 @@ var Search = (_dec = (0, _reactRedux.connect)(function (_ref) {
 
 	return {
 		msg: msg.search.value,
+		msgIsVisible: msg.search.visible,
 		currentPage: nav.currentPage,
 		availableTracks: search.availableTracks
 	};
@@ -74237,14 +74241,15 @@ var Search = (_dec = (0, _reactRedux.connect)(function (_ref) {
 			var _props = this.props,
 			    currentPage = _props.currentPage,
 			    availableTracks = _props.availableTracks,
-			    msg = _props.msg;
+			    msg = _props.msg,
+			    msgIsVisible = _props.msgIsVisible;
 
 			var onSearchPage = currentPage == 'SEARCH';
 			var hasResults = availableTracks.length > 0;
 			return _react2.default.createElement(
 				'div',
 				{ className: 'container' },
-				onSearchPage ? _react2.default.createElement(_report2.default, { msg: msg }) : _react2.default.createElement('div', null),
+				onSearchPage && msgIsVisible ? _react2.default.createElement(_message2.default, { msg: msg }) : _react2.default.createElement('div', null),
 				onSearchPage && hasResults ? _react2.default.createElement(_searchGroup2.default, null) : _react2.default.createElement('div', null)
 			);
 		}
@@ -74464,9 +74469,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(5);
 
-var _report = __webpack_require__(42);
+var _message = __webpack_require__(390);
 
-var _report2 = _interopRequireDefault(_report);
+var _message2 = _interopRequireDefault(_message);
 
 var _buyGroup = __webpack_require__(403);
 
@@ -74487,7 +74492,8 @@ var Buy = (_dec = (0, _reactRedux.connect)(function (_ref) {
 
 	return {
 		currentPage: nav.currentPage,
-		msg: msg.buy.value
+		msg: msg.buy.value,
+		msgIsVisible: msg.buy.msgIsVisible
 	};
 }), _dec(_class = function (_React$Component) {
 	_inherits(Buy, _React$Component);
@@ -74503,13 +74509,14 @@ var Buy = (_dec = (0, _reactRedux.connect)(function (_ref) {
 		value: function render() {
 			var _props = this.props,
 			    currentPage = _props.currentPage,
-			    msg = _props.msg;
+			    msg = _props.msg,
+			    msgIsVisible = _props.msgIsVisible;
 
 			var onBuyPage = currentPage == 'BUY';
 			return _react2.default.createElement(
 				'div',
 				null,
-				onBuyPage ? _react2.default.createElement(_report2.default, { msg: msg }) : _react2.default.createElement('div', null),
+				onBuyPage && msgIsVisible ? _react2.default.createElement(_message2.default, { msg: msg }) : _react2.default.createElement('div', null),
 				onBuyPage ? _react2.default.createElement(_buyGroup2.default, null) : _react2.default.createElement('div', null)
 			);
 		}
@@ -93415,7 +93422,7 @@ function searchResultsReducer() {
 	switch (action.type) {
 		case _searchActions.SEARCH_FULFILLED:
 			var nextState = (0, _merge2.default)({}, state);
-			nextState.availableTracks = action.payload.data;
+			nextState.availableTracks = action.payload.data.data;
 			return nextState;
 		default:
 			return state;
@@ -93579,22 +93586,28 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var initialState = {
 	allowance: {
-		value: null
+		value: null,
+		visible: false
 	},
 	buy: {
-		value: null
+		value: null,
+		visible: false
 	},
 	captcha: {
-		value: null
+		value: null,
+		visible: false
 	},
 	stream: {
-		value: null
+		value: null,
+		visible: false
 	},
 	upload: {
-		value: null
+		value: null,
+		visible: false
 	},
 	search: {
-		value: null
+		value: null,
+		visible: false
 	}
 };
 
@@ -93609,6 +93622,7 @@ function msgReducer() {
 		case _buyActions.BUY_SUBMIT_PENDING:
 			var nextState = (0, _merge2.default)({}, state);
 			nextState.buy.value = _reports.LOADING;
+			nextState.buy.visible = true;
 			return nextState;
 		// CAPTCHA
 		case _captchaActions.CAPTCHA_GET_PENDING:
@@ -93616,27 +93630,32 @@ function msgReducer() {
 		case _captchaActions.CAPTCHA_SIGN_PENDING:
 			var nextState = (0, _merge2.default)({}, state);
 			nextState.captcha.value = _reports.LOADING;
+			nextState.captcha.visible = true;
 			return nextState;
 		// STREAM
 		case _playerActions.PLAYER_STREAM_PENDING:
 		case _playerActions.PLAYER_UPDATE_PENDING:
 			var nextState = (0, _merge2.default)({}, state);
 			nextState.stream.value = _reports.LOADING;
+			nextState.stream.visible = true;
 			return nextState;
 		// UPLOAD
 		case _uploadActions.UPLOAD_SUBMIT_PENDING:
 		case _uploadActions.UPLOAD_SIGN_PENDING:
 			var nextState = (0, _merge2.default)({}, state);
 			nextState.upload.value = _reports.LOADING;
+			nextState.upload.visible = true;
 			return nextState;
 		case _searchActions.SEARCH_PENDING:
 			var nextState = (0, _merge2.default)({}, state);
 			nextState.search.value = _reports.LOADING;
+			nextState.search.visible = true;
 			return nextState;
 		case _allowanceActions.ALLOWANCE_APPROVE_SUBMIT_PENDING:
 		case _allowanceActions.ALLOWANCE_WITHDRAW_SUBMIT_PENDING:
 			var nextState = (0, _merge2.default)({}, state);
 			nextState.allowance.value = _reports.LOADING;
+			nextState.allowance.visible = true;
 			return nextState;
 
 		// BUY
@@ -93649,7 +93668,8 @@ function msgReducer() {
 		case _captchaActions.CAPTCHA_SUBMIT_FULFILLED:
 		case _captchaActions.CAPTCHA_SIGN_FULFILLED:
 			var nextState = (0, _merge2.default)({}, state);
-			nextState.captcha.value = action.payload.data.msg;
+			nextState.captcha.value = action.payload.data.error.msg;
+			nextState.captcha.visible = action.payload.data.error.status;
 			return nextState;
 		// STREAM
 		case _playerActions.PLAYER_STREAM_FULFILLED:
@@ -93661,11 +93681,13 @@ function msgReducer() {
 		case _uploadActions.UPLOAD_SUBMIT_FULFILLED:
 		case _uploadActions.UPLOAD_SIGN_FULFILLED:
 			var nextState = (0, _merge2.default)({}, state);
-			nextState.upload.value = action.payload.data.msg;
+			nextState.upload.value = action.payload.data.error.msg;
+			nextState.upload.visible = action.payload.data.error.status;
 			return nextState;
 		case _searchActions.SEARCH_FULFILLED:
 			var nextState = (0, _merge2.default)({}, state);
-			nextState.search.value = action.payload.data.msg;
+			nextState.search.value = action.payload.data.error.msg;
+			nextState.search.visible = action.payload.data.error.status;
 			return nextState;
 		case _allowanceActions.ALLOWANCE_APPROVE_SUBMIT_FULFILLED:
 		case _allowanceActions.ALLOWANCE_WITHDRAW_SUBMIT_FULFILLED:

@@ -11,7 +11,7 @@ export default class SearchGroup extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className="container">
 				<h3>Top Results</h3>
 				<SearchResults />
 			</div>

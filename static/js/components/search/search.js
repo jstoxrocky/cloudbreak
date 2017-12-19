@@ -1,11 +1,9 @@
 import React from 'react';
 import { connect } from "react-redux";
 import SearchGroup from './search-group'
-import Report from '../utils/report';
 
-@connect(({search, nav, msg}) => {
+@connect(({search, nav}) => {
 	return {
-		msg: msg.search.value,
 		currentPage: nav.currentPage,
 		availableTracks: search.availableTracks,
 	};
@@ -17,14 +15,11 @@ export default class Search extends React.Component {
 	}
 
 	render() {
-		const {currentPage, availableTracks, msg} = this.props;
+		const {currentPage, availableTracks} = this.props;
 		const onSearchPage = currentPage == 'SEARCH';
 		let hasResults = availableTracks.length > 0;
 		return (
-			<div className="container">
-				{(onSearchPage) ? <Report msg={msg} /> : <div></div>}
-				{(onSearchPage && hasResults) ? <SearchGroup /> : <div></div>}
-			</div> 
+			(onSearchPage && hasResults) ? <SearchGroup /> : <div></div>
 		)
 	}
 };

@@ -57,6 +57,7 @@ async function getCurrentTrackMetadata(user) {
 		trackBalance: trackBalance,
 		msg: CURRENT_TRACK_LOADED,
 		playCount: playCount,
+		status: false,
 	}
 }
 
@@ -80,7 +81,7 @@ async function streamAndUpdateState(keccakTrackHash) {
 	let msg = status ? 'Success': 'Transaction failed'
 	let state = await getCurrentState();
 	state.msg = msg
-
+	state.status = !status
 	return state
 }
 

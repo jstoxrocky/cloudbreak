@@ -7,6 +7,7 @@ export const BUY_INPUT_FULFILLED = "BUY_INPUT_FULFILLED";
 export const BUY_SUBMIT = "BUY_SUBMIT"
 export const BUY_SUBMIT_PENDING = "BUY_SUBMIT_PENDING";
 export const BUY_SUBMIT_FULFILLED = "BUY_SUBMIT_FULFILLED";
+export const BUY_SUBMIT_REJECTED = "BUY_SUBMIT_REJECTED"
 
 const getUserAddress = () => web3.eth.getAccounts()
 const getUserBalance = (user) => Tokens.methods.balanceOf(user).call()
@@ -18,27 +19,71 @@ const buyTokens = (user, wei) => {
 }
 
 async function convertEthToTokens(eth) {
-	let wei = (eth !== '') ? web3.utils.toWei(eth, 'ether'): 0
+
+	let payload = {
+		tokens:0,
+		wei:0,
+	}
+
+	if (isNaN(eth)) {
+		payload.visible = true
+		payload.msg = "Value must be numeric"
+		payload.level = 'alert-warning'
+		return payload
+	} 
+
+	if (eth == "") {
+		payload.visible = false
+		payload.msg = null
+		payload.level = 'alert-warning'
+		return payload
+	} 
+
+	payload.wei = web3.utils.toWei(eth, 'ether')
 	let weiPerTokens = await getWeiPerTokens()
 	let tokensPerEth = 1000000000000000000 / weiPerTokens;
-	let tokens = tokensPerEth*eth;
-	return {
-		tokens:tokens,
-		wei:wei,
-	}
+	payload.tokens = tokensPerEth*eth;
+	return payload
 }
 
 async function buyAndUpdateBalance(wei) {
+
 	let users = await getUserAddress()
 	let user = users[0]
-	let receipt = await buyTokens(user, wei)
-	let status = !!web3.utils.hexToNumber(receipt.status)
-	let msg = status ? 'Success': 'Transaction failed'
 	let balance = await getUserBalance(user)
-	return {
-		msg: msg,
+	let payload = {
 		userBalance: balance,
 	}
+
+	if (isNaN(wei)) {
+		payload.visible = true
+		payload.msg = "Value must be numeric"
+		payload.level = 'alert-warning'
+		return payload
+	}
+
+	if (wei == "" || wei == null || wei <= 0) {
+		payload.visible = true
+		payload.msg = "Value must be non-zero"
+		payload.level = 'alert-warning'
+		return payload
+	} 
+
+	try {
+		let receipt = await buyTokens(user, wei)
+		let status = !!web3.utils.hexToNumber(receipt.status)
+		payload.visible = true
+		payload.msg = status ? 'Success': 'Transaction failed'
+		payload.level = status ? 'alert-success': 'alert-danger'
+	} catch(err) {
+		payload.visible = true
+		payload.msg = 'Transaction rejected by user'
+		payload.level = 'alert-danger'
+	}
+	balance = await getUserBalance(user)
+	payload.balance = balance
+
+	return payload
 }
 
 export const inputBuy = (eth) => ({

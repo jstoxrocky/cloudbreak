@@ -11,7 +11,7 @@ import {
     NAV_BUY,
     NAV_ALLOWANCE,} from '../../actions/nav-actions';
 
-@connect(({stream, balance}) => {
+@connect(({balance}) => {
 	return {
         userBalance: balance.userBalance,
         serviceAllowance: balance.serviceAllowance,

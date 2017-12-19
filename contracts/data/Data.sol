@@ -21,6 +21,12 @@ contract Data is DataSpecificAddresses {
     }
 
     function uploadMetadata(bytes32 trackHash, string _key, string _value, address userToPay) onlyOwner external {
+        // require(txHashes[txhash] == false)
+        // txHashes[txhash] = true;
+
+
+
+
         verifications[trackHash][_key][_value] += 1;
         if (verifications[trackHash][_key][_value] >= constants.verificationRequirement()) {
             storeMetadata(trackHash, _key, _value, 'true');
