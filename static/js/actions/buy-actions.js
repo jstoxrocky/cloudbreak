@@ -18,31 +18,33 @@ const buyTokens = (user, wei) => {
 	return Crowdsale.methods.buyTokens(user).send(BASIC_OPTIONS)
 }
 
-async function convertEthToTokens(eth) {
+async function convertEthToTokens(tokens) {
 
 	let payload = {
-		tokens:0,
+		eth:0,
 		wei:0,
 	}
 
-	if (isNaN(eth)) {
+	if (isNaN(tokens)) {
 		payload.visible = true
 		payload.msg = "Value must be numeric"
 		payload.level = 'alert-warning'
 		return payload
 	} 
 
-	if (eth == "") {
+	if (tokens == "") {
 		payload.visible = false
 		payload.msg = null
 		payload.level = 'alert-warning'
 		return payload
 	} 
 
-	payload.wei = web3.utils.toWei(eth, 'ether')
 	let weiPerTokens = await getWeiPerTokens()
-	let tokensPerEth = 1000000000000000000 / weiPerTokens;
-	payload.tokens = tokensPerEth*eth;
+	let wei = tokens*weiPerTokens
+	let eth = web3.utils.fromWei(wei.toString())
+
+	payload.wei = wei
+	payload.eth = eth
 	return payload
 }
 
@@ -81,7 +83,7 @@ async function buyAndUpdateBalance(wei) {
 		payload.level = 'alert-danger'
 	}
 	balance = await getUserBalance(user)
-	payload.balance = balance
+	payload.userBalance = balance
 
 	return payload
 }

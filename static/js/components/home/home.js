@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import Jumbotron from './jumbotron'
+import Explanation from './explanation'
 
 @connect(({nav}) => {
 	return {
@@ -14,6 +15,7 @@ class Home extends React.Component {
 		return (
 			<div>
 	  			{(visible) ? <Jumbotron /> : <div></div>}
+	  			{(visible) ? <Explanation /> : <div></div>}
 	  		</div>
   		)
 	}

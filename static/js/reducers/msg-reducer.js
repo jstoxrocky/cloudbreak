@@ -4,6 +4,8 @@ import {
 	PLAYER_STREAM_FULFILLED,
 	PLAYER_UPDATE_PENDING, 
 	PLAYER_UPDATE_FULFILLED, 
+	PLAYER_STREAM_REJECTED,
+	PLAYER_UPDATE_REJECTED,
 } from '../actions/player-actions';
 import {
 	BUY_SUBMIT_PENDING,
@@ -125,6 +127,9 @@ function msgReducer(state=initialState, action) {
 			nextState.allowance.level = 'alert-info'
 			return nextState
 
+
+
+
 		// BUY
 		case BUY_SUBMIT_REJECTED:
 			var nextState = merge({}, state);
@@ -132,13 +137,21 @@ function msgReducer(state=initialState, action) {
 			nextState.buy.visible = true;
 			nextState.buy.level = 'alert-danger'
 			return nextState
-		// BUY
+		// ALLOWANCE
 		case ALLOWANCE_APPROVE_SUBMIT_REJECTED:
 		case ALLOWANCE_WITHDRAW_SUBMIT_REJECTED:
 			var nextState = merge({}, state);
 			nextState.allowance.value = "Transaction Error";
 			nextState.allowance.visible = true;
 			nextState.allowance.level = 'alert-danger'
+			return nextState
+		// PLAYER
+		case PLAYER_STREAM_REJECTED:
+		case PLAYER_UPDATE_REJECTED:
+			var nextState = merge({}, state);
+			nextState.allowance.value = "Player Error";
+			nextState.player.visible = true;
+			nextState.player.level = 'alert-danger'
 			return nextState
 
 		// BUY
@@ -154,31 +167,31 @@ function msgReducer(state=initialState, action) {
 		case CAPTCHA_SUBMIT_FULFILLED:
 		case CAPTCHA_SIGN_FULFILLED:
 			var nextState = merge({}, state);
-			nextState.captcha.value = action.payload.data.error.msg;
-			nextState.captcha.visible = action.payload.data.error.status;
-			nextState.captcha.level = action.payload.data.error.status ? 'alert-danger': 'alert-success'
+			nextState.captcha.value = action.payload.data.msg.value;
+			nextState.captcha.visible = action.payload.data.msg.visible;
+			nextState.captcha.level = action.payload.data.msg.level
 			return nextState
 		// STREAM
 		case PLAYER_STREAM_FULFILLED:
 		case PLAYER_UPDATE_FULFILLED:
 			var nextState = merge({}, state);
 			nextState.player.value = action.payload.msg;
-			nextState.player.visible = action.payload.status;
+			nextState.player.visible = action.payload.visible;
 			nextState.player.level = action.payload.level
 			return nextState
 		// UPLOAD
 		case UPLOAD_SUBMIT_FULFILLED:
 		case UPLOAD_SIGN_FULFILLED:
 			var nextState = merge({}, state);
-			nextState.upload.value = action.payload.data.error.msg;
-			nextState.upload.visible = action.payload.data.error.status;
-			nextState.upload.level = action.payload.data.error.status ? 'alert-danger': 'alert-success'
+			nextState.upload.value = action.payload.data.msg.value;
+			nextState.upload.visible = action.payload.data.msg.visible;
+			nextState.upload.level = action.payload.data.msg.level
 			return nextState
 		case SEARCH_FULFILLED:
 			var nextState = merge({}, state);
-			nextState.search.value = action.payload.data.error.msg;
-			nextState.search.visible = action.payload.data.error.status;
-			nextState.search.level = action.payload.data.error.status ? 'alert-danger': 'alert-success'
+			nextState.search.value = action.payload.data.msg.value;
+			nextState.search.visible = action.payload.data.msg.visible;
+			nextState.search.level = action.payload.data.msg.level
 			return nextState
 		case ALLOWANCE_APPROVE_INPUT:
 		case ALLOWANCE_WITHDRAW_INPUT:

@@ -9,13 +9,13 @@ import {web3} from '../../utils/blockchain'
 @connect(({buy}) => {
 	return {
 		wei: buy.wei,
-		tokens: buy.tokens,
+		eth: buy.eth,
 	};
 })
 export default class BuyGroup extends React.Component {  
 
 	render() {
-		const {wei, tokens} = this.props;
+		const {wei, eth} = this.props;
 		return (
 			<div className="container">
 				<div className="row top-buffer">
@@ -23,9 +23,9 @@ export default class BuyGroup extends React.Component {
 				</div>
 				<div className="row top-buffer">
 					<div className="col-md-9">
-						<ActionableInput action={inputBuy} placeholder={'ETH'} />
+						<ActionableInput action={inputBuy} placeholder={'Number of tokens'} />
 						<ActionableSubmit action={submitBuy} data={wei} />
-						{Math.floor(tokens)} Tokens 
+						{eth} ETH 
 					</div>
 				</div>
             </div>

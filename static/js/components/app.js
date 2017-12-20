@@ -8,6 +8,7 @@ import Search from './search/search'
 import Buy from './buy/buy'
 import Allowance from './allowance/allowance'
 import Message from './message/message'
+import PlayerMessage from './message/player-message'
 
 const App = () => {
 	return (
@@ -15,6 +16,7 @@ const App = () => {
 			<Nav />
 			<Home />
 			<Message />
+			<PlayerMessage />
 			<Captcha />
 			<Upload />
 			<Search />

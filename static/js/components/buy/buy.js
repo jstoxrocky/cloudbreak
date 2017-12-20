@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import BuyGroup from './buy-group';
 
 
-@connect(({nav, buy, msg}) => {
+@connect(({nav}) => {
 	return {
 		currentPage: nav.currentPage,
 	}
@@ -11,7 +11,7 @@ import BuyGroup from './buy-group';
 export default class Buy extends React.Component {   
 
 	render() {
-  		const {currentPage, msg, msgIsVisible} = this.props;
+  		const {currentPage} = this.props;
   		const onBuyPage = currentPage == 'BUY';
   		return (
 	  		(onBuyPage) ? <BuyGroup /> : <div></div>

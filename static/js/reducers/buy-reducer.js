@@ -4,7 +4,7 @@ import {
 
 const initialState = {
 	wei:null,
-	tokens:0,
+	eth:0,
 }
 
 function buyReducer(state=initialState, action) {
@@ -14,7 +14,6 @@ function buyReducer(state=initialState, action) {
 			let nextState = merge({}, state);
 			nextState.eth = action.payload.eth;
 			nextState.wei = action.payload.wei;
-			nextState.tokens = action.payload.tokens;
 			return nextState
 		}
 		default:
