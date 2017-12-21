@@ -62,7 +62,7 @@ export default class Nav extends React.Component {
                             <a className="nav-link" href='#' onClick={() => this.handleCaptchaClick()}>Earn</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href='#' onClick={() => this.handleApproveClick()}>Approve</a>
+                            <a className="nav-link" href='#' onClick={() => this.handleApproveClick()}>Allowance</a>
                         </li>
                     </ul>
                     <span className="token-balance navbar-text"><strong>{serviceAllowance}</strong>/{userBalance} Tokens</span>

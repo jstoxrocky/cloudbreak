@@ -5,7 +5,7 @@ import uploadReducer from "./upload-reducer";
 import searchReducer from "./search-reducer";
 import navReducer from "./nav-reducer";
 import buyReducer from "./buy-reducer";
-import msgReducer from "./msg-reducer";
+import msgReducers from "./msg/msg-reducer";
 import balanceReducer from "./balance-reducer";
 import allowanceReducer from "./allowance-reducer"
  
@@ -17,7 +17,7 @@ const reducers = combineReducers({
 	upload: uploadReducer,
 	buy: buyReducer,
 	allowance: allowanceReducer,
-	msg: msgReducer,
+	msg: msgReducers,
 	balance: balanceReducer,
 })
 

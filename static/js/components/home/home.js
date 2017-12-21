@@ -9,6 +9,7 @@ import Explanation from './explanation'
 	};
 })
 class Home extends React.Component {  
+
 	render() {
 		const {currentPage} = this.props;
 		const visible = currentPage == 'HOME';

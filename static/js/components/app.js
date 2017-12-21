@@ -14,9 +14,9 @@ const App = () => {
 	return (
 		<div>
 			<Nav />
+			<PlayerMessage />
 			<Home />
 			<Message />
-			<PlayerMessage />
 			<Captcha />
 			<Upload />
 			<Search />

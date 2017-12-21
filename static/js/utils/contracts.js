@@ -33,3 +33,5 @@ export const BASIC_OPTIONS = {
 	gasPrice: GAS_PRICE,
 }
 
+export const NETWORK = 4;
+

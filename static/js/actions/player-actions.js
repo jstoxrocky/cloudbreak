@@ -1,9 +1,14 @@
 import bs58 from 'bs58';
-import {Tokens, Player, Data, PLAYER_ADDRESS, web3, BASIC_OPTIONS} from "../utils/contracts"
+import {Tokens, Player, Data, PLAYER_ADDRESS, web3, BASIC_OPTIONS, NETWORK} from "../utils/contracts"
 import { NO_CURRENT_TRACK, TX_SUCCESS, TX_FAILURE, CURRENT_TRACK_LOADED } from '../utils/reports'
 import axios from 'axios'
 import {BASE_URL} from '../utils/endpoints'
 import merge from 'lodash/merge';
+import {requireMetamask, handleMetamaskRejection} from '../utils/metamask'
+import {
+	update_player_state_success,
+	tx_success, 
+	tx_fail, } from '../utils/reports'
 
 export const PLAYER_UPDATE = "PLAYER_UPDATE";
 export const PLAYER_UPDATE_PENDING = "PLAYER_UPDATE_PENDING";
@@ -29,12 +34,19 @@ const toIPFSHash = (hashFunction, size, currentTrack) => {
 }
 
 const getUserAddress = () => web3.eth.getAccounts()
+
 const getUserBalance = (user) => Tokens.methods.balanceOf(user).call()
+
 const getServiceAllowance = (owner, spender) => Tokens.methods.allowance(owner, spender).call()
+
 const getTrackBalance = (trackHash) => Tokens.methods.trackBalanceOf(trackHash).call()
+
 const getPlayCount = (trackHash) => Data.methods.getPlayCount(trackHash).call()
+
 const getCurrentTrack = (user) => Player.methods.getCurrentTrack(user).call()
+
 const getTrackBasicMetadataByHash = (trackHash, key) => Data.methods.getTrackBasicMetadataByHash(trackHash, key).call()
+
 const stream = (user, keccakTrackHash) => {
 	BASIC_OPTIONS.from = user
 	return Player.methods.stream(keccakTrackHash).send(BASIC_OPTIONS)
@@ -75,43 +87,36 @@ async function getCurrentTrackMetadata(user) {
 }
 
 async function getCurrentState() {
+	await requireMetamask(NETWORK)
+
 	let [user] = await getUserAddress();
-	let payload = {}
-	try {
-		let [currentTrackMetadata, userBalance, serviceAllowance] = await Promise.all([
-			getCurrentTrackMetadata(user), 
-			getUserBalance(user),
-			getServiceAllowance(user, PLAYER_ADDRESS),
-		])
-		payload = merge(payload, currentTrackMetadata);
-		payload.userBalance = userBalance
-		payload.serviceAllowance = serviceAllowance
-	} catch(err) {
-		// Happens when metamask is set to main and not testnet
-		console.log(err)
-		payload.userBalance = 0
-		payload.serviceAllowance = 0
-		payload.visible = true
-		payload.msg = "Could not get current track. Please make sure you are signed into Rinkeby Testnet."
-		payload.level = 'alert-danger'
+	let [currentTrackMetadata, userBalance, serviceAllowance] = await Promise.all([
+		getCurrentTrackMetadata(user), 
+		getUserBalance(user),
+		getServiceAllowance(user, PLAYER_ADDRESS),
+	])
+	let tokenBalances = {
+		userBalance:userBalance,
+		serviceAllowance:serviceAllowance,
 	}
+	let msg = update_player_state_success
+	let payload = merge(currentTrackMetadata, tokenBalances, msg)
 	return payload
 }
 
+
 async function streamAndUpdateState(keccakTrackHash) {
+	await requireMetamask(NETWORK)
+	await requireMinBalance()
 
-	// not ebough tokens?
-	// apprived?
-
-	let users = await getUserAddress();
-	let user = users[0];
-	let receipt = await stream(user, keccakTrackHash)
+	let [user] = await getUserAddress();
+	let safeStream = handleMetamaskRejection(stream)
+	let receipt = await safeStream(user, keccakTrackHash)
 	let status = !!web3.utils.hexToNumber(receipt.status)
-	let msg = status ? 'Success': 'Transaction failed'
+	let msg = status ? tx_success: tx_fail
 	let state = await getCurrentState();
-	state.msg = msg
-	state.status = !status
-	return state
+	let payload = merge(state, msg)
+	return payload
 }
 
 export const updatePlayer = () => ({

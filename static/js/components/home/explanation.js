@@ -29,6 +29,13 @@ class Explanation extends React.Component {
 				<div className="row"> 
 					We've given you one free track below.
 				</div>
+				<div className="row"> 
+					When you stream a track, you are paying the track's wallet. Like user accounts, Cloudbreak tracks have the ability to hold this ERC20 token.
+					Tracks will continue to collect money in their wallets until a rightsholder is able to prove rights to the track.
+					At ehich point, the rightsholder will be given the ability to transfer tokens out of the track's wallet and into their own.
+
+				</div>
+
 		    </div>
 		)
 	}

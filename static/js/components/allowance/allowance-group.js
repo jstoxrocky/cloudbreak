@@ -23,7 +23,7 @@ export default class AllowanceGroup extends React.Component {
 				</div>
 				<div className="row top-buffer">
 					<div className="col-md-9">
-						<ActionableInput action={inputApprove} placeholder={'ETH'} />
+						<ActionableInput action={inputApprove} placeholder={'Number of Tokens'} />
 						<ActionableSubmit action={submitApprove} data={approval} />
 					</div>
 				</div>
@@ -32,7 +32,7 @@ export default class AllowanceGroup extends React.Component {
 				</div>
 				<div className="row top-buffer">
 					<div className="col-md-9">
-						<ActionableInput action={inputWithdraw} placeholder={'ETH'} />
+						<ActionableInput action={inputWithdraw} placeholder={'Number of Tokens'} />
 						<ActionableSubmit action={submitWithdraw} data={withdrawl} />
 					</div>
 				</div>

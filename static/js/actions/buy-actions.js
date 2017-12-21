@@ -1,5 +1,11 @@
 import {web3} from '../utils/blockchain'
-import {Crowdsale, Tokens, Constants, BASIC_OPTIONS} from "../utils/contracts"
+import {Crowdsale, Tokens, Constants, BASIC_OPTIONS, NETWORK} from "../utils/contracts"
+import {requireNumeric} from '../utils/modifiers'
+import {requireMetamask, handleMetamaskRejection} from '../utils/metamask'
+import merge from 'lodash/merge';
+import {
+	tx_success, 
+	tx_fail, } from '../utils/reports'
 
 export const BUY_INPUT = "BUY_INPUT"
 export const BUY_INPUT_PENDING = "BUY_INPUT_PENDING";
@@ -8,6 +14,7 @@ export const BUY_SUBMIT = "BUY_SUBMIT"
 export const BUY_SUBMIT_PENDING = "BUY_SUBMIT_PENDING";
 export const BUY_SUBMIT_FULFILLED = "BUY_SUBMIT_FULFILLED";
 export const BUY_SUBMIT_REJECTED = "BUY_SUBMIT_REJECTED"
+export const BUY_INPUT_REJECTED = "BUY_INPUT_REJECTED"
 
 const getUserAddress = () => web3.eth.getAccounts()
 const getUserBalance = (user) => Tokens.methods.balanceOf(user).call()
@@ -19,72 +26,27 @@ const buyTokens = (user, wei) => {
 }
 
 async function convertEthToTokens(tokens) {
-
-	let payload = {
-		eth:0,
-		wei:0,
-	}
-
-	if (isNaN(tokens)) {
-		payload.visible = true
-		payload.msg = "Value must be numeric"
-		payload.level = 'alert-warning'
-		return payload
-	} 
-
-	if (tokens == "") {
-		payload.visible = false
-		payload.msg = null
-		payload.level = 'alert-warning'
-		return payload
-	} 
-
+	requireNumeric(tokens)
 	let weiPerTokens = await getWeiPerTokens()
 	let wei = tokens*weiPerTokens
 	let eth = web3.utils.fromWei(wei.toString())
-
-	payload.wei = wei
-	payload.eth = eth
-	return payload
+	return {
+		wei:wei,
+		eth:eth,
+	}
 }
 
 async function buyAndUpdateBalance(wei) {
+	await requireMetamask(NETWORK)
+	requireNumeric(wei)
 
-	let users = await getUserAddress()
-	let user = users[0]
-	let balance = await getUserBalance(user)
-	let payload = {
-		userBalance: balance,
-	}
-
-	if (isNaN(wei)) {
-		payload.visible = true
-		payload.msg = "Value must be numeric"
-		payload.level = 'alert-warning'
-		return payload
-	}
-
-	if (wei == "" || wei == null || wei <= 0) {
-		payload.visible = true
-		payload.msg = "Value must be non-zero"
-		payload.level = 'alert-warning'
-		return payload
-	} 
-
-	try {
-		let receipt = await buyTokens(user, wei)
-		let status = !!web3.utils.hexToNumber(receipt.status)
-		payload.visible = true
-		payload.msg = status ? 'Success': 'Transaction failed'
-		payload.level = status ? 'alert-success': 'alert-danger'
-	} catch(err) {
-		payload.visible = true
-		payload.msg = 'Transaction rejected by user'
-		payload.level = 'alert-danger'
-	}
-	balance = await getUserBalance(user)
-	payload.userBalance = balance
-
+	let [user] = await getUserAddress()
+	let safeBuyTokens = handleMetamaskRejection(buyTokens)
+	let receipt = await safeBuyTokens(user, wei)
+	let status = !!web3.utils.hexToNumber(receipt.status)
+	let msg = status ? tx_success: tx_fail
+	let userBalance = await getUserBalance(user)
+	let payload = merge({'userBalance':userBalance}, msg)
 	return payload
 }
 
